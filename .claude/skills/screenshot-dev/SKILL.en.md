@@ -13,17 +13,17 @@ cd ~/zulip
 node .claude/skills/screenshot-dev/screenshot.mjs [options]
 ```
 
-| Option                  | Default                          | Description                                                                    |
-| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| `--user <email>`        | `iago@zulip.com`                 | Test user to log in as (any user on the devlogin page)                         |
-| `--path <path>`         | `/`                              | Page to open after logging in, e.g. `/#channels/3/devel`, `/#settings/profile` |
-| `--out <file>`          | `/tmp/screenshot-dev-<time>.png` | Where to save the screenshot; the script prints this path last                 |
-| `--lang <language>`     | user's setting                   | Temporarily switch the UI language; Chinese is `zh-hans`                       |
-| `--dark`                | off                              | Temporarily switch to the dark theme                                           |
-| `--width/--height`      | `1280` / `800`                   | Window size; use `--width 480` for phone width                                 |
-| `--wait-for <selector>` | none                             | Wait for this element before taking the screenshot                             |
-| `--element <selector>`  | none                             | Capture only this element                                                      |
-| `--full-page`           | off                              | Capture the full page                                                          |
+| Option                  | Default                          | Description                                                                     |
+| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------- |
+| `--user <email>`        | `sunwukong@zulip.com`            | Test user to log in as (any user on the devlogin page)                          |
+| `--path <path>`         | `/`                              | Page to open after logging in, e.g., `/#channels/3/devel`, `/#settings/profile` |
+| `--out <file>`          | `/tmp/screenshot-dev-<time>.png` | Where to save the screenshot; the script prints this path last                  |
+| `--lang <language>`     | user's setting                   | Temporarily switch the UI language; Chinese is `zh-hans`                        |
+| `--dark`                | off                              | Temporarily switch to the dark theme                                            |
+| `--width/--height`      | `1280` / `800`                   | Window size; use `--width 480` for phone width                                  |
+| `--wait-for <selector>` | none                             | Wait for this element before taking the screenshot                              |
+| `--element <selector>`  | none                             | Capture only this element                                                       |
+| `--full-page`           | off                              | Capture the full page                                                           |
 
 `--lang` and `--dark` apply only while the screenshot is taken; afterwards, that user's language
 and theme are restored to their previous settings.

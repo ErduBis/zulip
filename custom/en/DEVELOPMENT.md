@@ -245,7 +245,10 @@ when accepting, list each deviation between the implementation and the spec.
 - Sync with upstream regularly: merge 13.x patch releases as they come; plan major upgrades
   separately. When merging, check translations per step 3 of "Chinese translation"; when
   upstream changes files we have deleted, keep them deleted (`git rm`). Deployment steps are in
-  `guides/deployment.md`.
+  `guides/deployment.md`. After merging, compare upstream's changes to
+  `zilencer/management/commands/populate_db.py` for new dev data worth porting to `zcustom/` (D11).
+  When upstream changes a file listed in `IMPORTANT_FILES` in `zerver/lib/test_fixtures.py`, the
+  next `./tools/provision` wipes and rebuilds the dev database, so tell the user before running it.
 
 ### Commit guidelines
 

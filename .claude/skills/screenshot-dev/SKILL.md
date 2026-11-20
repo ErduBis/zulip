@@ -14,7 +14,7 @@ node .claude/skills/screenshot-dev/screenshot.mjs [选项]
 
 | 选项                  | 默认                             | 说明                                                              |
 | --------------------- | -------------------------------- | ----------------------------------------------------------------- |
-| `--user <邮箱>`       | `iago@zulip.com`                 | 登录的测试用户（devlogin 页上的任意一个）                         |
+| `--user <邮箱>`       | `sunwukong@zulip.com`            | 登录的测试用户（devlogin 页上的任意一个）                         |
 | `--path <路径>`       | `/`                              | 登录后打开的地址，例如 `/#channels/3/devel`、`/#settings/profile` |
 | `--out <文件>`        | `/tmp/screenshot-dev-<时间>.png` | 截图保存位置；脚本最后一行输出这个路径                            |
 | `--lang <语言>`       | 用户原设置                       | 临时切换界面语言，中文用 `zh-hans`                                |

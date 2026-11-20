@@ -1,0 +1,218 @@
+# 格式说明见 README.md。
+
+- members: [tangseng, sunwukong]
+  start: {days_ago: 2, time: "21:00"}
+  messages:
+    - from: tangseng
+      text: |-
+        悟空，今天在顾问会上你提紧箍咒的事，我想了一下，你说得对。
+    - from: sunwukong
+      after: 10m
+      text: |-
+        师父别往心里去，我不是针对您，是觉得流程该改。
+    - from: tangseng
+      after: 5m
+      text: |-
+        我明白。以前总担心你冲动，现在看是我管得太紧了。
+    - from: sunwukong
+      after: 3m
+      text: |-
+        我也有问题，有时候确实没报备就动手了。以后先在 #**降妖除魔** 里说一声。
+      reactions:
+        "+1": [tangseng]
+    - from: tangseng
+      after: 2m
+      text: |-
+        好。早点休息，明天还要去女儿国。
+    - from: sunwukong
+      after: 1m
+      text: |-
+        师父晚安 :moon:
+- members: [zhubajie, shawujing]
+  start: {hours_ago: 1}
+  messages:
+    - from: zhubajie
+      text: |-
+        沙师弟，能先借我点钱吗？想买点零食，工资下周才发。
+    - from: zhubajie
+      after: 1m
+      text: |-
+        不多，就二十文。
+    - from: zhubajie
+      after: 3m
+      text: |-
+        你在吗？
+    - from: zhubajie
+      after: 10m
+      text: |-
+        算了，我去问猴哥。
+    - from: zhubajie
+      after: 1m
+      text: |-
+        猴哥说不借 :sob:
+- members: [sunwukong, nezha]
+  start: {days_ago: 6, time: "22:10"}
+  messages:
+    - from: sunwukong
+      text: |-
+        哪吒，明天开始你接值班。今天的情况：白骨精仿冒页面已经处理了三次，域名段也拉黑了。
+    - from: nezha
+      after: 5m
+      text: |-
+        收到。还有什么要注意的？
+    - from: sunwukong
+      after: 3m
+      text: |-
+        - 告警阈值我调低了一点，可能会多几条误报
+        - 八戒的密码已经改了，但他其他账号可能也用了同一个密码，提醒他一下
+    - from: nezha
+      after: 2m
+      text: |-
+        好，明早我先跟八戒说。
+    - from: sunwukong
+      after: 1m
+      text: |-
+        辛苦 :muscle:
+- members: [ravi, change]
+  start: {days_ago: 3, time: "22:30"}
+  messages:
+    - from: ravi
+      text: |-
+        Hi 嫦娥, quick question about the bilingual 通关文牒 design. 英文部分的字体是什么？
+    - from: change
+      after: 20m
+      text: |-
+        英文用的是无衬线字体，和中文的宋体搭配。你那边现在几点？
+    - from: ravi
+      after: 2m
+      text: |-
+        It's 8 PM here. 你那边应该是早上？
+    - from: change
+      after: 3m
+      text: |-
+        早上 7 点半，刚泡好桂花茶 :tea:
+    - from: ravi
+      after: 5m
+      text: |-
+        Nice. 我把英文校对完的版本发到 #**经卷研发** 里了。
+    - from: change
+      after: 30m
+      text: |-
+        看到了，改得很好，谢谢！
+      reactions:
+        heart: [ravi]
+- members: [guanyin, tangseng]
+  start: {days_ago: 4, time: "16:30"}
+  messages:
+    - from: guanyin
+      text: |-
+        玄奘，火焰山的事我听说了。团队处理得不错。
+    - from: tangseng
+      after: 10m
+      text: |-
+        多谢菩萨关心。主要是悟空出力，我只是在后面等着。
+    - from: guanyin
+      after: 15m
+      text: |-
+        能放手让徒弟去做，也是本事。
+    - from: tangseng
+      after: 5m
+      text: |-
+        受教了 :pray:
+- members: [sunwukong]
+  start: {days_ago: 1, time: "23:00"}
+  messages:
+    - from: sunwukong
+      text: |-
+        备忘：
+        - [ ] 金箍棒的证书下个月到期
+        - [ ] 值班表更新
+        - [ ] 给师父买个保温杯
+    - from: sunwukong
+      after: 1m
+      text: |-
+        还有：别再忘了八戒的生日。
+- members: [sunwukong, zhubajie, shawujing, bailongma]
+  start: {days_ago: 3, time: "20:00"}
+  messages:
+    - from: shawujing
+      text: |-
+        下个月是师父的生日，我们准备个惊喜？**这个群不要拉师父进来。**
+    - from: zhubajie
+      after: 2m
+      text: |-
+        好啊！我负责蛋糕，素的那种。
+    - from: sunwukong
+      after: 3m
+      text: |-
+        我去花果山摘点好桃子。
+    - from: bailongma
+      after: 5m
+      text: |-
+        我可以驮着大家去一个风景好的地方。
+    - from: shawujing
+      after: 10m
+      text: |-
+        那我来写贺卡，大家把想说的话发给我。
+      reactions:
+        "+1": [sunwukong, zhubajie, bailongma]
+    - from: zhubajie
+      after: 1m
+      text: |-
+        蛋糕预算多少？
+    - from: shawujing
+      after: 1m
+      text: |-
+        从我们自己的零花钱里出，每人五十文。
+    - from: zhubajie
+      after: 30s
+      text: |-
+        ……那我能先借一下吗
+      reactions:
+        joy: [sunwukong, shawujing, bailongma]
+- members: [sunwukong, erlangshen, nezha]
+  start: {hours_ago: 10}
+  messages:
+    - from: erlangshen
+      text: |-
+        今晚的告警有点多，大部分是黄风岭那边的风速传感器误报。
+    - from: nezha
+      after: 5m
+      text: |-
+        要不要把阈值调高一点？
+    - from: sunwukong
+      after: 10m
+      text: |-
+        先别动阈值，上次就是因为风太大才出的事。把传感器换个位置试试。
+    - from: erlangshen
+      after: 15m
+      text: |-
+        好，我明天让哮天犬去看看现场。
+      reactions:
+        dog: [nezha]
+    - from: nezha
+      after: 2m
+      text: |-
+        哮天犬会换传感器？
+    - from: erlangshen
+      after: 1m
+      text: |-
+        它会找。换还是我来换 :joy:
+- members: [taishanglaojun, ravi, huianxingzhe]
+  start: {days_ago: 8, time: "11:00"}
+  messages:
+    - from: huianxingzhe
+      text: |-
+        老君，南海那边想要一份经卷系统的介绍，能帮忙准备一下吗？Ravi 也可以一起。
+    - from: taishanglaojun
+      after: 30m
+      text: |-
+        可以。Ravi 写英文版，我写中文版。
+    - from: ravi
+      after: 10m
+      text: |-
+        Sure. 周五前给你。
+    - from: huianxingzhe
+      after: 5m
+      text: |-
+        多谢两位 :pray:

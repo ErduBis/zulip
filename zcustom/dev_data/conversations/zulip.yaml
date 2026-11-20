@@ -1,0 +1,66 @@
+# 格式说明见 ../README.md。
+
+channel: Zulip
+topics:
+  - topic: 话题到底怎么用
+    start: {days_ago: 18, time: "11:00"}
+    messages:
+      - from: bailongma
+        text: |-
+          请教一下，话题和频道有什么区别？我总是发错地方。
+      - from: shawujing
+        after: 10m
+        text: |-
+          频道是「在哪儿说」，话题是「说什么」。
+
+          比如路线的事都在 #**取经路线**，但具体是女儿国还是通天河，就分成不同的话题。这样大家只看自己关心的话题就行。
+        reactions:
+          "+1": [bailongma, ravi]
+      - from: ravi
+        after: 30m
+        text: |-
+          Like email subject lines, but for chat? 和邮件标题有点像？
+      - from: shawujing
+        after: 5m
+        text: |-
+          差不多，但比邮件标题更灵活，发错了还能把消息移到别的话题。
+      - from: bailongma
+        after: 15m
+        text: |-
+          明白了，谢谢三师兄。
+      - from: zhubajie
+        after: 1h
+        text: |-
+          我一直以为话题就是聊天的题目，原来真的是 :joy:
+        reactions:
+          joy: [shawujing, bailongma]
+  - topic: 通知太多怎么办
+    start: {days_ago: 6, time: "18:00"}
+    messages:
+      - from: zhubajie
+        text: |-
+          手机一直响，全是 #**茶水间** 的消息，怎么关掉？
+      - from: nezha
+        after: 5m
+        text: |-
+          在左侧栏频道名旁边点 `⋮`，可以把整个频道设成静音。只想屏蔽某个话题的话，在话题旁边点同样的按钮。
+      - from: zhubajie
+        after: 3m
+        text: |-
+          可是茶水间里有我最关心的「今天吃什么」……
+      - from: nezha
+        after: 2m
+        text: |-
+          那就静音频道，再单独**关注**那个话题。
+        reactions:
+          bulb: [zhubajie]
+      - from: shawujing
+        after: 10m
+        text: |-
+          也可以在个人设置里加提醒词，比如「斋饭」，出现这个词的时候会提醒您。
+      - from: zhubajie
+        after: 1m
+        text: |-
+          这个好，我已经加了「斋饭」「开饭」「请客」。
+        reactions:
+          joy: [nezha, shawujing]

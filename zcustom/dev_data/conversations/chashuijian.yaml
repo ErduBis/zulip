@@ -1,0 +1,244 @@
+# 格式说明见 ../README.md。
+
+channel: 茶水间
+topics:
+  - topic: 摸鱼推荐
+    start: {days_ago: 9, time: "15:30"}
+    messages:
+      - from: zhubajie
+        text: |-
+          下午三点半，最困的时候。大家都怎么提神？
+      - from: nezha
+        after: 2m
+        text: |-
+          踩风火轮绕院子跑两圈。
+      - from: sunwukong
+        after: 1m
+        text: |-
+          翻个跟头，十万八千里，回来就精神了。
+        reactions:
+          joy: [zhubajie, nezha]
+      - from: shawujing
+        after: 5m
+        text: |-
+          泡杯茶，整理一下行李清单。
+      - from: zhubajie
+        after: 1m
+        text: |-
+          你们这些都不算摸鱼……
+      - from: bailongma
+        after: 10m
+        text: |-
+          :sleeping:
+        reactions:
+          joy: [zhubajie, sunwukong, shawujing]
+      - from: guanyin
+        after: 20m
+        text: |-
+          打坐十分钟，比什么都管用。
+        reactions:
+          pray: [tangseng, shawujing]
+  - topic: 八戒的减肥计划
+    start: {days_ago: 5, time: "12:10"}
+    messages:
+      - from: zhubajie
+        text: |-
+          宣布一件事：我要减肥了。目标是这个月瘦十斤 :muscle:
+        reactions:
+          clap: [shawujing, nezha, change]
+          eyes: [sunwukong]
+      - from: sunwukong
+        after: 1m
+        text: |-
+          这是你今年第几次宣布了？
+      - from: zhubajie
+        after: 2m
+        text: |-
+          第……四次。但这次是认真的！我做了计划：
+
+          1. 早饭：一个馒头
+          2. 午饭：正常吃（化缘回来的不能浪费）
+          3. 晚饭：不吃
+          4. 夜宵：~~不吃~~ 少吃
+        reactions:
+          joy: [sunwukong, nezha, erlangshen, ravi]
+      - from: shawujing
+        after: 5m
+        text: |-
+          二师兄，每天走五十里路，其实不用特意减肥。
+      - from: tangseng
+        after: 10m
+        text: |-
+          ```quote
+          谁知盘中餐，粒粒皆辛苦。
+          ——李绅《悯农》
+          ```
+          减肥可以，不要浪费粮食。
+        reactions:
+          pray: [shawujing, bailongma]
+      - from: zhubajie
+        after: 3h
+        text: |-
+          汇报一下：今天晚饭没忍住。明天重新开始。
+        reactions:
+          sob: [zhubajie]
+          joy: [sunwukong, nezha]
+  - topic: 周末团建
+    start: {days_ago: 3, time: "16:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          这周末团建，三个选项，用表情投票：
+          - :mountain: 爬山（花果山）
+          - :hot_springs: 泡温泉（濯垢泉）
+          - :fork_and_knife: 吃大餐（八戒推荐的馆子）
+        reactions:
+          mountain: [sunwukong, nezha]
+          hot_springs: [change, tangseng, ravi]
+          fork_and_knife: [zhubajie, bailongma, erlangshen, taishanglaojun]
+      - from: sunwukong
+        after: 5m
+        text: |-
+          温泉那个地方……上次遇到过蜘蛛精，我投反对票。
+      - from: zhubajie
+        after: 1m
+        text: |-
+          大餐领先！
+      - from: tangseng
+        after: 30m
+        text: |-
+          那就吃饭吧，**人均预算 50 以内**。
+        reactions:
+          tada: [zhubajie, bailongma]
+          sob: [zhubajie]
+      - from: change
+        after: 2h
+        text: |-
+          我在月宫远程，只能云参加了。帮我多吃两口 :moon_cake:
+  - topic: 时差党
+    start: {days_ago: 1, time: "08:30"}
+    messages:
+      - from: ravi
+        text: |-
+          Good morning! 我这边是早上 6 点，你们是 8 点半。天竺的早晨很热 :sunny:
+      - from: change
+        after: 5m
+        text: |-
+          我这边是前一天下午 5 点半，准备下班了。
+      - from: zhubajie
+        after: 2m
+        text: |-
+          所以开会到底按谁的时间？
+      - from: shawujing
+        after: 10m
+        text: |-
+          以后发会议时间都用时间格式，比如 <time:2024-07-01T10:00:00+08:00>，每个人看到的都是自己的本地时间。
+        reactions:
+          "+1": [ravi, change, nezha]
+      - from: change
+        after: 3m
+        text: |-
+          ```quote
+          海内存知己，天涯若比邻。
+          ——王勃《送杜少府之任蜀州》
+          ```
+          远程办公的心情就是这样 :heart:
+        reactions:
+          heart: [ravi, shawujing, tangseng]
+      - from: ravi
+        after: 1m
+        text: |-
+          这句诗好美，能翻译成英文吗？
+      - from: change
+        after: 5m
+        text: |-
+          大意是：A close friend far away feels like a neighbor.
+  - topic: 今天吃什么
+    start: {hours_ago: 2}
+    messages:
+      - from: zhubajie
+        text: |-
+          今天中午吃什么？我先说：**烤馕 + 胡辣汤**。
+      - from: nezha
+        after: 2m
+        text: |-
+          又是你先说，每次都是你定。
+      - from: sunwukong
+        after: 1m
+        text: |-
+          我吃桃就行 :peach:
+      - from: bailongma
+        after: 3m
+        text: |-
+          有草料吗
+        reactions:
+          joy: [zhubajie, nezha, shawujing]
+      - from: shawujing
+        after: 5m
+        text: |-
+          斋饭的预算这个月还剩 30%，大家省着点。
+      - from: zhubajie
+        after: 1m
+        text: |-
+          :sob: :sob: :sob:
+      - from: tangseng
+        after: 10m
+        text: |-
+          今天我请客，不走预算。
+        reactions:
+          tada: [zhubajie, nezha, sunwukong, shawujing, bailongma, ravi]
+          heart: [zhubajie]
+      - from: zhubajie
+        after: 1m
+        text: |-
+          师父英明！那我要加个肉夹馍……哦不对，素的。
+        reactions:
+          joy: [sunwukong, nezha]
+      - from: guanyin
+        after: 5m
+        text: |-
+          :pray:
+  - topic: 猴哥生日快乐
+    start: {days_ago: 7, time: "12:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          今天是大师兄的生日 :birthday: 大家来祝福一下！
+        reactions:
+          tada: [tangseng, zhubajie, nezha, erlangshen, ravi, change, bailongma]
+      - from: zhubajie
+        after: 1m
+        text: |-
+          猴哥生日快乐！蛋糕我已经帮你尝过了，很好吃。
+        reactions:
+          joy: [nezha, erlangshen]
+      - from: nezha
+        after: 2m
+        text: |-
+          :birthday: :tada: :peach:
+      - from: tangseng
+        after: 10m
+        text: |-
+          悟空，生日快乐。这一路你最辛苦。
+        reactions:
+          heart: [sunwukong]
+      - from: sunwukong
+        after: 5m
+        text: |-
+          谢谢大家！不过我是从石头里蹦出来的，生日这个事情其实不太确定 :joy:
+      - from: ravi
+        after: 3m
+        text: |-
+          Happy birthday! 祝你……长命百岁？
+      - from: sunwukong
+        after: 1m
+        text: |-
+          已经好几百岁了，哈哈。谢谢 Ravi！
+        reactions:
+          joy: [ravi, change, nezha]
+      - from: guanyin
+        after: 30m
+        text: |-
+          生日快乐，悟空。
+        reactions:
+          pray: [sunwukong]

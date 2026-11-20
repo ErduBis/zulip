@@ -1,0 +1,260 @@
+# 格式说明见 ../README.md。
+
+channel: 降妖除魔
+topics:
+  - topic: 值班表
+    start: {days_ago: 10, time: "09:15"}
+    messages:
+      - from: sunwukong
+        text: |-
+          下两周的值班表，请 @*运维值班* 看一下有没有冲突：
+
+          | 日期 | 主值班 | 备份 |
+          | --- | --- | --- |
+          | 周一至周三 | @**孙悟空** | @**哪吒** |
+          | 周四至周五 | @**二郎神** | @**孙悟空** |
+          | 周末 | @**哪吒** | @**二郎神** |
+      - from: nezha
+        after: 20m
+        text: |-
+          周末我可以，但周六下午要去陈塘关给我爹过生日，那两个小时请二郎神顶一下？
+      - from: erlangshen
+        after: 10m
+        text: |-
+          没问题，我带着哮天犬随时在线。
+        reactions:
+          dog: [nezha, sunwukong]
+      - from: sunwukong
+        after: 5m
+        text: |-
+          好，表已经更新。值班手册在[这里](https://example.com/oncall)，新人一定要看。
+      - from: ravi
+        after: 2h
+        text: |-
+          Can I join the on-call rotation next month? 我想多学一点 :muscle:
+      - from: sunwukong
+        after: 15m
+        text: |-
+          欢迎！先跟一轮 shadow，熟悉一下告警再说。
+        reactions:
+          "+1": [ravi, erlangshen]
+  - topic: 白骨精仿冒登录页
+    start: {days_ago: 6, time: "13:20"}
+    messages:
+      - from: sunwukong
+        text: |-
+          **安全事件** 妖#301：有人仿冒我们的登录页，域名只差一个字母。已经有两位同事收到了钓鱼邮件。
+      - from: shawujing
+        after: 3m
+        text: |-
+          我也收到了，标题是「师父请您确认斋饭订单」，差点点进去 :scream:
+      - from: zhubajie
+        after: 1m
+        text: |-
+          我点进去了……还输了密码。
+        reactions:
+          scream: [nezha, erlangshen]
+      - from: sunwukong
+        after: 1m
+        text: |-
+          @**猪八戒** 马上改密码，然后在设置里把其他设备都退出登录。
+      - from: zhubajie
+        after: 5m
+        text: |-
+          改好了 :sweat_smile:
+      - from: tangseng
+        after: 10m
+        text: |-
+          悟空，你确定这是仿冒的？页面看起来和我们的一模一样。
+      - from: sunwukong
+        after: 2m
+        text: |-
+          师父，**看起来一样才可怕**。对比一下：
+
+          ```diff
+          - https://login.example.com
+          + https://1ogin.example.com
+          ```
+
+          第一个字母是数字 1，不是字母 l。
+        reactions:
+          eyes: [tangseng, shawujing, nezha]
+      - from: taishanglaojun
+        after: 20m
+        text: |-
+          已经提交下架申请。建议全员开启双重验证。
+      - from: sunwukong
+        after: 2h
+        text: |-
+          第二个仿冒页面又出现了，这次换了个外观，冒充的是「村口大娘送饭」。处理方式同上，编号 妖#302。
+      - from: nezha
+        after: 30m
+        text: |-
+          这个白骨精很执着啊，一天换两个皮肤。
+        reactions:
+          joy: [sunwukong, erlangshen, ravi]
+      - from: sunwukong
+        after: 3h
+        text: |-
+          第三次了（编号 妖#303），这次冒充的是「老爷爷找女儿」。我已经把整个域名段都拉黑了，**应该不会再有第四次**。
+
+          全员提醒：
+          - 不认识的链接先别点
+          - 登录前看一眼地址栏
+          - 拿不准就在这里问
+        reactions:
+          "+1": [tangseng, shawujing, nezha, taishanglaojun, ravi]
+          muscle: [zhubajie]
+      - from: tangseng
+        after: 10m
+        text: |-
+          悟空，之前我错怪你了。辛苦。
+        reactions:
+          heart: [sunwukong]
+  - topic: 黄风岭接口超时
+    start: {days_ago: 2, time: "02:10"}
+    resolved: true
+    resolved_by: erlangshen
+    messages:
+      - from: erlangshen
+        text: |-
+          :rotating_light: 妖#318：黄风岭节点的接口大量超时，告警来自土地公巡山告警。
+      - from: erlangshen
+        after: 2m
+        text: |-
+          日志片段：
+
+          ```text
+          02:08:13 ERROR api.route  timeout after 30000ms  region=huangfengling
+          02:08:14 ERROR api.route  timeout after 30000ms  region=huangfengling
+          02:08:19 WARN  lb         upstream unhealthy: node-3 (wind speed too high)
+          ```
+      - from: sunwukong
+        after: 6m
+        text: |-
+          醒了。看起来是风太大把 node-3 吹掉线了。先把流量切到其他节点。
+      - from: erlangshen
+        after: 4m
+        text: |-
+          已切换，错误率从 37% 降到 2%。
+        reactions:
+          tada: [sunwukong]
+      - from: sunwukong
+        after: 20m
+        text: |-
+          根因找到了：黄风岭那台机器的散热口朝着风口，风一大就过热。我去借了一颗定风丹装上 :wrench:
+      - from: nezha
+        after: 5h
+        text: |-
+          早上起来才看到，你们辛苦了！复盘文档我来写吧。
+      - from: erlangshen
+        after: 1h
+        text: |-
+          复盘写好了，要点：
+          1. 告警到响应 6 分钟，达标
+          2. 切流量手动操作，下次做成自动
+          3. 机房选址要考虑风向
+        reactions:
+          "+1": [sunwukong, nezha, taishanglaojun]
+  - topic: 金角银角的葫芦漏洞
+    start: {hours_ago: 6}
+    messages:
+      - from: nezha
+        text: |-
+          报一个奇怪的漏洞：平顶山那边的系统，只要你**回应自己的名字**，就会被收进一个葫芦里。
+      - from: ravi
+        after: 3m
+        text: |-
+          Wait, what? 回答名字就被……收进去？这是什么 authentication？
+      - from: sunwukong
+        after: 5m
+        text: |-
+          这个我熟。它的逻辑大概是这样：
+
+          ```python
+          def call_name(name: str, reply: str | None) -> bool:
+              # 只要对方应答，就把对方收进葫芦
+              if reply is not None:
+                  gourd.capture(name)
+                  return True
+              return False
+          ```
+
+          问题在于它**没有校验应答的人是不是本人**，换个名字也照样收。
+      - from: taishanglaojun
+        after: 15m
+        text: |-
+          那个葫芦是我实验室丢的，说来惭愧。我负责修。
+        reactions:
+          sweat_smile: [nezha, ravi]
+      - from: erlangshen
+        after: 10m
+        text: |-
+          临时措施：全员**听到有人喊名字先别答应**，在这里确认一下再说。
+      - from: zhubajie
+        after: 2m
+        text: |-
+          那要是师父喊我吃饭呢？
+      - from: sunwukong
+        after: 1m
+        text: |-
+          师父喊你吃饭会走 #**茶水间**，不会在山里喊。
+        reactions:
+          joy: [nezha, erlangshen, ravi, shawujing]
+      - from: taishanglaojun
+        after: 40m
+        text: |-
+          修复已经提交，加了身份校验。麻烦 @**哪吒** 帮忙验证一下？
+      - from: nezha
+        after: 30m
+        text: |-
+          验证通过 :green_tick: 我喊了三次「孙行者」，葫芦都没反应。
+        reactions:
+          tada: [taishanglaojun, sunwukong]
+  - topic: 妖怪分级标准
+    start: {days_ago: 16, time: "14:30"}
+    messages:
+      - from: sunwukong
+        text: |-
+          以后报妖怪统一按这个分级，方便判断要不要半夜叫人：
+
+          | 等级 | 说明 | 响应时间 |
+          | --- | --- | --- |
+          | P0 | 有人被抓走了 | 立即 |
+          | P1 | 妖怪拦路，无法前进 | 30 分钟 |
+          | P2 | 可疑人员，还没动手 | 当天 |
+          | P3 | 只是长得吓人 | 不用报 |
+        reactions:
+          "+1": [erlangshen, nezha, taishanglaojun]
+      - from: zhubajie
+        after: 5m
+        text: |-
+          师父被抓走算 P0，那我被抓走算几级？
+      - from: sunwukong
+        after: 1m
+        text: |-
+          看情况，饭点前算 P0，饭点后算 P2。
+        reactions:
+          joy: [nezha, erlangshen, shawujing, ravi]
+      - from: zhubajie
+        after: 1m
+        text: |-
+          :rage:
+      - from: shawujing
+        after: 10m
+        text: |-
+          建议 P0 和 P1 自动通知 @*运维值班*，不用手动喊人。
+      - from: erlangshen
+        after: 30m
+        text: |-
+          已经配好了，土地公巡山告警发出 P0 和 P1 的时候会自动提及值班组。
+      - from: tangseng
+        after: 1h
+        text: |-
+          分级很清楚。补一条：**P3 也要记录**，长得吓人的不一定是坏人。
+        reactions:
+          pray: [shawujing]
+      - from: sunwukong
+        after: 5m
+        text: |-
+          好，师父说得对。

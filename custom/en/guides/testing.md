@@ -314,9 +314,17 @@ node_modules/.bin/stylelint <file.css>
 
 ## Dev environment conveniences
 
-- `./manage.py print_initial_password iago@zulip.com` prints a test user's initial password and API
-  key, for calls like `curl -u iago@zulip.com:<API key> http://localhost:9991/api/v1/users/me` (send
-  only GET requests, so the dev data stays unchanged).
+- The dev database (9991) holds our own generated Chinese sample organization, whose members differ
+  from the test database: owner 唐僧 `tangseng@zulip.com`, administrator 孙悟空
+  `sunwukong@zulip.com`, regular member 猪八戒 `zhubajie@zulip.com`, guest 观音菩萨
+  `guanyin@zulip.com`; the full list is in `zcustom/dev_data/org.yaml`. hamlet and the other users in
+  the table above exist only in the test database. `./manage.py populate_dev_zh` generates the dev
+  database (`tools/rebuild-dev-database` runs it and wipes the dev database, so ask the lead first);
+  after changing data in `zcustom/dev_data/`, validate it with `./manage.py populate_dev_zh --check`.
+- `./manage.py print_initial_password sunwukong@zulip.com` prints a dev organization member's
+  initial password and API key, for calls like
+  `curl -u sunwukong@zulip.com:<API key> http://localhost:9991/api/v1/users/me` (send only GET
+  requests, so the dev data stays unchanged).
 - `http://localhost:9991/devtools/` lists dev-only pages: `/emails` (the dev environment doesn't
   really send mail; everything "sent" shows up here), `/devtools/buttons`, `/devtools/banners`,
   `/devtools/inputs` (component styles), `/errors/404`, `/errors/5xx`.

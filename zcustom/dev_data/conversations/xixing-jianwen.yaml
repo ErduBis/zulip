@@ -1,0 +1,140 @@
+# 格式说明见 ../README.md。
+
+channel: 西行见闻
+topics:
+  - topic: 西出阳关
+    start: {days_ago: 25, time: "18:20"}
+    messages:
+      - from: tangseng
+        text: |-
+          今天出了阳关。临走的时候想起一句诗：
+
+          ```quote
+          劝君更尽一杯酒，西出阳关无故人。
+          ——王维《送元二使安西》
+          ```
+
+          不过我们有四个人一匹马，不算无故人。
+        reactions:
+          heart: [sunwukong, shawujing, zhubajie]
+      - from: zhubajie
+        after: 10m
+        text: |-
+          酒是不能喝的，但我可以多喝一碗汤。
+        reactions:
+          joy: [sunwukong, nezha]
+      - from: shawujing
+        after: 15m
+        text: |-
+          附上今天的照片：
+
+          [阳关落日](/static/images/characters/starr.png)
+      - from: huianxingzhe
+        after: 1h
+        text: |-
+          拍得真好，我转给南海那边看看。
+  - topic: 两岸猿声
+    start: {days_ago: 15, time: "07:50"}
+    messages:
+      - from: sunwukong
+        text: |-
+          早上坐船过峡谷，两边山上全是猴子在叫，像是在给我打招呼 :monkey_face:
+
+          ```quote
+          两岸猿声啼不住，轻舟已过万重山。
+          ——李白《早发白帝城》
+          ```
+        reactions:
+          monkey: [zhubajie, nezha, shawujing]
+      - from: nezha
+        after: 5m
+        text: |-
+          猴哥，那是你的粉丝团吧。
+      - from: sunwukong
+        after: 1m
+        text: |-
+          花果山的老乡，见到我激动。
+      - from: ravi
+        after: 2h
+        text: |-
+          What a view! 这首诗我会背了：两岸猿声啼不住 :blush:
+        reactions:
+          clap: [sunwukong, change, tangseng]
+      - from: change
+        after: 5h
+        text: |-
+          我这边刚看到，好美。月宫只能看见地球，看不见猴子。
+  - topic: 宝象国夜市
+    start: {days_ago: 4, time: "18:30"}
+    messages:
+      - from: zhubajie
+        text: |-
+          宝象国的夜市强烈推荐！整理了一份攻略：
+
+          **必吃**
+          1. 烤饼（素的，放心）
+          2. 甜豆花
+          3. 葡萄干，按斤称
+
+          **避坑**
+          - 门口那家「白袍公子」的摊子，看着好看，**别买**，上次买的饼是石头做的
+        reactions:
+          "+1": [shawujing, nezha]
+          joy: [sunwukong]
+      - from: shawujing
+        after: 15m
+        text: |-
+          二师兄这份攻略比我们的项目文档还详细。
+        reactions:
+          joy: [zhubajie, sunwukong, ravi]
+      - from: tangseng
+        after: 10m
+        text: |-
+          大家逛完早点回来，明天还要赶路。
+      - from: nezha
+        after: 30m
+        text: |-
+          甜豆花确实好吃 :yum:
+      - from: change
+        after: 3h
+        text: |-
+          看饿了。下次去帮我带一斤葡萄干！
+      - from: zhubajie
+        after: 5m
+        text: |-
+          已加入采购清单 :check:
+  - topic: 车迟国见闻
+    start: {days_ago: 11, time: "13:30"}
+    messages:
+      - from: shawujing
+        text: |-
+          车迟国这边很重视「求雨」，城里到处都是道观。今天正好赶上一场求雨比赛。
+      - from: sunwukong
+        after: 5m
+        text: |-
+          我也参加了，**赢了**。具体怎么赢的就不细说了 :innocent:
+        reactions:
+          joy: [zhubajie, nezha]
+          eyes: [shawujing]
+      - from: zhubajie
+        after: 2m
+        text: |-
+          我负责在旁边鼓掌。
+      - from: ravi
+        after: 1h
+        text: |-
+          求雨比赛？This sounds like a hackathon for weather :joy:
+        reactions:
+          joy: [sunwukong, change]
+      - from: change
+        after: 4h
+        text: |-
+          月宫这边的天气预报说，那天车迟国确实下了一场大雨。
+      - from: tangseng
+        after: 30m
+        text: |-
+          ```quote
+          欲穷千里目，更上一层楼。
+          ——王之涣《登鹳雀楼》
+          ```
+          明天登城楼看看全城的样子。

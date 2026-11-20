@@ -1,0 +1,163 @@
+# 格式说明见 ../README.md。
+
+channel: 师徒小会
+topics:
+  - topic: 要不要回高老庄
+    start: {days_ago: 12, time: "20:30"}
+    messages:
+      - from: zhubajie
+        text: |-
+          说个心里话，最近有点累。高老庄那边问我要不要回去，待遇还行，离家也近。
+      - from: shawujing
+        after: 5m
+        text: |-
+          二师兄，这事你想清楚了吗？
+      - from: zhubajie
+        after: 3m
+        text: |-
+          没想清楚，所以才说出来。每天走几十里路，饭还经常吃不饱 :sob:
+      - from: sunwukong
+        after: 2m
+        text: |-
+          你这个月第三次说要回高老庄了。
+        reactions:
+          joy: [shawujing, bailongma]
+      - from: tangseng
+        after: 10m
+        text: |-
+          八戒，累了可以说，这很正常。我们看看能做什么：
+          - 伙食预算我去申请增加
+          - 下周安排两天休整
+          - 化缘的活大家轮流来，不全压在你身上
+
+          你考虑一下，**真想走我也不拦**，但我希望你留下。
+        reactions:
+          heart: [zhubajie, shawujing, bailongma]
+      - from: zhubajie
+        after: 15m
+        text: |-
+          师父这么说，那我再坚持坚持。伙食预算的事别忘了啊。
+        reactions:
+          tada: [shawujing, sunwukong]
+      - from: bailongma
+        after: 2m
+        text: |-
+          我也觉得最近节奏太紧。休整两天挺好的。
+      - from: shawujing
+        after: 5m
+        text: |-
+          我来排一下休整的日子，明天发到这里。
+  - topic: 周会纪要
+    start: {days_ago: 7, time: "09:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          **周会纪要**（<time:2024-06-03T09:00:00+08:00>）
+
+          **上周完成**
+          - 通天河渡船已订好（负责人 @**沙悟净**）
+          - 经卷检索原型可用（负责人 @_**太上老君**）
+          - 伙食预算申请已提交（负责人 @**唐僧**）
+
+          **本周计划**
+          - 准备火焰山方案（负责人 @**孙悟空**）
+          - 女儿国通关材料（负责人 @**沙悟净**）
+          - 物资补充（负责人 @**猪八戒**）
+
+          **风险**
+          - 火焰山温度过高，可能要改时间
+          - 白骨精最近又活跃了，见 #**降妖除魔>白骨精仿冒登录页**
+      - from: tangseng
+        after: 30m
+        text: |-
+          谢谢沙师弟，纪要很清楚。火焰山的方案周三前给我。
+      - from: sunwukong
+        after: 5m
+        text: |-
+          没问题。
+      - from: zhubajie
+        after: 10m
+        text: |-
+          物资补充需要钱，预算批了吗？
+      - from: tangseng
+        after: 1h
+        text: |-
+          批了一半。先买必需的，零食往后放。
+        reactions:
+          sob: [zhubajie]
+  - topic: 绩效和奖金
+    start: {hours_ago: 20}
+    messages:
+      - from: tangseng
+        text: |-
+          这一季度的绩效评估要开始了。今年试点一个新算法，先给大家看一下：
+
+          $$
+          \text{奖金} = \text{基数} \times \left(0.6 \cdot \text{目标完成度} + 0.4 \cdot \text{同事评价}\right)
+          $$
+
+          同事评价是匿名的，周五前填完。
+      - from: sunwukong
+        after: 10m
+        text: |-
+          降妖的数量算在目标完成度里吗？
+      - from: tangseng
+        after: 5m
+        text: |-
+          算。但**打死的和劝降的权重一样**，鼓励大家先讲道理。
+        reactions:
+          thinking: [sunwukong]
+      - from: zhubajie
+        after: 3m
+        text: |-
+          化缘成功的次数也算吧？
+      - from: tangseng
+        after: 2m
+        text: |-
+          算，按 #**取经路线>化缘路线优化** 里的统计口径。
+      - from: shawujing
+        after: 20m
+        text: |-
+          我把评价表做好了，链接已经私信发给各位。
+        reactions:
+          "+1": [tangseng, bailongma]
+  - topic: 紧箍咒使用记录
+    start: {days_ago: 2, time: "21:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          按顾问的建议，紧箍咒使用记录表已经上线了。字段如下：
+
+          ```yaml
+          时间: 2024-06-10 15:20
+          原因: 未经报备单独降妖
+          持续时长: 5 秒
+          事后复盘: 已沟通，同意以后先报备
+          ```
+      - from: tangseng
+        after: 20m
+        text: |-
+          好。我这周一次都没用。
+        reactions:
+          tada: [sunwukong]
+      - from: sunwukong
+        after: 1m
+        text: |-
+          这是我这个月最舒服的一周 :relieved:
+        reactions:
+          joy: [zhubajie, shawujing]
+      - from: zhubajie
+        after: 3m
+        text: |-
+          我能申请一个专门管我的咒吗？比如「不许吃夜宵咒」。
+      - from: tangseng
+        after: 5m
+        text: |-
+          可以考虑。
+        reactions:
+          scream: [zhubajie]
+          joy: [sunwukong, shawujing, bailongma]
+      - from: zhubajie
+        after: 1m
+        text: |-
+          我撤回刚才的话。

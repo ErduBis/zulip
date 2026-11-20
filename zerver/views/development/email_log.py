@@ -15,9 +15,9 @@ from zerver.actions.users import change_user_is_active
 from zerver.lib.email_notifications import enqueue_welcome_emails, send_account_registered_email
 from zerver.lib.response import json_success
 from zerver.lib.typed_endpoint import typed_endpoint
-from zerver.models import Realm
+from zerver.lib.utils import assert_is_not_none
+from zerver.models import Realm, UserProfile
 from zerver.models.realms import get_realm
-from zerver.models.streams import get_realm_stream
 from zerver.models.users import get_user_by_delivery_email
 from zerver.views.invite import INVITATION_LINK_VALIDITY_MINUTES
 from zproject.email_backends import get_forward_address, set_forward_address
@@ -65,13 +65,20 @@ def generate_all_emails(request: HttpRequest) -> HttpResponse:
         client = Client()
 
         # write fake data for all variables
-        registered_email = "hamlet@zulip.com"
         unregistered_email_1 = "new-person@zulip.com"
         unregistered_email_2 = "new-person-2@zulip.com"
         invite_expires_in_minutes = INVITATION_LINK_VALIDITY_MINUTES
         realm = get_realm("zulip")
         other_realm = Realm.objects.exclude(string_id="zulip").first()
-        user = get_user_by_delivery_email(registered_email, realm)
+        # Pick people by role rather than by name, since our development
+        # organization (zcustom/dev_data) doesn't use the upstream names.
+        user = UserProfile.objects.filter(
+            realm=realm, role=UserProfile.ROLE_MEMBER, is_bot=False, is_imported_stub=False
+        ).order_by("id")[0]
+        registered_email = user.delivery_email
+        admin = UserProfile.objects.filter(
+            realm=realm, role=UserProfile.ROLE_REALM_ADMINISTRATOR, is_bot=False
+        ).order_by("id")[0]
 
         # Password reset emails
         # active account in realm
@@ -113,7 +120,7 @@ def generate_all_emails(request: HttpRequest) -> HttpResponse:
         assert logged_in
 
         # New user invite and reminder emails
-        stream = get_realm_stream("Denmark", user.realm.id)
+        stream = assert_is_not_none(realm.new_stream_announcements_stream)
         result = client.post(
             "/json/invites",
             {
@@ -154,12 +161,10 @@ def generate_all_emails(request: HttpRequest) -> HttpResponse:
         enqueue_welcome_emails(user_profile)
 
         # Initial email with new account information for admin user
-        send_account_registered_email(get_user_by_delivery_email("iago@zulip.com", realm))
+        send_account_registered_email(admin)
 
         # Onboarding emails for admin user
-        enqueue_welcome_emails(
-            get_user_by_delivery_email("iago@zulip.com", realm), realm_creation=True
-        )
+        enqueue_welcome_emails(admin, realm_creation=True)
 
         # Realm reactivation email
         do_send_realm_reactivation_email(realm, acting_user=None)

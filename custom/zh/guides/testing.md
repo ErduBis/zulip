@@ -267,8 +267,13 @@ node_modules/.bin/stylelint <file.css>
 
 ## 开发环境里的便利
 
-- `./manage.py print_initial_password iago@zulip.com` 打印测试用户的初始密码和 API key，可以用
-  `curl -u iago@zulip.com:<API key> http://localhost:9991/api/v1/users/me` 调接口（只发 GET，开发数据保持不变）。
+- 开发库（9991）里是我们自己生成的中文示例组织，成员和测试库不同：所有者唐僧 `tangseng@zulip.com`、
+  管理员孙悟空 `sunwukong@zulip.com`、普通成员猪八戒 `zhubajie@zulip.com`、访客观音菩萨
+  `guanyin@zulip.com`，完整名单见 `zcustom/dev_data/org.yaml`。上面表格里的 hamlet 等用户只在测试库里。
+  开发库由 `./manage.py populate_dev_zh` 生成（`tools/rebuild-dev-database` 调用它，会清空开发库，先问总领）；
+  改了 `zcustom/dev_data/` 的数据后用 `./manage.py populate_dev_zh --check` 校验。
+- `./manage.py print_initial_password sunwukong@zulip.com` 打印开发组织成员的初始密码和 API key，可以用
+  `curl -u sunwukong@zulip.com:<API key> http://localhost:9991/api/v1/users/me` 调接口（只发 GET，开发数据保持不变）。
 - `http://localhost:9991/devtools/` 列出开发用页面：`/emails`（开发环境不真发邮件，「发出」的邮件都在这里）、
   `/devtools/buttons`、`/devtools/banners`、`/devtools/inputs`（组件样式）、`/errors/404`、`/errors/5xx`。
 - 改动自动生效：Python 改动后 run-dev 自动重启；`web/src/`、`web/templates/` 改动后浏览器自动刷新；

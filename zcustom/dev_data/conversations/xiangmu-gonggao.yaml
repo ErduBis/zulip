@@ -1,0 +1,92 @@
+# 格式说明见 ../README.md。
+
+channel: 项目公告
+topics:
+  - topic: 团队约定
+    start: {days_ago: 20, time: "09:00"}
+    messages:
+      - from: tangseng
+        text: |-
+          各位，取经项目正式进入长途阶段，几条约定请大家看一下：
+
+          1. **讨论放到对应频道**：路线问 #**取经路线**，线上问题去 #**降妖除魔**，吃饭去 #**茶水间**。
+          2. **一个话题只聊一件事**，话题名写清楚，比如「女儿国通关手续」，不要写「问一下」。
+          3. 遇到妖怪先报备，**不要单独行动**。说的就是你 @**孙悟空**。
+          4. 每周一早上在 #**师徒小会** 过一遍上周进度。
+
+          有意见在 #**茶水间** 里提，我都会看。
+        reactions:
+          "+1": [sunwukong, shawujing, zhubajie, bailongma, nezha]
+          pray: [huianxingzhe]
+      - from: sunwukong
+        after: 12m
+        text: |-
+          收到。补充一条运维约定：生产环境的金箍棒（我是说管理员权限）**只在值班时用**，用完在 #**降妖除魔** 留个记录。
+        reactions:
+          muscle: [erlangshen, nezha]
+      - from: tangseng
+        after: 1h
+        text: |-
+          好。另外，沙师弟已经整理了[新人入门文档](https://example.com/onboarding)，新同事先看这个。
+  - topic: 本月目标
+    start: {days_ago: 6, time: "10:00"}
+    messages:
+      - from: tangseng
+        text: |-
+          本月目标（OKR）如下，大家对照一下自己负责的部分：
+
+          | 目标 | 关键结果 | 负责人 |
+          | --- | --- | --- |
+          | 安全通过火焰山 | 借到芭蕉扇，全员无伤 | @**孙悟空** |
+          | 降低伙食成本 | 化缘成功率提升到 80% | @**猪八戒** |
+          | 经卷系统上线 | 检索响应时间 < 200 ms | @**太上老君** |
+          | 顾问关系 | 每月一次顾问会 | @**沙悟净** |
+
+          有问题这周五前提出来。
+        reactions:
+          "+1": [shawujing, taishanglaojun, nezha]
+          sweat_smile: [zhubajie]
+      - from: sunwukong
+        after: 30m
+        text: |-
+          化缘成功率 80% 是不是有点高？上个月才 52%。
+      - from: tangseng
+        after: 20m
+        text: |-
+          目标要有挑战性。八戒说他有信心。
+        reactions:
+          joy: [sunwukong, shawujing, nezha, erlangshen]
+  - topic: 火焰山段临时调整
+    start: {hours_ago: 5}
+    messages:
+      - from: sunwukong
+        text: |-
+          @*取经团队* 临时通知：火焰山一带气温过高，明后两天**改为夜间赶路**，白天原地休整。
+
+          - 出发时间：每晚 20:00
+          - 休整地点：山脚的客栈（已订好）
+          - 防暑物资：八戒负责，清单见 #**取经路线>每日行程**
+        reactions:
+          fire: [zhubajie, nezha]
+          "+1": [shawujing, bailongma]
+      - from: tangseng
+        after: 15m
+        text: |-
+          同意。大家注意休息，夜里赶路**不许掉队**。
+  - topic: 休整日安排
+    start: {days_ago: 11, time: "08:00"}
+    messages:
+      - from: tangseng
+        text: |-
+          经过上周的讨论，决定**每走六天休整一天**。休整日不安排任何工作，也不要在群里发工作消息。
+        reactions:
+          tada: [zhubajie, bailongma, nezha, shawujing]
+          heart: [zhubajie]
+      - from: sunwukong
+        after: 10m
+        text: |-
+          休整日如果遇到 P0 级妖怪，按 #**降妖除魔>妖怪分级标准** 处理，值班同事照常响应。
+      - from: tangseng
+        after: 5m
+        text: |-
+          对。其余的事情都等到第二天。

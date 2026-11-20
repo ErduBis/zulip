@@ -12,7 +12,7 @@ const puppeteer = require("puppeteer");
 
 const {values: options} = parseArgs({
     options: {
-        user: {type: "string", default: "iago@zulip.com"},
+        user: {type: "string", default: "sunwukong@zulip.com"},
         path: {type: "string", default: "/"},
         out: {type: "string", default: `/tmp/screenshot-dev-${Date.now()}.png`},
         lang: {type: "string"},

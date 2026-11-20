@@ -1,0 +1,380 @@
+# 格式说明见同目录的 README.md。
+
+realm:
+  name: 取经项目组（示例）
+  name_alternatives:
+    - 西行事业部（示例）
+    - 大唐取经有限公司（示例）
+    - 灵山远征队（示例）
+  description: |-
+    西天取经项目的协作空间：路线规划、降妖除魔、经卷研发都在这里。
+
+    **本组织只用于开发和演示**，人物和内容均为虚构，与任何真实组织无关。
+  welcome_message_custom_text: |-
+    欢迎加入取经项目组！先去 #**茶水间** 打个招呼，再看看 #**项目公告** 里的团队约定。
+    有问题随时找 @**沙悟净**，他最有耐心。
+
+members:
+  - key: tangseng
+    name: 唐僧
+    role: owner
+    replaces: desdemona
+    timezone: Asia/Shanghai
+    profile:
+      职务: 项目负责人
+      个人简介: |-
+        西天取经项目发起人，负责方向、预算和对外沟通。
+        口头禅：**流程要走，初心要守。**
+      常用兵器: 九环锡杖
+      入职日期: "2019-03-01"
+      个人主页: https://example.com/tangseng
+      GitHub: zulip
+      称谓: 他
+  - key: sunwukong
+    name: 孙悟空
+    role: administrator
+    replaces: iago
+    is_staff: true
+    timezone: Asia/Shanghai
+    profile:
+      职务: 技术负责人 / 安全与运维
+      个人简介: |-
+        火眼金睛，专治各种线上妖怪。
+        - 擅长：故障排查、性能优化、翻跟头
+        - 不擅长：写周报
+      常用兵器: 金箍棒
+      入职日期: "2019-03-15"
+      导师: [tangseng]
+      称谓: 他
+  - key: shawujing
+    name: 沙悟净
+    role: moderator
+    replaces: shiva
+    timezone: Asia/Shanghai
+    profile:
+      职务: 项目经理 / 社区版主
+      个人简介: |-
+        挑担的，也挑需求。负责排期、记账和维护频道秩序。
+      常用兵器: 降妖宝杖
+      入职日期: "2019-06-20"
+      导师: [tangseng]
+      称谓: 他
+  - key: zhubajie
+    name: 猪八戒
+    role: member
+    replaces: hamlet
+    timezone: Asia/Shanghai
+    profile:
+      职务: 后勤与采购
+      个人简介: |-
+        团队伙食和物资全归我管。
+        午饭吃什么，问我就对了。
+      常用兵器: 九齿钉耙
+      入职日期: "2019-05-01"
+      个人主页: https://example.com/zhubajie
+      导师: [sunwukong]
+      称谓: 他
+  - key: bailongma
+    name: 白龙马
+    role: member
+    replaces: cordelia
+    timezone: Asia/Shanghai
+    profile:
+      职务: 交通与物流
+      个人简介: |-
+        话不多，脚程快。只关注跟赶路有关的频道。
+      入职日期: "2019-04-10"
+      称谓: 他
+  - key: nezha
+    name: 哪吒
+    role: member
+    replaces: othello
+    timezone: Asia/Shanghai
+    profile:
+      职务: 前端工程师 / 测试
+      个人简介: |-
+        三头六臂，正好同时开三个浏览器测兼容性。
+      常用兵器: 火尖枪
+      入职日期: "2021-07-01"
+      导师: [sunwukong]
+      GitHub: zulip
+      称谓: 他
+  - key: taishanglaojun
+    name: 太上老君
+    role: member
+    replaces: prospero
+    timezone: Asia/Shanghai
+    profile:
+      职务: 首席架构师
+      个人简介: |-
+        兜率宫实验室负责人。炼丹炉就是我们的 CI，火候全靠经验。
+      常用兵器: 笔记本电脑
+      入职日期: "2018-01-01"
+      个人主页: https://example.com/doushuaigong
+      称谓: 他
+  - key: erlangshen
+    name: 二郎神
+    role: member
+    replaces: aaron
+    timezone: Asia/Shanghai
+    profile:
+      职务: 平台工程师
+      个人简介: |-
+        负责消息推送和外部集成，哮天犬机器人是我养的。
+      常用兵器: 三尖两刃刀
+      入职日期: "2020-09-01"
+      导师: [taishanglaojun]
+      称谓: 他
+  - key: change
+    name: 嫦娥
+    role: member
+    replaces: zoe
+    timezone: America/Los_Angeles
+    profile:
+      职务: 交互设计师
+      个人简介: |-
+        常驻月宫远程办公，和大家有时差。设计稿都在 #**经卷研发** 里。
+      常用兵器: 笔记本电脑
+      入职日期: "2022-02-14"
+      个人主页: https://example.com/yuegong
+      称谓: 她
+  - key: guanyin
+    name: 观音菩萨
+    role: guest
+    replaces: polonius
+    timezone: Asia/Shanghai
+    profile:
+      职务: 外部顾问
+      个人简介: |-
+        项目的外部顾问，只参与 #**菩萨顾问团**。
+      称谓: 她
+  - key: zhenyuandaxian
+    name: 镇元大仙
+    role: member
+    replaces: imported-user
+    imported_stub: true
+    timezone: Asia/Shanghai
+  - key: ravi
+    name: Ravi Sharma
+    role: member
+    timezone: Asia/Kolkata
+    profile:
+      职务: Backend Engineer（天竺分部）
+      个人简介: |-
+        Working from the Tianzhu office. 中文学习中，说错了请指正 :pray:
+      常用兵器: 笔记本电脑
+      入职日期: "2023-08-01"
+      导师: [taishanglaojun]
+      GitHub: zulip
+      称谓: he/him
+  - key: huianxingzhe
+    name: 惠岸行者木叉（南海普陀山紫竹林驻西行项目组对外联络专员）
+    role: member
+    timezone: Asia/Shanghai
+    profile:
+      职务: 对外联络
+      个人简介: |-
+        负责项目组和南海方面的日常联络。名字长，大家叫我木叉就行。
+      入职日期: "2021-03-03"
+      导师: [shawujing]
+      称谓: 他
+
+bots:
+  - email: default-bot@zulip.com
+    name: 筋斗云助手
+    owner: tangseng
+  - email: webhook-bot@zulip.com
+    name: 顺风耳
+    owner: change
+  - email: outgoing-webhook@zulip.com
+    name: 哮天犬
+    owner: erlangshen
+  - email: commit-bot@zulip.com
+    name: 藏经阁提交记录
+    owner: tangseng
+  - email: trac-bot@zulip.com
+    name: 通关文牒工单
+    owner: tangseng
+  - email: nagios-bot@zulip.com
+    name: 土地公巡山告警
+    owner: tangseng
+
+custom_profile_fields:
+  - name: 职务
+    type: short_text
+    hint: 您在团队里负责什么？
+  - name: 个人简介
+    type: paragraph
+    hint: 简单介绍一下自己，支持 Markdown
+  - name: 常用兵器
+    type: dropdown
+    hint: 您最顺手的家伙
+    options:
+      [九环锡杖, 金箍棒, 九齿钉耙, 降妖宝杖, 火尖枪, 三尖两刃刀, 笔记本电脑]
+  - name: 入职日期
+    type: date
+  - name: 个人主页
+    type: url
+    hint: 您的博客或作品集地址
+  - name: 导师
+    type: user
+    hint: 带您入门的同事
+  - name: GitHub
+    type: external_account
+  - name: 称谓
+    type: pronouns
+    hint: 其他人应该怎样称呼您？
+
+channel_folders:
+  - name: 取经事务
+    description: 西行路上的正事：路线、公告和核心决策
+  - name: 技术与运维
+    description: 研发、上线和处理线上妖怪
+  - name: 生活与闲聊
+    description: 吃饭、摸鱼和沿途见闻
+
+channels:
+  - name: 项目公告
+    description: |-
+      团队通知和重要决定，**仅管理员可以发言**。讨论请移步 #**茶水间** 或相关频道。
+    folder: 取经事务
+    creator: tangseng
+    admins_only_post: true
+    default_channel: true
+    subscribers: everyone
+  - name: 取经路线
+    description: 路线规划、通关文牒和每日行程
+    folder: 取经事务
+    creator: tangseng
+    subscribers: members
+  - name: 师徒小会
+    description: 核心团队的内部讨论，私有频道
+    folder: 取经事务
+    creator: tangseng
+    private: true
+    subscribers: [tangseng, sunwukong, zhubajie, shawujing, bailongma]
+  - name: 菩萨顾问团
+    description: |-
+      和外部顾问的沟通频道，访客也在这里。请注意不要贴内部数据。
+    folder: 取经事务
+    creator: shawujing
+    subscribers:
+      [tangseng, sunwukong, shawujing, zhubajie, guanyin, huianxingzhe]
+  - name: 降妖除魔
+    description: |-
+      线上事故和「妖怪」处理。事故编号写成 `妖#123` 会自动变成链接。
+    folder: 技术与运维
+    creator: sunwukong
+    subscribers:
+      [
+        tangseng,
+        sunwukong,
+        shawujing,
+        zhubajie,
+        nezha,
+        taishanglaojun,
+        erlangshen,
+        ravi,
+      ]
+  - name: 经卷研发
+    description: 经卷系统的开发、代码评审、设计稿和发布
+    folder: 技术与运维
+    creator: taishanglaojun
+    subscribers:
+      [
+        tangseng,
+        sunwukong,
+        shawujing,
+        zhubajie,
+        nezha,
+        taishanglaojun,
+        erlangshen,
+        change,
+        ravi,
+      ]
+  - name: 茶水间
+    description: 吃饭、摸鱼、闲聊，什么都可以聊
+    folder: 生活与闲聊
+    creator: zhubajie
+    default_channel: true
+    subscribers: everyone
+  - name: 西行见闻
+    description: |-
+      沿途的风景和故事，**网络公开**，没有账号的人也能看到。
+    folder: 生活与闲聊
+    creator: shawujing
+    web_public: true
+    subscribers:
+      [
+        tangseng,
+        sunwukong,
+        shawujing,
+        zhubajie,
+        nezha,
+        change,
+        ravi,
+        huianxingzhe,
+      ]
+
+user_groups:
+  - name: 取经团队
+    description: 师徒四人加白龙马
+    members: [tangseng, sunwukong, zhubajie, shawujing, bailongma]
+  - name: 运维值班
+    description: 线上出事时第一时间响应的同事
+    members: [sunwukong, erlangshen, nezha]
+  - name: 技术部
+    description: 所有参与研发的同事
+    members: [taishanglaojun, change, ravi]
+    subgroups: [运维值班]
+
+drafts:
+  - owner: sunwukong
+    to: {channel: 降妖除魔, topic: 白骨精仿冒登录页}
+    text: |-
+      补充一点：第三次的仿冒页面换了域名，但证书还是同一张，
+  - owner: sunwukong
+    to: {direct: [tangseng]}
+    text: |-
+      师父，紧箍咒的权限能不能改成需要二次确认？我是说
+  - owner: sunwukong
+    text: |-
+      明天早会要提：
+      - 火焰山方案的预算
+      - 值班表
+  - owner: zhubajie
+    to: {channel: 茶水间, topic: 今天吃什么}
+    text: |-
+      我提议今天中午吃
+
+scheduled_messages:
+  - from: sunwukong
+    to: {channel: 项目公告, topic: 周年回顾}
+    deliver_in_days: 30
+    text: |-
+      西行项目启动又满一个月了 :tada: 本月回顾会安排在周五下午，请大家提前把要说的写在 #**茶水间** 里。
+  - from: sunwukong
+    to: {direct: [sunwukong]}
+    deliver_in_days: 7
+    text: |-
+      备忘：检查一下金箍棒的证书是不是快过期了。
+  - from: tangseng
+    to: {channel: 取经路线, topic: 每日行程}
+    deliver_in_days: 1
+    text: |-
+      明天早上 7 点出发，请大家带好通关文牒。
+
+alert_words:
+  [妖怪, 师父, 斋饭, 通关文牒, 芭蕉扇, 紧箍咒, 化缘, 上线, 宕机, 火焰山]
+
+linkifiers:
+  - pattern: "文牒#(?P<id>[0-9]+)"
+    url_template: "https://example.com/wendie/{id}"
+  - pattern: "妖#(?P<id>[0-9]+)"
+    url_template: "https://example.com/yaoguai/{id}"
+
+analytics:
+  realm_name: 天庭数据司（示例）
+  owner: {key: taibaijinxing, name: 太白金星}
+  guest: {key: zaowangye, name: 灶王爷}
+  channel: 全天庭

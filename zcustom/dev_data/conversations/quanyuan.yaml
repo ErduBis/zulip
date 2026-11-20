@@ -1,0 +1,110 @@
+# 格式说明见 ../README.md。
+
+channel: 全员
+topics:
+  - topic: 办公地点调整
+    start: {days_ago: 22, time: "10:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          通知：从下周起，我们的「办公室」改为**移动办公**，每天在哪儿落脚就在哪儿办公。
+          网络问题找 @**孙悟空**，物资问题找 @**猪八戒**。
+      - from: zhubajie
+        after: 3m
+        text: |-
+          意思是以后天天出差？
+      - from: shawujing
+        after: 2m
+        text: |-
+          一直都是啊，二师兄。
+        reactions:
+          joy: [sunwukong, nezha, bailongma]
+      - from: bailongma
+        after: 10m
+        text: |-
+          收到。驮行李的路线我每天早上发到 #**取经路线**。
+      - from: tangseng
+        after: 30m
+        text: |-
+          辛苦大家。路上条件差，有困难随时说。
+  - topic: 新同事报到
+    start: {days_ago: 14, time: "09:30"}
+    messages:
+      - from: tangseng
+        text: |-
+          欢迎两位新同事 :tada:
+
+          - @**Ravi Sharma**：天竺分部的后端工程师，以后负责经卷的多语言支持
+          - @**惠岸行者木叉（南海普陀山紫竹林驻西行项目组对外联络专员）**：负责和南海方面的联络
+
+          大家多关照。
+        reactions:
+          tada: [sunwukong, shawujing, zhubajie, nezha, change, erlangshen]
+          wave: [taishanglaojun, bailongma]
+      - from: ravi
+        after: 5m
+        text: |-
+          Hi everyone! 很高兴加入。我的中文还在学习中，如果说错了请告诉我 :smile:
+        reactions:
+          heart: [change, shawujing]
+      - from: huianxingzhe
+        after: 3m
+        text: |-
+          大家好，叫我木叉就行。名字太长，手机上显示不全请见谅 :joy:
+      - from: zhubajie
+        after: 2m
+        text: |-
+          Ravi 你好！你们天竺有什么好吃的推荐吗？
+      - from: ravi
+        after: 10m
+        text: |-
+          Lots! 下次给你带 samosa，素的。
+        reactions:
+          heart_eyes: [zhubajie]
+      - from: nezha
+        after: 20m
+        text: |-
+          @**Ravi Sharma** 开发环境搭好了吗？有问题去 #**经卷研发** 问。
+      - from: ravi
+        after: 1h
+        text: |-
+          Done. 已经跑通了，谢谢！
+  - topic: 年会节目征集
+    start: {days_ago: 2, time: "17:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          年会节目开始征集了，每个小组至少出一个节目。报名在这里回复。
+      - from: sunwukong
+        after: 5m
+        text: |-
+          我报一个：**七十二变**现场表演，观众点什么我变什么。
+        reactions:
+          star_struck: [nezha, ravi, change]
+      - from: zhubajie
+        after: 3m
+        text: |-
+          我报吃播。
+        reactions:
+          joy: [sunwukong, shawujing, nezha]
+      - from: nezha
+        after: 10m
+        text: |-
+          我和二郎神出一个武术节目。
+      - from: erlangshen
+        after: 5m
+        text: |-
+          哮天犬也上台。
+        reactions:
+          dog: [nezha, sunwukong]
+      - from: change
+        after: 4h
+        text: |-
+          我远程跳一支舞，直播信号从月宫发 :dancer:
+      - from: tangseng
+        after: 30m
+        text: |-
+          我来念一段经，压轴。
+        reactions:
+          sleeping: [zhubajie]
+          pray: [shawujing]

@@ -1,0 +1,265 @@
+# 格式说明见 ../README.md。
+
+channel: 经卷研发
+topics:
+  - topic: 炼丹炉 CI 太慢
+    start: {days_ago: 8, time: "10:00"}
+    resolved: true
+    resolved_by: taishanglaojun
+    messages:
+      - from: nezha
+        text: |-
+          现在跑一次 CI 要 49 分钟，提个 PR 等到天黑。能不能优化一下？
+      - from: taishanglaojun
+        after: 20m
+        text: |-
+          炼丹炉讲究七七四十九，这个时间是有道理的。
+        reactions:
+          joy: [nezha, sunwukong, ravi]
+      - from: sunwukong
+        after: 2m
+        text: |-
+          老君，上次我在炉子里待了四十九天，出来就有了火眼金睛。CI 跑四十九分钟，出来的只有红色的叉 :x:
+        reactions:
+          joy: [nezha, erlangshen, zhubajie, ravi]
+      - from: taishanglaojun
+        after: 10m
+        text: |-
+          好吧，看看瓶颈在哪。
+      - from: ravi
+        after: 30m
+        text: |-
+          I profiled the pipeline. Most of the time is spent here:
+
+          ```bash
+          # 每个任务都从头安装依赖
+          ./tools/setup --fresh
+          ./tools/test-all --serial
+          ```
+
+          建议：cache dependencies, and run tests in parallel.
+        reactions:
+          eyes: [taishanglaojun, sunwukong]
+      - from: taishanglaojun
+        after: 15m
+        text: |-
+          有道理。改成这样试试：
+
+          ```yaml
+          jobs:
+            test:
+              cache: [deps, build]
+              parallel: 8
+              steps:
+                - ./tools/test-all --parallel
+          ```
+      - from: nezha
+        after: 2h
+        text: |-
+          新配置跑了一次：**49 分钟 → 9 分钟** :rocket:
+        reactions:
+          rocket: [ravi, sunwukong, erlangshen, taishanglaojun]
+          tada: [shawujing, change]
+      - from: taishanglaojun
+        after: 10m
+        text: |-
+          不错。炉子的火候是该调调了。标记已解决。
+  - topic: 经卷检索性能优化
+    start: {days_ago: 3, time: "14:00"}
+    messages:
+      - from: taishanglaojun
+        text: |-
+          经卷检索现在平均响应 850 ms，目标是 200 ms 以内。大家有什么想法？
+      - from: ravi
+        after: 10m
+        text: |-
+          现在是全文扫描吗？If so, an inverted index would help a lot.
+      - from: taishanglaojun
+        after: 5m
+        text: |-
+          是的，三藏真经一共 5048 卷，每次都从头翻。
+      - from: sunwukong
+        after: 3m
+        text: |-
+          那肯定慢。我写了个倒排索引的原型：
+
+          ```python
+          from collections import defaultdict
+
+          def build_index(scrolls: dict[int, str]) -> dict[str, set[int]]:
+              index: dict[str, set[int]] = defaultdict(set)
+              for scroll_id, text in scrolls.items():
+                  for word in tokenize(text):
+                      index[word].add(scroll_id)
+              return index
+          ```
+        reactions:
+          "+1": [ravi, taishanglaojun]
+      - from: ravi
+        after: 15m
+        text: |-
+          Nice. 中文分词怎么做？`tokenize` 用的是什么？
+      - from: sunwukong
+        after: 5m
+        text: |-
+          先用最简单的二元切分，以后再换词典。
+      - from: taishanglaojun
+        after: 30m
+        text: |-
+          算了一下索引大小，假设每卷平均 $$n$$ 个不同的词，总共 $$N = 5048$$ 卷，索引条目数大约是 $$N \cdot n$$。按 $$n \approx 2000$$ 估计，一千万条左右，内存放得下。
+      - from: nezha
+        after: 1h
+        text: |-
+          前端这边加了一个搜索框，输入的时候实时提示。截图：
+
+          [检索界面](/static/images/characters/fisher.png)
+      - from: change
+        after: 2h
+        text: |-
+          搜索框的样式我看了一下，有两点建议：
+          - 输入框圆角改成 4px，和其他输入框一致
+          - 结果为空时显示「没有找到相关经卷」，不要显示空白
+        reactions:
+          "+1": [nezha]
+      - from: taishanglaojun
+        after: 2h
+        text: |-
+          测了一下，平均响应 **140 ms**，达标了。下周上线。
+        reactions:
+          tada: [sunwukong, ravi, nezha, change, tangseng]
+      - from: tangseng
+        after: 20m
+        text: |-
+          好！这是这个月最好的消息 :pray:
+  - topic: 设计稿：通关文牒新版
+    start: {days_ago: 2, time: "01:30"}
+    messages:
+      - from: change
+        text: |-
+          新版通关文牒的设计稿好了（我这边是上午，你们那边应该是凌晨，不用急着回）。
+
+          主要改动：
+          1. 盖章区域放大，各国的章不用挤在一起
+          2. 加了二维码，扫码查看行程
+          3. 支持中英文双语
+
+          ```spoiler 设计细节
+          - 主色：大唐红 `#B22222`
+          - 字体：标题用楷体，正文用宋体
+          - 尺寸：A4，可折叠成三折
+          ```
+      - from: shawujing
+        after: 6h
+        text: |-
+          早上看到了，很好看！二维码扫出来的行程是实时的吗？
+      - from: change
+        after: 15m
+        text: |-
+          对，接的是 #**取经路线** 的行程数据。
+      - from: ravi
+        after: 1h
+        text: |-
+          The bilingual version looks great. 英文的部分我可以帮忙校对。
+        reactions:
+          heart: [change]
+      - from: tangseng
+        after: 30m
+        text: |-
+          盖章区域放大这个改得好，现在的文牒上已经盖了十几个国家的章，快没地方了。
+      - from: nezha
+        after: 1h
+        text: |-
+          @**嫦娥** 前端实现大概需要三天，切图能今天给我吗？
+      - from: change
+        after: 6h
+        text: |-
+          刚醒，已经上传了 :moon:
+  - topic: PR 评审：多语言经卷
+    start: {hours_ago: 9}
+    messages:
+      - from: ravi
+        text: |-
+          @**太上老君** I opened a PR to support Sanskrit originals alongside the Chinese translation. 麻烦有空看一下。
+
+          Key changes:
+          - New `ScrollTranslation` model
+          - API: `GET /api/scrolls/{id}?lang=sa`
+          - Fallback to Chinese if the translation is missing
+      - from: taishanglaojun
+        after: 40m
+        text: |-
+          看了，整体思路没问题。两个问题：
+          1. `lang` 参数没有校验，传个不存在的语言会 500
+          2. 缺少测试
+      - from: ravi
+        after: 20m
+        text: |-
+          Good catch. 已经加上校验和测试了：
+
+          ```python
+          def test_unknown_language_returns_400(self) -> None:
+              result = self.client_get("/api/scrolls/1", {"lang": "xx"})
+              self.assert_json_error(result, "Unknown language: xx")
+          ```
+      - from: sunwukong
+        after: 10m
+        text: |-
+          顺便问一下，梵文的字体在手机上能显示吗？
+      - from: nezha
+        after: 15m
+        text: |-
+          测了一下，iOS 没问题，部分安卓机器显示方块 :thinking: 我开个单独的话题跟进。
+      - from: taishanglaojun
+        after: 1h
+        text: |-
+          LGTM，可以合并了。辛苦了 @**Ravi Sharma**，第一个 PR 就这么完整。
+        reactions:
+          tada: [ravi, nezha, sunwukong]
+      - from: ravi
+        after: 5m
+        text: |-
+          Thank you! 谢谢老君 :pray:
+  - topic: 梵文字体在安卓上显示方块
+    start: {hours_ago: 4}
+    messages:
+      - from: nezha
+        text: |-
+          接着 #**经卷研发>PR 评审：多语言经卷** 说的问题：部分安卓机器上梵文显示成方块 □□□。
+      - from: ravi
+        after: 10m
+        text: |-
+          Probably the system font doesn't include Devanagari. 可以考虑把字体打包进去？
+      - from: change
+        after: 5m
+        text: |-
+          打包字体会让页面变大。能不能只在打开梵文经卷的时候再加载？
+      - from: nezha
+        after: 15m
+        text: |-
+          可以，按需加载：
+
+          ```css
+          @font-face {
+              font-family: "Scroll Sanskrit";
+              src: url("/fonts/sanskrit.woff2") format("woff2");
+              font-display: swap;
+          }
+          ```
+        reactions:
+          "+1": [change, ravi]
+      - from: taishanglaojun
+        after: 20m
+        text: |-
+          字体文件多大？
+      - from: nezha
+        after: 5m
+        text: |-
+          子集化之后 86 KB。
+      - from: taishanglaojun
+        after: 3m
+        text: |-
+          可以接受。
+      - from: ravi
+        after: 2m
+        text: |-
+          :tada:

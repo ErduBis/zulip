@@ -209,6 +209,9 @@ Zulip 界面以英文为源文本，中文译文放在 `locale/zh_Hans/`：前�
 - 把重要决策记录到 `DECISIONS.md`。
 - 定期同步上游：13.x 小版本随时合并；大版本升级单独规划。合并时按「中文翻译」第 3 步核对译文；
   上游改了我们已删除的文件，保持删除（`git rm`）。部署步骤见 `guides/deployment.md`。
+  合并后对照上游 `zilencer/management/commands/populate_db.py` 的改动，看开发数据有没有要移植到
+  `zcustom/` 的新内容（D11）。上游改了 `zerver/lib/test_fixtures.py` 里 `IMPORTANT_FILES` 列出的文件时，
+  下一次 `./tools/provision` 会清空并重建开发库，运行前先告诉用户。
 
 ### 提交规范
 

@@ -1,0 +1,271 @@
+# 格式说明见 ../README.md。
+
+channel: 取经路线
+topics:
+  - topic: 通天河怎么过
+    start: {days_ago: 9, time: "08:40"}
+    messages:
+      - from: shawujing
+        text: |-
+          前面就是通天河，水面宽八百里。我列了三个方案：
+
+          1. 绕路：多走 12 天
+          2. 坐船：渡口说要等冰化
+          3. 等河面结冰后步行过去
+
+          @**唐僧** 您看选哪个？
+      - from: tangseng
+        after: 10m
+        text: |-
+          绕路太久了。冰面安全吗？
+      - from: sunwukong
+        after: 3m
+        text: |-
+          我看了下天气预报，明晚会降温，但冰层多厚说不好。**我不太相信这么巧的结冰**，总觉得有人在搞事。
+      - from: zhubajie
+        after: 1m
+        text: |-
+          走冰面好啊，省力。
+      - from: bailongma
+        after: 6m
+        text: |-
+          冰面我驮不了太重的行李，要减负。
+      - from: shawujing
+        after: 15m
+        text: |-
+          那我把行李分成两批。悟空先去冰面上探一探，测一下厚度再决定。
+        reactions:
+          "+1": [tangseng, sunwukong]
+      - from: sunwukong
+        after: 2h
+        text: |-
+          探完了。东边那片冰只有三寸，下面有东西在动 :eyes:
+          建议**等官方渡船**，别走冰面。
+        reactions:
+          scream: [zhubajie]
+          "+1": [shawujing, tangseng]
+      - from: tangseng
+        after: 10m
+        text: |-
+          好，等渡船。沙师弟去渡口登记一下，船票走项目经费。
+  - topic: 过火焰山
+    start: {days_ago: 4, time: "09:30"}
+    resolved: true
+    resolved_by: tangseng
+    messages:
+      - from: tangseng
+        text: |-
+          @**孙悟空** 前方八百里火焰山，这周能过去吗？
+      - from: sunwukong
+        after: 5m
+        text: |-
+          师父放心，我先去借**芭蕉扇**。预计流程：
+          1. 拜访铁扇公主
+          2. 借扇（大概率要谈判）
+          3. 扇灭火焰，全队通过
+        reactions:
+          "+1": [tangseng]
+      - from: zhubajie
+        after: 2m
+        text: |-
+          谈判这种事交给猴哥，我负责准备防暑的绿豆汤 :watermelon:
+      - from: shawujing
+        after: 8m
+        text: |-
+          预算提醒：上次借东西赔了人家一面镜子，这次请**提前签借用协议**。
+        reactions:
+          joy: [zhubajie, nezha]
+      - from: sunwukong
+        after: 3h
+        text: |-
+          第一次借到的扇子是假的，越扇火越大 :fire:
+          已经回滚，准备第二次。
+        reactions:
+          fire: [zhubajie, nezha]
+          sweat_smile: [shawujing]
+      - from: tangseng
+        after: 5m
+        text: |-
+          注意安全。需要支援就 @*运维值班*。
+      - from: sunwukong
+        after: 4h
+        text: |-
+          第二次拿到真扇子了。复盘几条：
+          - 对方给的东西要先验证，不能拿来就用
+          - 下次借用前先查一下对方的口碑
+          - 火已经灭了，今晚就能过
+        reactions:
+          tada: [tangseng, zhubajie, shawujing, bailongma, nezha]
+      - from: bailongma
+        after: 20m
+        text: |-
+          我先过去探路，路面温度已经正常。
+      - from: tangseng
+        after: 2h
+        text: |-
+          全员通过 :pray: 辛苦了。这个话题我先标成已解决，后续行程在 #**取经路线>每日行程** 里跟进。
+        reactions:
+          heart: [sunwukong, shawujing, zhubajie]
+  - topic: 化缘路线优化
+    start: {days_ago: 6, time: "11:00"}
+    messages:
+      - from: zhubajie
+        text: |-
+          我统计了一下最近十天的化缘数据，**下午两点以后**成功率明显低。建议改成上午集中化缘。
+      - from: shawujing
+        after: 4m
+        text: |-
+          数据发一下？
+      - from: zhubajie
+        after: 6m
+        text: |-
+          ```text
+          时间段      尝试  成功  成功率
+          07-09点      14    10   71%
+          09-11点      22    15   68%
+          11-13点      18     9   50%
+          14-17点      20     6   30%
+          ```
+        reactions:
+          eyes: [sunwukong, tangseng]
+      - from: sunwukong
+        after: 3m
+        text: |-
+          可以啊八戒，第一次见你用数据说话 :clap:
+        reactions:
+          joy: [shawujing, nezha]
+      - from: zhubajie
+        after: 1m
+        text: |-
+          事关吃饭，必须认真。
+        reactions:
+          "100": [nezha, erlangshen]
+      - from: tangseng
+        after: 30m
+        text: |-
+          同意从下周开始上午化缘。八戒把这个写进 #**取经路线>每日行程** 的模板里。
+  - topic: 女儿国通关手续
+    start: {days_ago: 2, time: "14:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          女儿国的通关文牒办理进度：已提交，编号 文牒#2041。对方要求**师父本人到场**签字。
+      - from: tangseng
+        after: 15m
+        text: |-
+          好，明天上午去。需要准备什么材料？
+      - from: shawujing
+        after: 5m
+        text: |-
+          - 大唐的出关文书（原件）
+          - 团队成员名单（我已经准备好）
+          - 一寸照片两张
+      - from: zhubajie
+        after: 2m
+        text: |-
+          我能一起去吗？听说女儿国的饭菜很好吃。
+      - from: sunwukong
+        after: 1m
+        text: |-
+          你去了还走得动吗 :joy:
+        reactions:
+          joy: [shawujing, nezha, bailongma]
+      - from: tangseng
+        after: 10m
+        text: |-
+          只去办手续，**当天往返**，不吃饭。悟空陪我去，其他人原地待命。
+      - from: shawujing
+        after: 3h
+        text: |-
+          更新：对方说国王想当面聊聊，可能要多留一天。编号 文牒#2041 的状态变成了「待面谈」。
+        reactions:
+          eyes: [sunwukong, zhubajie]
+      - from: sunwukong
+        after: 5m
+        text: |-
+          我陪师父去，有情况随时在这个话题里同步。
+      - from: tangseng
+        after: 20m
+        text: |-
+          ```quote
+          莫愁前路无知己，天下谁人不识君。
+          ——高适《别董大》
+          ```
+          放心，我们会准时回来。
+        reactions:
+          pray: [shawujing, bailongma]
+  - topic: 每日行程
+    start: {hours_ago: 3}
+    messages:
+      - from: shawujing
+        text: |-
+          今日行程（火焰山段夜间赶路版）：
+
+          | 时间 | 安排 |
+          | --- | --- |
+          | 白天 | 客栈休整 |
+          | 18:00 | 晚饭 |
+          | 20:00 | 出发 |
+          | 次日 04:00 | 到达下一站 |
+      - from: zhubajie
+        after: 10m
+        text: |-
+          防暑物资清单：
+          - [x] 绿豆汤 20 份
+          - [x] 西瓜 6 个
+          - [ ] 扇子（普通的，不是芭蕉扇）
+          - [ ] 驱蚊香
+      - from: bailongma
+        after: 25m
+        text: |-
+          我晚上视力好，可以走在最前面带路。
+        reactions:
+          horse: [tangseng, shawujing]
+      - from: sunwukong
+        after: 40m
+        text: |-
+          我在前面一公里探路，有情况在 #**降妖除魔** 里报。
+      - from: tangseng
+        after: 20m
+        text: |-
+          好。大家下午先睡一觉，晚上见。
+      - from: zhubajie
+        after: 1m
+        text: |-
+          这个安排我最喜欢 :sleeping:
+        reactions:
+          joy: [sunwukong, shawujing, nezha]
+  - topic: 盘丝洞绕行
+    start: {days_ago: 1, time: "19:00"}
+    messages:
+      - from: bailongma
+        text: |-
+          明天的路线经过盘丝洞附近。当地人说那里经常有人被缠住，建议绕行。
+      - from: shawujing
+        after: 10m
+        text: |-
+          绕行要多走多远？
+      - from: bailongma
+        after: 5m
+        text: |-
+          多走 18 里，大约多花一个半小时。
+      - from: sunwukong
+        after: 3m
+        text: |-
+          我同意绕行。那边的事我以前处理过，**丝太多，不好清理**。
+      - from: zhubajie
+        after: 2m
+        text: |-
+          我听说那附近有温泉……
+      - from: sunwukong
+        after: 1m
+        text: |-
+          就是因为有温泉才要绕。
+        reactions:
+          joy: [shawujing, bailongma, nezha]
+      - from: tangseng
+        after: 15m
+        text: |-
+          绕行。安全第一。白龙马把新路线发到 #**取经路线>每日行程**。
+        reactions:
+          horse: [bailongma]

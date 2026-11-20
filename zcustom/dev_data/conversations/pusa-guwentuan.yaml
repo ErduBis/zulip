@@ -1,0 +1,140 @@
+# 格式说明见 ../README.md。
+
+channel: 菩萨顾问团
+topics:
+  - topic: 季度顾问会
+    start: {days_ago: 5, time: "15:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          @**观音菩萨** 您好，本季度顾问会的材料已经准备好了：
+          1. 项目进度：已走完全程的六成
+          2. 团队状况：稳定，有一位同事一度想离职，现已留下
+          3. 需要您建议的事项：火焰山之后的路线
+      - from: guanyin
+        after: 20m
+        text: |-
+          辛苦了。进度比我预期的快。火焰山之后的路，**山多妖也多**，建议你们多留出缓冲时间。
+        reactions:
+          pray: [tangseng, shawujing]
+      - from: tangseng
+        after: 10m
+        text: |-
+          多谢菩萨。缓冲时间留多少比较合适？
+      - from: guanyin
+        after: 15m
+        text: |-
+          按经验，每段路程预留两成。另外团队里要有人专门负责对外联络，这次我派木叉过来帮忙。
+      - from: huianxingzhe
+        after: 5m
+        text: |-
+          大家好，我是木叉，以后对接南海这边的事情找我就行 :wave:
+        reactions:
+          wave: [tangseng, sunwukong, shawujing, zhubajie]
+      - from: zhubajie
+        after: 2m
+        text: |-
+          欢迎！你的显示名好长，手机上都显示不全了。
+        reactions:
+          joy: [huianxingzhe, sunwukong]
+      - from: huianxingzhe
+        after: 3m
+        text: |-
+          正好测测界面截断 :joy: 大家叫我木叉就行。
+      - from: shawujing
+        after: 30m
+        text: |-
+          会议纪要我整理好了，下次顾问会定在 <time:2024-09-05T15:00:00+08:00>。
+  - topic: 紧箍咒权限设计
+    start: {days_ago: 3, time: "10:30"}
+    messages:
+      - from: sunwukong
+        text: |-
+          想请顾问看一下：现在**紧箍咒**这个权限只有师父一个人能用，没有任何审批和日志。
+          从权限设计的角度，我觉得风险很大。
+      - from: tangseng
+        after: 5m
+        text: |-
+          我很少用的。
+      - from: sunwukong
+        after: 1m
+        text: |-
+          上个月用了七次。
+        reactions:
+          eyes: [shawujing, zhubajie]
+      - from: guanyin
+        after: 25m
+        text: |-
+          悟空说得有道理。建议这样改：
+          - 使用前写明原因
+          - 每次使用留下记录，顾问可以查看
+          - 紧急情况可以先用后补记录
+
+          > 权限越大，越需要透明。
+        reactions:
+          "+1": [sunwukong, shawujing]
+      - from: tangseng
+        after: 15m
+        text: |-
+          好，我接受。沙师弟来设计记录表。
+      - from: shawujing
+        after: 10m
+        text: |-
+          收到。记录表字段：时间、原因、持续时长、事后复盘。
+      - from: sunwukong
+        after: 2m
+        text: |-
+          感谢菩萨 :pray: 这是我入职以来最开心的一天。
+        reactions:
+          joy: [zhubajie, huianxingzhe]
+          heart: [guanyin]
+  - topic: 南海联络
+    start: {days_ago: 1, time: "10:00"}
+    messages:
+      - from: huianxingzhe
+        text: |-
+          南海那边下周要一份进度简报，格式和上次一样，周三前给我就行。
+      - from: shawujing
+        after: 15m
+        text: |-
+          @**惠岸行者木叉（南海普陀山紫竹林驻西行项目组对外联络专员）** 好的，我周二发给你。简报需要附上照片吗？
+      - from: huianxingzhe
+        after: 5m
+        text: |-
+          附两三张就行，放在 #**西行见闻** 里的那种就可以。
+      - from: guanyin
+        after: 1h
+        text: |-
+          简报里请写一下火焰山的复盘，我想看看你们是怎么处理的。
+      - from: shawujing
+        after: 10m
+        text: |-
+          好的，会写进去。
+  - topic: 五庄观的旧账
+    start: {days_ago: 9, time: "16:00"}
+    messages:
+      - from: shawujing
+        text: |-
+          向顾问报告一件旧事：之前在五庄观，团队里有人摘了观里的人参果，还碰倒了果树。和观主 @_**镇元大仙** 的账还没结清。
+      - from: zhubajie
+        after: 2m
+        text: |-
+          说「有人」是给我留面子了 :sweat_smile:
+      - from: guanyin
+        after: 30m
+        text: |-
+          果树我已经帮忙救活了。账的事，你们主动去道个歉，比什么都强。
+        reactions:
+          pray: [tangseng, shawujing, sunwukong]
+      - from: sunwukong
+        after: 10m
+        text: |-
+          已经从旧系统把他的账号导过来了，等他登录就私信道歉。
+      - from: huianxingzhe
+        after: 5m
+        text: |-
+          我也可以帮忙联系，五庄观和南海有来往。
+      - from: tangseng
+        after: 15m
+        text: |-
+          好，麻烦木叉。这件事是我们的错，该赔的要赔。
