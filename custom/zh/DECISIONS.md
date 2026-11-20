@@ -118,3 +118,14 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Verona 等名字，测试库不能动；`populate_db.py` 等文件在 `zerver/lib/test_fixtures.py` 的 `IMPORTANT_FILES`
 里，改了会让 `provision` 不经提示就清空、重建开发库，上游也常改这个文件。独立命令只需在原有文件里加两处
 挂接点。代价是上游以后给开发数据加的新内容不会自动进入我们的组织，合并上游时要对照移植。
+
+## D12 系统机器人用中文名（2026-11-20）
+
+欢迎机器人、通知机器人、邮件网关等系统机器人对所有用户显示中文名。名字存在数据库里，分两条路径写入：
+已有的服务器和开发库由 `zcustom/0001_localize_system_bot_names` 在 migrate 时改名；新装的服务器由
+`zcustom/apps.py` 在内部组织创建、事务提交后改名。两者都只改仍是上游英文默认名的机器人，测试环境
+（`TEST_SUITE`）下都不执行。前端改为按邮箱识别这些机器人。
+
+**原因**：显示名取自数据库，`INTERNAL_BOTS` 里的名字只在创建时用一次；直接改设置会改变开发库的哈希，
+`provision` 会不经提示清空开发库，而且改不到已有的服务器。测试库保留英文名，因为上游测试依赖这些名字。
+代价是测试模板会多一条 `zcustom` 的 migration 记录（数据不变），改名的效果由单独的测试验证。

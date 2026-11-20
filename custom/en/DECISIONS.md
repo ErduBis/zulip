@@ -146,3 +146,18 @@ database can't change; `populate_db.py` and similar files are in `IMPORTANT_FILE
 without warning, and upstream changes that file often. A separate command needs only two hook points
 in original files. The cost is that dev data upstream adds later doesn't reach our organization
 automatically; port it when merging upstream.
+
+## D12 System bots use Chinese names (2026-11-20)
+
+System bots such as Welcome Bot, Notification Bot and Email Gateway show Chinese names to all users.
+The names live in the database and are written two ways: on existing servers and the dev database,
+`zcustom/0001_localize_system_bot_names` renames them during migrate; on new servers, `zcustom/apps.py`
+renames them once the internal organization is created and its transaction commits. Both only rename
+bots still using upstream's English default names, and neither runs in tests (`TEST_SUITE`). The
+frontend recognizes these bots by email.
+
+**Why**: the display name comes from the database, and the names in `INTERNAL_BOTS` are only used at
+creation. Changing the setting would change the dev database hash, so `provision` would wipe the dev
+database without warning, and it wouldn't reach existing servers. The test database keeps the
+English names because upstream tests depend on them. The cost is one extra `zcustom` migration record
+in the test template (data unchanged); a separate test covers the renaming.

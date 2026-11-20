@@ -226,7 +226,8 @@ project overview.
 
 ## Reporting when a task is done
 
-Report to the lead when done (the lead reviews and commits based on this):
+Report to the lead when done (the lead reviews and commits based on this). Reports and replies are
+always in Chinese:
 
 1. **Files changed**: list new and modified files separately.
 2. **Zulip original files touched**: for each, what changed and why it couldn't be avoided.
