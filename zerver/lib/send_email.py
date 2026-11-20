@@ -433,7 +433,9 @@ def send_future_email(
         "context": context,
     }
 
-    if settings.DEVELOPMENT_LOG_EMAILS:
+    # Emails without a delay are sent through the queue below, which
+    # already logs them, so only log scheduled emails here.
+    if settings.DEVELOPMENT_LOG_EMAILS and delay != timedelta(0):
         send_immediate_email(
             template_prefix,
             to_user_ids=to_user_ids,

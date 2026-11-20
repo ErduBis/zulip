@@ -503,6 +503,29 @@ class TestFollowupEmails(ZulipTestCase):
         self.assertIn("you have created a new Zulip organization", message.body)
         self.assertNotIn("demo org", message.body)
 
+    def test_development_logs_each_email_once(self) -> None:
+        from django.core.mail import outbox
+
+        cordelia = self.example_user("cordelia")
+        with (
+            self.settings(DEVELOPMENT_LOG_EMAILS=True),
+            self.captureOnCommitCallbacks(execute=True),
+        ):
+            send_account_registered_email(cordelia, realm_creation=True)
+            enqueue_welcome_emails(cordelia, realm_creation=True)
+
+        # The account_registered email is sent once, through the queue;
+        # the scheduled onboarding emails are logged when scheduled.
+        self.assertEqual(
+            sorted(message.subject for message in outbox),
+            [
+                "Choosing the chat app for your team",
+                "Zulip Dev on Zulip: Your new organization details",
+                "Zulip guide for businesses",
+            ],
+        )
+        self.assert_length(ScheduledEmail.objects.filter(users=cordelia), 2)
+
     def test_onboarding_zulip_guide_with_invalid_org_type(self) -> None:
         cordelia = self.example_user("cordelia")
         realm = get_realm("zulip")
