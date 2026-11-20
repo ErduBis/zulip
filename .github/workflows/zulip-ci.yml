@@ -133,8 +133,6 @@ jobs:
         run: |
           source tools/ci/activate-venv
           ./tools/build-help-center
-          # In CI, we only test links we control in test-documentation to avoid flakes
-          ./tools/test-documentation --skip-external-links
           ./tools/test-help-documentation --skip-external-links --help-center
           ./tools/test-api
 

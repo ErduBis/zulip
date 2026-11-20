@@ -57,8 +57,6 @@ run ./tools/test-migrations
 # run ./tools/setup/optimize-svg
 # Not running missing bot avatar detection since it's low churn
 # ./tools/setup/generate_integration_bots_avatars.py --check-missing
-# Not running documentation tests since it takes 20s and only tests documentation
-# run ./tools/test-documentation --skip-external-links
 run ./tools/test-help-documentation --skip-external-links "${forcearg[@]}"
 run ./tools/test-api
 run env -u PYTHONDEVMODE -u PYTHONWARNINGS uv lock --check
