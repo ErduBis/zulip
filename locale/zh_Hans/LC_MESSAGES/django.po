@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zulip\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 10:59+0000\n"
+"POT-Creation-Date: 2026-11-20 11:17+0000\n"
 "PO-Revision-Date: 2026-08-13 11:01+0000\n"
 "Last-Translator: reducedradius <137701630+flytothehighest@users.noreply."
 "github.com>\n"
@@ -3921,7 +3921,7 @@ msgid ""
 "<a href=\"%(realm_url)s\">%(realm_name)s</a>."
 msgstr ""
 "您已成功退订 <a href=\"%(realm_url)s\">%(realm_name)s</a> 的 Zulip "
-"%(subscription_type)s 邮件。"
+"%(subscription_type)s邮件。"
 
 #: templates/zerver/unsubscribe_success.html
 #, python-format
@@ -5478,6 +5478,47 @@ msgstr ""
 "\n"
 
 #: zerver/lib/onboarding.py
+msgid "apps"
+msgstr "应用"
+
+#: zerver/lib/onboarding.py
+msgid "profile"
+msgstr "个人资料"
+
+#: zerver/lib/onboarding.py
+msgid "theme"
+msgstr "主题"
+
+#: zerver/lib/onboarding.py
+msgid "channels"
+msgstr "频道"
+
+#: zerver/lib/onboarding.py
+msgid "topics"
+msgstr "话题"
+
+#: zerver/lib/onboarding.py
+msgid "message formatting"
+msgstr "消息格式"
+
+#: zerver/lib/onboarding.py
+msgid "keyboard shortcuts"
+msgstr "快捷键"
+
+#: zerver/lib/onboarding.py
+msgid "help"
+msgstr "帮助"
+
+#: zerver/lib/onboarding.py
+msgid ", "
+msgstr "、"
+
+#: zerver/lib/onboarding.py
+#, python-brace-format
+msgid "{command_list}."
+msgstr "{command_list}。"
+
+#: zerver/lib/onboarding.py
 msgid ""
 "\n"
 "You can [download](/apps/) the [mobile and desktop apps](/apps/).\n"
@@ -5937,7 +5978,7 @@ msgid ""
 "{topic_pretty_link}."
 msgstr ""
 "{user_silent_mention} 在 {topic_pretty_link} 中[发送]({conversation_url})了一"
-"个 {widget}。"
+"个{widget}。"
 
 #: zerver/lib/reminders.py
 #, python-brace-format
@@ -5946,17 +5987,25 @@ msgid ""
 "{list_of_recipient_mentions}."
 msgstr ""
 "{user_silent_mention} 向 {list_of_recipient_mentions} [发送]"
-"({conversation_url})了一个 {widget}。"
+"({conversation_url})了一个{widget}。"
 
 #: zerver/lib/reminders.py
 #, python-brace-format
 msgid "You [sent]({conversation_url}) yourself a {widget}."
-msgstr "您给自己[发送]({conversation_url})了一个 {widget}。"
+msgstr "您给自己[发送]({conversation_url})了一个{widget}。"
 
 #: zerver/lib/reminders.py
 #, python-brace-format
 msgid "You [sent]({conversation_url}) a note to yourself:"
 msgstr "您给自己[发送]({conversation_url})了一条备忘："
+
+#: zerver/lib/reminders.py
+msgid "poll"
+msgstr "投票"
+
+#: zerver/lib/reminders.py
+msgid "todo list"
+msgstr "任务列表"
 
 #: zerver/lib/reminders.py
 msgid "Reminder does not exist"
@@ -6745,6 +6794,10 @@ msgid "Private, protected history"
 msgstr "私人的、受保护的历史消息"
 
 #: zerver/models/users.py
+msgid "Plain text"
+msgstr "纯文本"
+
+#: zerver/models/users.py
 msgid "Admins, moderators, members and guests"
 msgstr "管理员、版主、成员和访客"
 
@@ -7466,6 +7519,26 @@ msgstr "空的“到”列表"
 msgid "User has disabled typing notifications for direct messages"
 msgstr "用户停用私信的输入状态"
 
+#: zerver/views/unsubscribe.py
+msgid "missed messages"
+msgstr "未读消息提醒"
+
+#: zerver/views/unsubscribe.py
+msgid "welcome"
+msgstr "欢迎"
+
+#: zerver/views/unsubscribe.py
+msgid "digest"
+msgstr "摘要"
+
+#: zerver/views/unsubscribe.py
+msgid "login"
+msgstr "登录提醒"
+
+#: zerver/views/unsubscribe.py
+msgid "marketing"
+msgstr "推广"
+
 #: zerver/views/upload.py
 msgid "<p>This file does not exist or has been deleted.</p>"
 msgstr "<p>此文件不存在或已被删除。</p>"
@@ -7991,9 +8064,6 @@ msgstr "不能同时使用 mobile_flow_otp 和 desktop_flow_otp。"
 
 #~ msgid "Human resources"
 #~ msgstr "人力资源"
-
-#~ msgid "Marketing"
-#~ msgstr "销售"
 
 #~ msgid "Miscellaneous"
 #~ msgstr "杂项"

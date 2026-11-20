@@ -197,48 +197,57 @@ Hello, and welcome to Zulip!👋 {inform_about_tracked_onboarding_messages_text}
 
 
 def bot_commands(no_help_command: bool = False) -> str:
+    # These names must match the translated keywords that
+    # select_welcome_bot_response accepts.
     commands = [
-        "apps",
-        "profile",
-        "theme",
-        "channels",
-        "topics",
-        "message formatting",
-        "keyboard shortcuts",
+        _("apps"),
+        _("profile"),
+        _("theme"),
+        _("channels"),
+        _("topics"),
+        _("message formatting"),
+        _("keyboard shortcuts"),
     ]
     if not no_help_command:
-        commands.append("help")
-    return ", ".join("`" + command + "`" for command in commands) + "."
+        commands.append(_("help"))
+    command_list = _(", ").join("`" + command + "`" for command in commands)
+    return _("{command_list}.").format(command_list=command_list)
 
 
 def select_welcome_bot_response(human_response_lower: str) -> str:
     # Given the raw (pre-markdown-rendering) content for a private
     # message from the user to Welcome Bot, select the appropriate reply.
-    if human_response_lower in ["app", "apps"]:
+    if human_response_lower in ["app", "apps", _("apps").lower()]:
         return _("""
 You can [download](/apps/) the [mobile and desktop apps](/apps/).
 Zulip also works great in a browser.
 """)
-    elif human_response_lower == "profile":
+    elif human_response_lower in ["profile", _("profile").lower()]:
         return _("""
 Go to [Profile settings](#settings/profile) to add a [profile picture](/help/change-your-profile-picture)
 and edit your [profile information](/help/edit-your-profile).
 """)
-    elif human_response_lower == "theme":
+    elif human_response_lower in ["theme", _("theme").lower()]:
         return _("""
 You can switch between [light and dark theme](/help/dark-theme), [pick your
 favorite emoji set](/help/emoji-and-emoticons#change-your-emoji-set), [change
 your language](/help/change-your-language), and otherwise customize your Zulip
 experience in your [Preferences](#settings/preferences).
 """)
-    elif human_response_lower in ["stream", "streams", "channel", "channels"]:
+    elif human_response_lower in [
+        "stream",
+        "streams",
+        "channel",
+        "channels",
+        _("channels").lower(),
+    ]:
         return _("""
 Channels organize conversations based on who needs to see them. For example,
 it's common to have a channel for each team in an organization.
 
 [Browse and subscribe to channels]({settings_link}).
 """).format(help_link="/help/introduction-to-channels", settings_link="#channels/all")
-    elif human_response_lower in ["topic", "topics"]:
+    elif human_response_lower in ["topic", "topics", _("topics").lower()]:
         return _("""
 [Topics](/help/introduction-to-topics) summarize what each conversation in Zulip
 is about. You can read Zulip one topic at a time, seeing each message in
@@ -250,14 +259,23 @@ think about finishing the sentence: “Hey, can we chat about…?”
 Check out [Recent conversations](#recent) for a list of topics that are being
 discussed.
 """)
-    elif human_response_lower in ["keyboard", "shortcuts", "keyboard shortcuts"]:
+    elif human_response_lower in [
+        "keyboard",
+        "shortcuts",
+        "keyboard shortcuts",
+        _("keyboard shortcuts").lower(),
+    ]:
         return _("""
 Zulip's [keyboard shortcuts](#keyboard-shortcuts) let you navigate the app
 quickly and efficiently.
 
 Press `?` any time to see a [cheat sheet](#keyboard-shortcuts).
 """)
-    elif human_response_lower in ["formatting", "message formatting"]:
+    elif human_response_lower in [
+        "formatting",
+        "message formatting",
+        _("message formatting").lower(),
+    ]:
         return _("""
 You can **format** *your* `message` using the handy formatting buttons, or by
 typing your formatting with Markdown.
@@ -265,7 +283,7 @@ typing your formatting with Markdown.
 Check out the [cheat sheet](#message-formatting) to learn about spoilers, global
 times, and more.
 """)
-    elif human_response_lower in ["help", "?"]:
+    elif human_response_lower in ["help", "?", _("help").lower()]:
         return _("""
 Here are a few messages I understand: {bot_commands}
 
@@ -286,9 +304,12 @@ def send_welcome_bot_response(send_request: SendMessageRequest) -> None:
     human_response_lower = send_request.message.content.lower()
     assert send_request.message.recipient.type == Recipient.DIRECT_MESSAGE_GROUP
     conversation_recipient_id = send_request.message.recipient.id
-    content = select_welcome_bot_response(human_response_lower)
+    # Reply in the user's language, which may differ from the language
+    # of the request that sent their message.
+    with override_language(send_request.message.sender.default_language):
+        content = select_welcome_bot_response(human_response_lower)
+        commands = bot_commands()
     realm_id = send_request.realm.id
-    commands = bot_commands()
     if (
         commands in content
         and Message.objects.filter(

@@ -146,10 +146,10 @@ def get_reminder_formatted_content(
     }
 
     if message.content.startswith("/poll"):
-        context.update(widget="poll")
+        context.update(widget=_("poll"))
         content += REMINDER_FORMAT[format_recipient_type_key]["widget"].format_map(context)
     elif message.content.startswith("/todo"):
-        context.update(widget="todo list")
+        context.update(widget=_("todo list"))
         content += REMINDER_FORMAT[format_recipient_type_key]["widget"].format_map(context)
     else:
         content += REMINDER_FORMAT[format_recipient_type_key]["text"].format_map(context)

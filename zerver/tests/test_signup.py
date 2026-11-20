@@ -1275,6 +1275,21 @@ class EmailUnsubscribeTests(ZulipTestCase):
         self.assertEqual(result.status_code, 200)
         self.assertEqual(0, ScheduledEmail.objects.filter(users=user_profile).count())
 
+    def test_unsubscribe_page_translated(self) -> None:
+        user_profile = self.example_user("hamlet")
+
+        # The email type name is translated within the sentence, and
+        # the note about notification settings is still skipped for
+        # welcome emails in other languages.
+        unsubscribe_link = one_click_unsubscribe_link(user_profile, "welcome")
+        result = self.client_get(urlsplit(unsubscribe_link).path, HTTP_ACCEPT_LANGUAGE="zh-hans")
+        self.assert_in_success_response(["的 Zulip 欢迎邮件。"], result)
+        self.assert_not_in_success_response(["通知设置"], result)
+
+        unsubscribe_link = one_click_unsubscribe_link(user_profile, "missed_messages")
+        result = self.client_get(urlsplit(unsubscribe_link).path, HTTP_ACCEPT_LANGUAGE="zh-hans")
+        self.assert_in_success_response(["的 Zulip 未读消息提醒邮件。", "通知设置"], result)
+
     def test_digest_unsubscribe(self) -> None:
         """
         We provide one-click unsubscribe links in digest e-mails that you can

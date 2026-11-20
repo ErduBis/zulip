@@ -2,6 +2,7 @@ from django.conf import settings
 from typing_extensions import override
 
 from zerver.actions.message_send import internal_send_private_message
+from zerver.actions.user_settings import do_change_user_setting
 from zerver.lib.test_classes import ZulipTestCase
 from zerver.lib.test_helpers import message_stream_count, most_recent_message
 from zerver.models.recipients import get_or_create_direct_message_group
@@ -209,3 +210,31 @@ class TutorialTests(ZulipTestCase):
         # after group direct message.
         self.send_personal_message(user1, bot, content)
         self.assertEqual(message_stream_count(user1), user1_messages + 2)
+
+    def test_response_in_user_language(self) -> None:
+        user = self.example_user("hamlet")
+        do_change_user_setting(user, "default_language", "zh-hans", acting_user=None)
+        bot = get_system_bot(settings.WELCOME_BOT, user.realm_id)
+        self.login_user(user)
+
+        # Both the translated and the English command names are recognized.
+        for content in ["帮助", "help"]:
+            self.send_personal_message(user, bot, content)
+            response = most_recent_message(user)
+            self.assertEqual(response.sender, bot)
+            self.assertIn(
+                "`应用`、`个人资料`、`主题`、`频道`、`话题`、`消息格式`、`快捷键`。",
+                response.content,
+            )
+
+        self.send_personal_message(user, bot, "快捷键")
+        self.assertIn("(#keyboard-shortcuts)", most_recent_message(user).content)
+
+        # The list of commands is only sent once for messages the bot
+        # doesn't understand, also when it is translated.
+        self.send_personal_message(user, bot, "你好")
+        response = most_recent_message(user)
+        self.assertEqual(response.sender, bot)
+        self.assertIn("`快捷键`、`帮助`。", response.content)
+        self.send_personal_message(user, bot, "在吗")
+        self.assertEqual(most_recent_message(user).content, "在吗")

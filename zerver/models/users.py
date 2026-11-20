@@ -160,7 +160,7 @@ class UserBaseSettings(models.Model):
     EMOJISET_CHOICES = (
         (GOOGLE_EMOJISET, "Google"),
         (TWITTER_EMOJISET, "Twitter"),
-        (TEXT_EMOJISET, "Plain text"),
+        (TEXT_EMOJISET, gettext_lazy("Plain text")),
     )
     emojiset = models.CharField(default=GOOGLE_EMOJISET, choices=EMOJISET_CHOICES, max_length=20)
 
@@ -432,7 +432,8 @@ class UserBaseSettings(models.Model):
     @staticmethod
     def emojiset_choices() -> list[dict[str, str]]:
         return [
-            dict(key=emojiset[0], text=emojiset[1]) for emojiset in UserProfile.EMOJISET_CHOICES
+            dict(key=emojiset[0], text=str(emojiset[1]))
+            for emojiset in UserProfile.EMOJISET_CHOICES
         ]
 
 

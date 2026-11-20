@@ -9,9 +9,14 @@
 
 ## 修改清单
 
-| 编号 | 文件 | 改了什么 | 为什么必须改原文件 | 相关提交 |
-| ---- | ---- | -------- | ------------------ | -------- |
-|      |      |          |                    |          |
+| 编号 | 文件                                                                              | 改了什么                                                                              | 为什么必须改原文件                                               | 相关提交                                            |
+| ---- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
+| C1   | `zerver/lib/onboarding.py`                                                        | 欢迎机器人的命令名和列表格式可翻译；识别翻译后的命令；回复使用用户自己的语言          | 命令列表写死英文，中文用户无法使用这些命令                       | i18n: Make hard-coded English strings translatable. |
+| C2   | `zerver/lib/reminders.py`                                                         | 提醒里的 `poll`、`todo list` 标记翻译                                                 | 英文词被插进已翻译的句子里                                       | i18n: Make hard-coded English strings translatable. |
+| C3   | `zerver/models/users.py`                                                          | `EMOJISET_CHOICES` 的 “Plain text” 用 `gettext_lazy`，`emojiset_choices()` 转成 `str` | 设置页的表情主题选项从这里取文字；不产生 migration               | i18n: Make hard-coded English strings translatable. |
+| C4   | `zerver/views/unsubscribe.py`、`templates/zerver/unsubscribe_success.html`        | 邮件类型显示名可翻译；模板改用英文键 `email_type` 判断是否为欢迎邮件                  | 显示名插在退订成功页的句子里；原模板用显示名做判断，翻译后会出错 | i18n: Make hard-coded English strings translatable. |
+| C5   | `web/templates/settings/playground_settings_admin.hbs`、`realm_domains_modal.hbs` | 输入框占位符示例标记翻译                                                              | 示例要换成贴近中文用户的写法                                     | i18n: Make hard-coded English strings translatable. |
+| C6   | `zerver/tests/test_tutorial.py`、`zerver/tests/test_signup.py`                    | 新增中文命令、去重和退订欢迎邮件的测试                                                | 覆盖 C1、C4 的行为                                               | i18n: Make hard-coded English strings translatable. |
 
 ## 自定义 API 接口
 
