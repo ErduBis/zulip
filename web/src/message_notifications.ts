@@ -425,9 +425,9 @@ export function send_test_notification(content: string): void {
         {
             id: Math.random(),
             type: "test-notification",
-            sender_email: "notification-bot@zulip.com",
-            sender_full_name: "Notification Bot",
-            display_reply_to: "Notification Bot",
+            sender_email: people.NOTIFICATION_BOT.email,
+            sender_full_name: people.NOTIFICATION_BOT.full_name,
+            display_reply_to: people.NOTIFICATION_BOT.full_name,
             content,
             unread: true,
         },

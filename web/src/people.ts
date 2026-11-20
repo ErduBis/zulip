@@ -65,6 +65,7 @@ let fetch_users_storage: {
 export let INACCESSIBLE_USER_NAME: string;
 export let WELCOME_BOT: User;
 export let EMAIL_GATEWAY_BOT: User;
+export let NOTIFICATION_BOT: User;
 
 export const MAX_USER_NAME_LENGTH = 100;
 
@@ -1414,10 +1415,21 @@ export function add_cross_realm_user(person: User): void {
         _add_user(person);
     }
     cross_realm_dict.set(person.user_id, person);
-    if (person.full_name === "Welcome Bot") {
-        WELCOME_BOT = person;
-    } else if (person.full_name === "Email Gateway") {
-        EMAIL_GATEWAY_BOT = person;
+    // System bots are recognized by the local part of their email
+    // address: their names can be changed (for example, translated),
+    // and the domain depends on the server's INTERNAL_BOT_DOMAIN, but
+    // the local parts are fixed by the server's INTERNAL_BOTS.
+    const email_local_part = person.email.toLowerCase().split("@", 1)[0];
+    switch (email_local_part) {
+        case "welcome-bot":
+            WELCOME_BOT = person;
+            break;
+        case "emailgateway":
+            EMAIL_GATEWAY_BOT = person;
+            break;
+        case "notification-bot":
+            NOTIFICATION_BOT = person;
+            break;
     }
 }
 

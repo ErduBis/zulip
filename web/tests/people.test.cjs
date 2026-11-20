@@ -48,14 +48,21 @@ initialize_user_settings({user_settings});
 const welcome_bot = make_cross_realm_bot({
     email: "welcome-bot@example.com",
     user_id: 4,
-    full_name: "Welcome Bot",
+    full_name: "欢迎机器人",
     // cross realm bots have no owner
 });
 
 const email_gateway_bot = make_cross_realm_bot({
     email: "emailgateway@example.com",
     user_id: 5,
-    full_name: "Email Gateway",
+    full_name: "邮件网关",
+    // cross realm bots have no owner
+});
+
+const notification_bot = make_cross_realm_bot({
+    email: "Notification-Bot@example.com",
+    user_id: 6,
+    full_name: "通知机器人",
     // cross realm bots have no owner
 });
 
@@ -381,8 +388,8 @@ run_test("basics", ({override}) => {
     assert.equal(people.get_bot_owner_user(welcome_bot), undefined);
     assert.equal(people.get_bot_owner_user(email_gateway_bot), undefined);
     assert.equal(people.get_active_human_count(), 1);
-    assert.equal(people.get_by_email(welcome_bot.email).full_name, "Welcome Bot");
-    assert.equal(people.get_by_email(email_gateway_bot.email).full_name, "Email Gateway");
+    assert.equal(people.get_by_email(welcome_bot.email).full_name, "欢迎机器人");
+    assert.equal(people.get_by_email(email_gateway_bot.email).full_name, "邮件网关");
 
     override(settings_data, "user_can_access_all_other_users", () => false);
     assert.equal(
@@ -1606,6 +1613,22 @@ run_test("get_user_by_id_assert_valid", ({override}) => {
     assert.equal(user.full_name, charles.full_name);
     assert.ok(!user.is_inaccessible_user);
     assert.equal(user.email, charles.email);
+});
+
+run_test("system_bots_identified_by_email", () => {
+    initialize();
+    // Names are deliberately not the English defaults, since
+    // organizations may rename (e.g. translate) their system bots.
+    people.add_cross_realm_user(welcome_bot);
+    people.add_cross_realm_user(email_gateway_bot);
+    people.add_cross_realm_user(notification_bot);
+    assert.equal(people.WELCOME_BOT, welcome_bot);
+    assert.equal(people.EMAIL_GATEWAY_BOT, email_gateway_bot);
+    assert.equal(people.NOTIFICATION_BOT, notification_bot);
+    assert.deepEqual(
+        people.get_realm_users_and_welcome_bot().map((user) => user.user_id),
+        [me.user_id, welcome_bot.user_id],
+    );
 });
 
 run_test("user_can_initiate_direct_message_thread", ({override}) => {
