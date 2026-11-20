@@ -1438,6 +1438,22 @@ class HomeTest(ZulipTestCase):
         page_params = self._get_page_params(result)
         self.assertEqual(page_params["state_data"]["user_settings"]["default_language"], "es")
 
+    def test_state_data_in_user_language(self) -> None:
+        # The language cookie still holds the previous language, as it
+        # does on the first load after the user changes their language.
+        user = self.example_user("hamlet")
+        user.default_language = "zh-hans"
+        user.save()
+        self.login_user(user)
+        self.client.cookies[settings.LANGUAGE_COOKIE_NAME] = "en"
+        result = self._get_home_page()
+        page_params = self._get_page_params(result)
+        emojiset_texts = {
+            choice["key"]: choice["text"]
+            for choice in page_params["state_data"]["user_settings"]["emojiset_choices"]
+        }
+        self.assertEqual(emojiset_texts["text"], "纯文本")
+
     # TODO: This test would likely be better written as a /register
     # API test with just the drafts event type, to avoid the
     # performance cost of fetching /.

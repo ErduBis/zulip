@@ -120,6 +120,12 @@ def build_page_params_for_home_page_load(
     if user_profile is not None and not is_client_reload:
         client = RequestNotes.get_notes(request).client
         assert client is not None
+        # The initial state contains server-translated strings (e.g.,
+        # emojiset_choices), so build it in the language the page will
+        # use; the request's language may be a stale cookie value.
+        translation.activate(
+            translation.get_language_from_path(request.path_info) or user_profile.default_language
+        )
         state_data = do_events_register(
             user_profile,
             realm,
