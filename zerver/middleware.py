@@ -21,6 +21,7 @@ from django.utils.crypto import constant_time_compare
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.log import log_response
 from django.utils.translation import gettext as _
+from django.utils.translation.trans_real import parse_accept_lang_header
 from django_scim.middleware import SCIMAuthCheckMiddleware
 from django_scim.settings import scim_settings
 from sentry_sdk import set_tag
@@ -480,6 +481,45 @@ def csrf_failure(request: HttpRequest, reason: str = "") -> HttpResponse:
 
 
 class LocaleMiddleware(DjangoLocaleMiddleware):
+    @staticmethod
+    def request_chooses_language(request: HttpRequest) -> bool:
+        """Whether the URL, language cookie or browser names a supported language.
+
+        When none does, Django falls back to settings.LANGUAGE_CODE.
+        """
+        if translation.get_language_from_path(request.path_info) is not None:
+            return True
+        candidates = []
+        cookie_language = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
+        if cookie_language:
+            candidates.append(cookie_language)
+        for accept_language, unused_priority in parse_accept_lang_header(
+            request.META.get("HTTP_ACCEPT_LANGUAGE", "")
+        ):
+            if accept_language == "*":
+                break
+            candidates.append(accept_language)
+        for language in candidates:
+            try:
+                translation.get_supported_language_variant(language)
+            except LookupError:
+                continue
+            return True
+        return False
+
+    @staticmethod
+    def activate_realm_default_language(request: HttpRequest, realm: Realm) -> None:
+        """Shows an organization's pages in its default language to
+        visitors whose browser doesn't ask for a supported one.
+
+        Called by HostDomainMiddleware, which fetches the realm anyway,
+        so this costs no extra database query.
+        """
+        if LocaleMiddleware.request_chooses_language(request):
+            return
+        translation.activate(realm.default_language)
+        request.LANGUAGE_CODE = translation.get_language()
+
     @override
     def process_response(
         self, request: HttpRequest, response: HttpResponseBase
@@ -594,6 +634,7 @@ class HostDomainMiddleware(MiddlewareMixin):
             return render(request, "zerver/invalid_realm.html", status=404, context=context)
 
         set_tag("realm", request_notes.realm.string_id)
+        LocaleMiddleware.activate_realm_default_language(request, request_notes.realm)
 
         # Check that we're not using the non-canonical form of a REALM_HOSTS subdomain
         if subdomain in settings.REALM_HOSTS:

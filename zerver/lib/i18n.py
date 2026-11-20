@@ -106,4 +106,13 @@ def get_default_language_for_anonymous_user(request: HttpRequest) -> str:
     browser_language_code = get_browser_language_code(request)
     if browser_language_code is not None:
         return browser_language_code
+
+    # On an organization's subdomain, its default language is a better
+    # guess than the server's for visitors of that organization.
+    # Imported here to avoid an import cycle.
+    from zerver.context_processors import get_realm_from_request
+
+    realm = get_realm_from_request(request)
+    if realm is not None:
+        return realm.default_language
     return settings.LANGUAGE_CODE

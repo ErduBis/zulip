@@ -9,10 +9,11 @@ from django.utils import translation
 from typing_extensions import override
 
 from zerver.lib.email_notifications import enqueue_welcome_emails
-from zerver.lib.i18n import get_browser_language_code
+from zerver.lib.i18n import get_browser_language_code, get_default_language_for_anonymous_user
 from zerver.lib.test_classes import ZulipTestCase
-from zerver.lib.test_helpers import HostRequestMock
+from zerver.lib.test_helpers import HostRequestMock, queries_captured
 from zerver.management.commands import makemessages
+from zerver.models.realms import get_realm
 from zerver.models.streams import get_realm_stream
 
 if TYPE_CHECKING:
@@ -125,6 +126,41 @@ class TranslationTestCase(ZulipTestCase):
             response = self.fetch("get", "/integrations/", 200)
             self.assert_in_response(word, response)
 
+    def test_realm_default_language_for_logged_out_visitors(self) -> None:
+        realm = get_realm("zulip")
+        realm.default_language = "zh-hans"
+        realm.save(update_fields=["default_language"])
+
+        # Without a supported browser language, an organization's pages
+        # use its default language.
+        for headers in [{}, {"HTTP_ACCEPT_LANGUAGE": "tlh"}]:
+            response = self.fetch("get", "/login/", 200, **headers)
+            self.assertEqual(response["Content-Language"], "zh-hans")
+            self.assert_in_response("登录", response)
+
+        # A supported browser language, URL prefix or cookie still wins.
+        response = self.fetch("get", "/login/", 200, HTTP_ACCEPT_LANGUAGE="tlh,de;q=0.8")
+        self.assertEqual(response["Content-Language"], "de")
+        response = self.fetch("get", "/de/integrations/", 200)
+        self.assertEqual(response["Content-Language"], "de")
+        self.client.cookies = SimpleCookie({str(settings.LANGUAGE_COOKIE_NAME): "en"})
+        response = self.fetch("get", "/login/", 200)
+        self.assertEqual(response["Content-Language"], "en")
+        self.client.cookies = SimpleCookie()
+
+        # Without an organization, the server default applies.
+        response = self.fetch("get", "/integrations/", 200, subdomain="")
+        self.assertEqual(response["Content-Language"], "en")
+
+        # The realm comes from HostDomainMiddleware, which fetches it
+        # anyway, so falling back costs no extra query.
+        self.fetch("get", "/login/", 200)
+        with queries_captured() as realm_language_queries:
+            self.fetch("get", "/login/", 200)
+        with queries_captured() as browser_language_queries:
+            self.fetch("get", "/login/", 200, HTTP_ACCEPT_LANGUAGE="de")
+        self.assert_length(realm_language_queries, len(browser_language_queries))
+
     def test_i18n_urls(self) -> None:
         languages = [
             ("en", "Sign up"),
@@ -174,6 +210,25 @@ class TranslationTestCase(ZulipTestCase):
         req.META["HTTP_ACCEPT_LANGUAGE"] = "no;q=0.9,de;q=0.8"
         with mock.patch("zerver.lib.i18n.get_language_list", return_value=mocked_language_list):
             self.assertEqual(get_browser_language_code(req), "de")
+
+    def test_get_default_language_for_anonymous_user(self) -> None:
+        realm = get_realm("zulip")
+        realm.default_language = "zh-hans"
+        realm.save(update_fields=["default_language"])
+
+        def language_for(host: str, accept_language: str | None) -> str:
+            req = HostRequestMock(host=host)
+            if accept_language is not None:
+                req.META["HTTP_ACCEPT_LANGUAGE"] = accept_language
+            return get_default_language_for_anonymous_user(req)
+
+        # A supported browser language wins.
+        self.assertEqual(language_for(realm.host, "de"), "de")
+        # Otherwise, an organization's subdomain uses its default language.
+        self.assertEqual(language_for(realm.host, "en-IND"), "zh-hans")
+        self.assertEqual(language_for(realm.host, None), "zh-hans")
+        # Without an organization, the server default applies.
+        self.assertEqual(language_for("nonexistent.testserver", "en-IND"), settings.LANGUAGE_CODE)
 
 
 class JsonTranslationTestCase(ZulipTestCase):

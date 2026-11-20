@@ -1576,7 +1576,9 @@ class UserSignUpTest(ZulipTestCase):
         self.assertTrue(
             result["Location"].endswith(f"/accounts/send_confirm/?email={quote(email)}")
         )
-        result = self.client_get(result["Location"])
+        # Without a supported browser language, the page would use the
+        # organization's default language (German).
+        result = self.client_get(result["Location"], HTTP_ACCEPT_LANGUAGE="en")
         self.assert_in_response("check your email", result)
 
         # Visit the confirmation link.
@@ -1609,7 +1611,9 @@ class UserSignUpTest(ZulipTestCase):
         self.assertTrue(
             result["Location"].endswith(f"/accounts/send_confirm/?email={quote(email)}")
         )
-        result = self.client_get(result["Location"])
+        # Without a supported browser language, the page would use the
+        # organization's default language (German).
+        result = self.client_get(result["Location"], HTTP_ACCEPT_LANGUAGE="en")
         self.assert_in_response("check your email", result)
 
         # Visit the confirmation link.
