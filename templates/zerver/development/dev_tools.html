@@ -1,7 +1,7 @@
 {% extends "zerver/portico.html" %}
 
 {% block title %}
-<title>Development tools | Zulip Dev</title>
+<title>{{ _("Development tools") }} | Zulip Dev</title>
 {% endblock %}
 
 {# Login page. #}
@@ -9,162 +9,160 @@
 
 <div class="app flex full-page">
     <div id="devtools-page" class="markdown">
-        <h1>Development tools</h1>
+        <h1>{{ _("Development tools") }}</h1>
         <p>
+            {% trans %}
             This page describes development-specific URLs and commands that may
             come in handy. Make sure your development server is running when you
             visit the pages linked below.
+            {% endtrans %}
         </p>
-        <h2>General</h2>
+        <h2>{{ _("General") }}</h2>
         <table class="table table-striped table-rounded table-bordered">
             <thead>
                 <tr>
                     <th>URL</th>
-                    <th>Command</th>
-                    <th>Description</th>
+                    <th>{{ _("Command") }}</th>
+                    <th>{{ _("Description") }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><a href="/devtools/integrations">/devtools/integrations</a></td>
-                    <td>None needed</td>
-                    <td>Test incoming webhook integrations</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("Test incoming webhook integrations") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/emails">/emails</a></td>
-                    <td>None needed</td>
-                    <td>View outgoing and example emails.</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("View outgoing and example emails.") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/digest">/digest</a></td>
-                    <td>None needed</td>
-                    <td>View sample digest email.</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("View sample digest email.") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/stats/realm/analytics/">/stats/realm/analytics/</a></td>
                     <td><code>./manage.py populate_analytics_db</code><br />
-                        Run the command after changing analytics data population logic.
+                        {{ _("Run the command after changing analytics data population logic.") }}
                     </td>
-                    <td>View the /stats page with some pre-populated data</td>
+                    <td>{{ _("View the /stats page with some pre-populated data") }}</td>
                 </tr>
 
             </tbody>
         </table>
-        <h2>Design system</h2>
+        <h2>{{ _("Design system") }}</h2>
         <table class="table table-striped table-rounded table-bordered">
             <thead>
                 <tr>
                     <th>URL</th>
-                    <th>Description</th>
+                    <th>{{ _("Description") }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><a href="/devtools/buttons">/devtools/buttons</a></td>
-                    <td>Test button styles</td>
+                    <td>{{ _("Test button styles") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/devtools/banners">/devtools/banners</a></td>
-                    <td>Test banner styles</td>
+                    <td>{{ _("Test banner styles") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/devtools/inputs">/devtools/inputs</a></td>
-                    <td>Test input styles</td>
+                    <td>{{ _("Test input styles") }}</td>
                 </tr>
             </tbody>
         </table>
-        <h2>Test coverage</h2>
+        <h2>{{ _("Test coverage") }}</h2>
         <table class="table table-striped table-rounded table-bordered">
             <thead>
                 <tr>
                     <th>URL</th>
-                    <th>Command</th>
-                    <th>Description</th>
+                    <th>{{ _("Command") }}</th>
+                    <th>{{ _("Description") }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><a href="/coverage/index.html">/coverage/index.html</a></td>
                     <td><code>./tools/test-backend --coverage</code></td>
-                    <td>Backend (Django) test coverage report</td>
+                    <td>{{ _("Backend (Django) test coverage report") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/node-coverage/index.html">/node-coverage/index.html</a></td>
                     <td><code>./tools/test-js-with-node --coverage</code></td>
-                    <td>Frontend (node) test coverage report</td>
+                    <td>{{ _("Frontend (node) test coverage report") }}</td>
                 </tr>
             </tbody>
         </table>
-        <h2>Useful management commands</h2>
-        <p>Development-specific <a href="https://zulip.readthedocs.io/en/latest/production/management-commands.html">management commands</a> live in <code>zilencer/management/commands</code>.  Highlights include:</p>
+        <h2>{{ _("Useful management commands") }}</h2>
+        <p>{% trans %}Development-specific <a href="https://zulip.readthedocs.io/en/latest/production/management-commands.html">management commands</a> live in <code>zilencer/management/commands</code>.  Highlights include:{% endtrans %}</p>
         <ul>
-            <li><code>./manage.py populate_db</code>: Rebuilds database. Has options to, for example, create 3K users for testing.</li>
-            <li><code>./manage.py mark_all_messages_unread</code>: Useful for testing reading messages.</li>
-            <li><code>./manage.py send_zulip_update_announcements</code>: Send <a href="https://zulip.com/help/configure-automated-notices#zulip-update-announcements">Zulip
-                update notices</a> drafted in <code>zerver/lib/zulip_update_announcements.py</code>.</li>
-            <li><code>./manage.py add_mock_conversation</code>: Add test messages, streams, images, emoji, etc.
-                into the dev environment. First edit <code>zilencer/management/commands/add_mock_conversation.py</code>
-                to add the data you're testing.
+            <li><code>./manage.py populate_db</code>: {{ _("Rebuilds database. Has options to, for example, create 3K users for testing.") }}</li>
+            <li><code>./manage.py mark_all_messages_unread</code>: {{ _("Useful for testing reading messages.") }}</li>
+            <li><code>./manage.py send_zulip_update_announcements</code>: {% trans %}Send <a href="https://zulip.com/help/configure-automated-notices#zulip-update-announcements">Zulip update notices</a> drafted in <code>zerver/lib/zulip_update_announcements.py</code>.{% endtrans %}</li>
+            <li><code>./manage.py add_mock_conversation</code>: {% trans %}Add test messages, streams, images, emoji, etc. into the dev environment. First edit <code>zilencer/management/commands/add_mock_conversation.py</code> to add the data you're testing.{% endtrans %}
             </li>
         </ul>
-        <p>We also have
-            <a href="https://zulip.readthedocs.io/en/latest/development/authentication.html">documentation on testing LDAP, Google &amp; GitHub authentication</a> in the development environment.
+        <p>{% trans %}We also have <a href="https://zulip.readthedocs.io/en/latest/development/authentication.html">documentation on testing LDAP, Google &amp; GitHub authentication</a> in the development environment.{% endtrans %}
         </p>
-        <h2>Modifying and running the help center</h2>
+        <h2>{{ _("Modifying and running the help center") }}</h2>
         {% include "zerver/development/help_center_instructions_macro.html" %}
-        <h2>Viewing error pages</h2>
+        <h2>{{ _("Viewing error pages") }}</h2>
         <table class="table table-striped table-rounded table-bordered">
             <thead>
                 <tr>
                     <th>URL</th>
-                    <th>Command</th>
-                    <th>Description</th>
+                    <th>{{ _("Command") }}</th>
+                    <th>{{ _("Description") }}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><a href="/webpack/5xx.html">/webpack/5xx.html</a></td>
-                    <td>None needed</td>
-                    <td>Error 5xx page served by nginx (used when Django is totally broken)</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("Error 5xx page served by nginx (used when Django is totally broken)") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/errors/404">/errors/404</a></td>
-                    <td>None needed</td>
-                    <td>Error 404 page served by Django</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("Error 404 page served by Django") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/errors/5xx">/errors/5xx</a></td>
-                    <td>None needed</td>
-                    <td>Error 5xx page served by Django</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("Error 5xx page served by Django") }}</td>
                 </tr>
                 <tr>
                     <td><a href="/accounts/do_confirm/invalid">/accounts/do_confirm/invalid</a></td>
-                    <td>None needed</td>
-                    <td>Invalid confirmation link page</td>
+                    <td>{{ _("None needed") }}</td>
+                    <td>{{ _("Invalid confirmation link page") }}</td>
                 </tr>
             </tbody>
         </table>
-        <h2>Connecting to the local PostgreSQL database</h2>
+        <h2>{{ _("Connecting to the local PostgreSQL database") }}</h2>
         <ul>
             <li>
-                <code>./manage.py dbshell</code>: Connect to
-                PostgreSQL database via your terminal.
+                <code>./manage.py dbshell</code>: {% trans %}Connect to PostgreSQL database via your terminal.{% endtrans %}
             </li>
             <li>
-                <code>provision</code> creates a <code>~/.pgpass</code> file,
-                so <code>psql -U zulip -h localhost</code> works too.
+                {% trans %}<code>provision</code> creates a <code>~/.pgpass</code> file, so <code>psql -U zulip -h localhost</code> works too.{% endtrans %}
             </li>
             <li>
                 <p>
+                    {% trans %}
                     To connect using a graphical PostgreSQL client
                     like <a href="https://www.pgadmin.org/">pgAdmin</a>,
                     use the following credentials:
+                    {% endtrans %}
                 </p>
                 <ul>
-                    <li>Host: 127.0.0.1 (don't use localhost)</li>
-                    <li>Maintenance database: zulip</li>
-                    <li>Username: zulip</li>
-                    <li>password: stored as <code>local_database_password</code> in <code>zulip/zproject/dev-secrets.conf</code></li>
+                    <li>{{ _("Host: 127.0.0.1 (don't use localhost)") }}</li>
+                    <li>{{ _("Maintenance database: zulip") }}</li>
+                    <li>{{ _("Username: zulip") }}</li>
+                    <li>{% trans %}password: stored as <code>local_database_password</code> in <code>zulip/zproject/dev-secrets.conf</code>{% endtrans %}</li>
                 </ul>
             </li>
         </ul>

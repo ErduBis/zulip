@@ -15,24 +15,24 @@
                 <div class="showroom-wrapper">
                     <div class="banner-wrapper" id="showroom_component_banner_default_wrapper"></div>
                     <section class="showroom-controls-section">
-                        <div class="showroom-controls-label">Theme Settings</div>
+                        <div class="showroom-controls-label">{{ _("Theme Settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Dark Theme</span>
+                                <span class="showroom-control-label">{{ _("Dark Theme") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" data-theme="dark" id="showroom_enable_dark_theme_banners" class="tab-option" name="showroom-dark-theme-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="showroom_enable_dark_theme_banners" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" data-theme="light" id="showroom_disable_dark_theme_banners" class="tab-option" name="showroom-dark-theme-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="showroom_disable_dark_theme_banners" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Select Background</span>
+                                <span class="showroom-control-label">{{ _("Select Background") }}</span>
                                 <select class="showroom-control-element showroom-control-setting select_background">
                                     {% for background in background_colors %}
                                         <option value="{{ background.css_var }}" {% if background.css_var == "--color-background" %}selected{% endif %}>{{ background.name }}</option>
@@ -41,68 +41,68 @@
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">Banner Settings</div>
+                        <div class="showroom-controls-label">{{ _("Banner Settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Alert Banner Type</span>
+                                <span class="showroom-control-label">{{ _("Alert Banner Type") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="banner_select_type"></select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Banner Intent</span>
+                                <span class="showroom-control-label">{{ _("Banner Intent") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="showroom_component_banner_select_intent"></select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Banner Label</span>
+                                <span class="showroom-control-label">{{ _("Banner Label") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="banner_label" />
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Banner Close Button</span>
+                                <span class="showroom-control-label">{{ _("Banner Close Button") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_banner_close_button" class="tab-option" name="banner-close-button-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_banner_close_button" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_banner_close_button" class="tab-option" name="banner-close-button-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_banner_close_button" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">Solid Button Settings</div>
+                        <div class="showroom-controls-label">{{ _("Solid Button Settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button</span>
+                                <span class="showroom-control-label">{{ _("Button") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_solid_button" class="tab-option" name="solid-button-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_solid_button" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_solid_button" class="tab-option" name="solid-button-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_solid_button" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button Icon</span>
+                                <span class="showroom-control-label">{{ _("Button Icon") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_solid_button_icon" class="tab-option" name="solid-button-icon-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_solid_button_icon" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_solid_button_icon" class="tab-option" name="solid-button-icon-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_solid_button_icon" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Select Icon</span>
+                                <span class="showroom-control-label">{{ _("Select Icon") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="solid_button_select_icon">
                                     {% for icon in icons %}
                                         <option value="{{ icon }}" {% if icon == "move-alt" %}selected{% endif %}>{{ icon }}</option>
@@ -110,43 +110,43 @@
                                 </select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button Text</span>
+                                <span class="showroom-control-label">{{ _("Button Text") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="solid_button_text" />
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">Subtle Button Settings</div>
+                        <div class="showroom-controls-label">{{ _("Subtle Button Settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button</span>
+                                <span class="showroom-control-label">{{ _("Button") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_subtle_button" class="tab-option" name="subtle-button-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_subtle_button" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_subtle_button" class="tab-option" name="subtle-button-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_subtle_button" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button Icon</span>
+                                <span class="showroom-control-label">{{ _("Button Icon") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_subtle_button_icon" class="tab-option" name="subtle-button-icon-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_subtle_button_icon" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_subtle_button_icon" class="tab-option" name="subtle-button-icon-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_subtle_button_icon" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Select Icon</span>
+                                <span class="showroom-control-label">{{ _("Select Icon") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="subtle_button_select_icon">
                                     {% for icon in icons %}
                                         <option value="{{ icon }}" {% if icon == "move-alt" %}selected{% endif %}>{{ icon }}</option>
@@ -154,43 +154,43 @@
                                 </select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button Text</span>
+                                <span class="showroom-control-label">{{ _("Button Text") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="subtle_button_text" />
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">Text Button Settings</div>
+                        <div class="showroom-controls-label">{{ _("Text Button Settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button</span>
+                                <span class="showroom-control-label">{{ _("Button") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_text_button" class="tab-option" name="text-button-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_text_button" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_text_button" class="tab-option" name="text-button-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_text_button" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button Icon</span>
+                                <span class="showroom-control-label">{{ _("Button Icon") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_text_button_icon" class="tab-option" name="text-button-icon-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_text_button_icon" tabindex="0">
-                                        <span>Enable</span>
+                                        <span>{{ _("Enable") }}</span>
                                     </label>
                                     <input type="radio" id="disable_text_button_icon" class="tab-option" name="text-button-icon-select" checked/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="disable_text_button_icon" tabindex="0">
-                                        <span>Disable</span>
+                                        <span>{{ _("Disable") }}</span>
                                     </label>
                                     <span class="slider"></span>
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Select Icon</span>
+                                <span class="showroom-control-label">{{ _("Select Icon") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="text_button_select_icon">
                                     {% for icon in icons %}
                                         <option value="{{ icon }}" {% if icon == "move-alt" %}selected{% endif %}>{{ icon }}</option>
@@ -198,7 +198,7 @@
                                 </select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">Button Text</span>
+                                <span class="showroom-control-label">{{ _("Button Text") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="text_button_text" />
                             </div>
                         </div>

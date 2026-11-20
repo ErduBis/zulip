@@ -2,7 +2,7 @@
 {% set entrypoint = "dev-integrations-panel" %}
 
 {% block title %}
-<title>Integrations developer panel | Zulip Dev</title>
+<title>{{ _("Integrations developer panel") }} | Zulip Dev</title>
 {% endblock %}
 
 {% block customhead %}
@@ -22,10 +22,10 @@
             </a>
         </div>
 
-        <div class="centerpiece">Integrations developer panel</div>
+        <div class="centerpiece">{{ _("Integrations developer panel") }}</div>
 
         <div class="top-links">
-            <a href="/">Go to Zulip</a>
+            <a href="/">{{ _("Go to Zulip") }}</a>
         </div>
 
     </div>
@@ -36,7 +36,7 @@
 <div id="dev-panel">
     <div class="row1">
         <div>
-            <label for="bot_name"><b>Bot</b></label>
+            <label for="bot_name"><b>{{ _("Bot") }}</b></label>
             <select class="bootstrap-focus-style" id="bot_name">
                 <option value=""></option>
                 {% for bot in bots %}
@@ -46,7 +46,7 @@
         </div>
 
         <div>
-            <label><b>Integration</b></label>
+            <label><b>{{ _("Integration") }}</b></label>
             <select class="bootstrap-focus-style" id="integration_name">
                 <option value=""></option>
                 {% for integration in integrations %}
@@ -56,17 +56,17 @@
         </div>
 
         <div>
-            <label for="fixture_name"><b>Fixture</b></label>
+            <label for="fixture_name"><b>{{ _("Fixture") }}</b></label>
             <select class="bootstrap-focus-style" id="fixture_name"></select>
         </div>
 
         <div>
-            <label class="optional"><b>Stream</b></label>
+            <label class="optional"><b>{{ _("Stream") }}</b></label>
             <input id="stream_name" type="text" />
         </div>
 
         <div>
-            <label class="optional"><b>Topic</b></label>
+            <label class="optional"><b>{{ _("Topic") }}</b></label>
             <input id="topic_name" type="text" />
         </div>
     </div>
@@ -74,14 +74,14 @@
     <br />
 
     <div class="row2">
-        <label for="URL"><b>URL</b> (automatically generated)</label>
+        <label for="URL"><b>URL</b> {{ _("(automatically generated)") }}</label>
         <input id="URL" type="text" />
     </div>
 
     <br />
 
     <div class="row3">
-        <label for="custom_http_headers"><b>Custom HTTP headers</b></label>
+        <label for="custom_http_headers"><b>{{ _("Custom HTTP headers") }}</b></label>
         <textarea id="custom_http_headers"></textarea>
     </div>
 
@@ -90,17 +90,17 @@
     <div class="row4">
         <div class="col1">
             <div class="inline">
-                <label for="fixture_body"><b>Fixture body</b></label>
+                <label for="fixture_body"><b>{{ _("Fixture body") }}</b></label>
                 <span id="results_notice"></span>
             </div>
             <textarea id="fixture_body"></textarea>
             <div class="buttons">
-                <button id="send_all_fixtures_button">Send all</button>
-                <button id="send_fixture_button">Send!</button>
+                <button id="send_all_fixtures_button">{{ _("Send all") }}</button>
+                <button id="send_fixture_button">{{ _("Send!") }}</button>
             </div>
         </div>
         <div class="col1">
-            <label for="idp-results"><b>Results</b></label>
+            <label for="idp-results"><b>{{ _("Results") }}</b></label>
             <textarea id="idp-results" readonly></textarea>
         </div>
     </div>

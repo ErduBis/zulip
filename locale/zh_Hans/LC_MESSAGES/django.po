@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zulip\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 11:17+0000\n"
+"POT-Creation-Date: 2026-11-20 12:50+0000\n"
 "PO-Revision-Date: 2026-08-13 11:01+0000\n"
 "Last-Translator: reducedradius <137701630+flytothehighest@users.noreply."
 "github.com>\n"
@@ -629,7 +629,7 @@ msgstr "账单"
 #: templates/zerver/create_user/change_email_address_visibility_modal.html
 #: templates/zerver/development/email_log.html
 msgid "Close modal"
-msgstr "关闭模式"
+msgstr "关闭弹窗"
 
 #: templates/corporate/billing/billing.html
 msgid "Never mind"
@@ -826,7 +826,7 @@ msgstr "创建组织"
 #: templates/corporate/why-zulip.html templates/corporate/zulip-cloud.html
 #: templates/zerver/footer.html
 msgid "Get a demo"
-msgstr "获取演示示例"
+msgstr "预约演示"
 
 #: templates/corporate/for/business.html
 #: templates/corporate/for/communities.html
@@ -1266,7 +1266,7 @@ msgstr "组织网址"
 #: templates/zerver/create_realm/realm_creation_subdomain_form_field.html
 #, python-format
 msgid "Use %(external_host)s"
-msgstr "使用%(external_host)s"
+msgstr "使用 %(external_host)s"
 
 #: templates/zerver/create_realm/realm_creation_subdomain_form_field.html
 #: templates/zerver/create_user/accounts_home.html templates/zerver/login.html
@@ -1281,7 +1281,7 @@ msgstr "注册"
 
 #: templates/zerver/create_user/accounts_home.html
 msgid "Sign up for Zulip"
-msgstr "注册Zulip"
+msgstr "注册 Zulip"
 
 #: templates/zerver/create_user/accounts_home.html
 msgid "You need an invitation to join this organization."
@@ -1290,13 +1290,14 @@ msgstr "您需要邀请才能加入本组织。"
 #: templates/zerver/create_user/accounts_home.html
 #, python-format
 msgid "Sign up with %(identity_provider)s"
-msgstr "使用%(identity_provider)s登录"
+msgstr "使用 %(identity_provider)s 注册"
 
 #: templates/zerver/create_user/accounts_home.html
 msgid "Already have an account?"
 msgstr "已有账号？"
 
 #: templates/zerver/create_user/accounts_home.html
+#: templates/zerver/development/dev_login.html
 #: templates/zerver/emails/remote_billing_legacy_server_confirm_login.html
 #: templates/zerver/emails/remote_billing_legacy_server_confirm_login.txt
 #: templates/zerver/footer.html
@@ -1570,33 +1571,404 @@ msgstr "然后您可以关闭此窗口。"
 msgid "Or, continue in your browser."
 msgstr "或者，在浏览器中继续。"
 
+#: templates/zerver/development/dev_help.html
+msgid "Help center server not running"
+msgstr "帮助中心服务器未运行"
+
+#: templates/zerver/development/dev_help.html
+msgid ""
+"To minimize resource requirements for the development environment, the help "
+"center's development server does not run by default. Below are our "
+"recommendations for accessing this help center page:"
+msgstr ""
+"为了降低开发环境的资源占用，帮助中心的开发服务器默认不运行。要查看这个帮助中"
+"心页面，建议如下："
+
+#: templates/zerver/development/dev_help.html
+#, python-format
+msgid ""
+"<b>Quick reference</b>: If you aren't planning to modify the help center, "
+"you can <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://"
+"zulip.com/help/%(subpath)s\">view it on zulip.com</a>. Pages may be slightly "
+"behind the version currently in <code>main</code>."
+msgstr ""
+"<b>快速查阅</b>：如果不打算修改帮助中心，可以<a target=\"_blank\" "
+"rel=\"noopener noreferrer\" href=\"https://zulip.com/help/%(subpath)s\">在 "
+"zulip.com 上查看</a>。页面内容可能比 <code>main</code> 分支上的版本略旧。"
+
+#: templates/zerver/development/dev_help.html
+#, python-format
+msgid ""
+"<b>Up-to-date reference</b>: You can <a target=\"_blank\" rel=\"noopener "
+"noreferrer\" href=\"%(raw_url)s\">view the current raw MDX file</a>, which "
+"is recommended for documentation that touches brand new or recently modified "
+"features."
+msgstr ""
+"<b>最新版本</b>：可以<a target=\"_blank\" rel=\"noopener noreferrer\" "
+"href=\"%(raw_url)s\">查看当前的 MDX 源文件</a>，涉及新功能或最近改动的功能时"
+"推荐这种方式。"
+
+#: templates/zerver/development/dev_help.html
+msgid "Modifying the help center"
+msgstr "修改帮助中心"
+
+#: templates/zerver/development/dev_help.html
+msgid ""
+"This is not a valid help path and not a valid MDX file. Please re-check the "
+"URL subpath you have provided."
+msgstr ""
+"这既不是有效的帮助路径，也不是有效的 MDX 文件。请检查您提供的 URL 子路径。"
+
+#: templates/zerver/development/dev_help.html
+msgid "View page on zulip.com"
+msgstr "在 zulip.com 上查看页面"
+
+#: templates/zerver/development/dev_help.html
+msgid "View page source"
+msgstr "查看页面源文件"
+
+#: templates/zerver/development/dev_login.html
+#, python-format
+msgid "Click on a user to log in to %(realm_name)s!"
+msgstr "点击一位用户，登录“%(realm_name)s”！"
+
+#: templates/zerver/development/dev_login.html
+msgid "Click on a user to log in!"
+msgstr "点击一位用户即可登录！"
+
+#: templates/zerver/development/dev_login.html
+#, python-format
+msgid ""
+"(Browse the <a href=\"/devtools\">developer tools</a> or visit the <a "
+"href=\"%(login_url)s\">normal login page</a>.)"
+msgstr ""
+"（浏览<a href=\"/devtools\">开发者工具</a>，或前往<a href=\"%(login_url)s\">"
+"普通登录页面</a>。）"
+
 #: templates/zerver/development/dev_login.html
 msgid "Anonymous user"
 msgstr "匿名用户"
 
 #: templates/zerver/development/dev_login.html zerver/models/groups.py
 msgid "Owners"
-msgstr "拥有者"
+msgstr "所有者"
+
+#: templates/zerver/development/dev_login.html
+msgid "No owners found in this realm"
+msgstr "此组织中没有所有者"
 
 #: templates/zerver/development/dev_login.html zerver/models/groups.py
 msgid "Administrators"
 msgstr "管理员"
+
+#: templates/zerver/development/dev_login.html
+msgid "No administrators found in this realm"
+msgstr "此组织中没有管理员"
 
 #: templates/zerver/development/dev_login.html zerver/models/groups.py
 msgid "Moderators"
 msgstr "版主"
 
 #: templates/zerver/development/dev_login.html
+msgid "No moderators found in this realm"
+msgstr "此组织中没有版主"
+
+#: templates/zerver/development/dev_login.html
 msgid "Guest users"
 msgstr "访客用户"
+
+#: templates/zerver/development/dev_login.html
+msgid "No guest users found in this realm"
+msgstr "此组织中没有访客用户"
 
 #: templates/zerver/development/dev_login.html
 msgid "Normal users"
 msgstr "普通用户"
 
+#: templates/zerver/development/dev_login.html
+msgid "No normal users found in this realm"
+msgstr "此组织中没有普通用户"
+
+#: templates/zerver/development/dev_login.html
+msgid "Realm"
+msgstr "组织"
+
+#: templates/zerver/development/dev_login.html
+msgid "All realms"
+msgstr "所有组织"
+
+#: templates/zerver/development/dev_login.html
+msgid "Create new user"
+msgstr "创建新用户"
+
+#: templates/zerver/development/dev_login.html
+msgid "Create new realm"
+msgstr "创建新组织"
+
+#: templates/zerver/development/dev_login.html
+msgid "Create demo organization"
+msgstr "创建演示组织"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Development tools"
+msgstr "开发工具"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"This page describes development-specific URLs and commands that may come in "
+"handy. Make sure your development server is running when you visit the pages "
+"linked below."
+msgstr ""
+"本页列出开发环境专用的 URL 和命令，可能会派上用场。访问下方链接前，请确认开发"
+"服务器正在运行。"
+
+#: templates/zerver/development/dev_tools.html
+msgid "General"
+msgstr "常规"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Command"
+msgstr "命令"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Description"
+msgstr "说明"
+
+#: templates/zerver/development/dev_tools.html
+msgid "None needed"
+msgstr "无需命令"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Test incoming webhook integrations"
+msgstr "测试接收 webhook 的应用整合"
+
+#: templates/zerver/development/dev_tools.html
+msgid "View outgoing and example emails."
+msgstr "查看已发送的邮件和示例邮件。"
+
+#: templates/zerver/development/dev_tools.html
+msgid "View sample digest email."
+msgstr "查看摘要邮件示例。"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Run the command after changing analytics data population logic."
+msgstr "修改统计数据的生成逻辑后运行此命令。"
+
+#: templates/zerver/development/dev_tools.html
+msgid "View the /stats page with some pre-populated data"
+msgstr "查看预先填充了数据的 /stats 页面"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Design system"
+msgstr "设计系统"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Test button styles"
+msgstr "测试按钮样式"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Test banner styles"
+msgstr "测试横幅样式"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Test input styles"
+msgstr "测试输入框样式"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Test coverage"
+msgstr "测试覆盖率"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Backend (Django) test coverage report"
+msgstr "后端（Django）测试覆盖率报告"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Frontend (node) test coverage report"
+msgstr "前端（node）测试覆盖率报告"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Useful management commands"
+msgstr "常用管理命令"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"Development-specific <a href=\"https://zulip.readthedocs.io/en/latest/"
+"production/management-commands.html\">management commands</a> live in "
+"<code>zilencer/management/commands</code>.  Highlights include:"
+msgstr ""
+"开发环境专用的<a href=\"https://zulip.readthedocs.io/en/latest/production/"
+"management-commands.html\">管理命令</a>位于 <code>zilencer/management/"
+"commands</code>。常用的有："
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"Rebuilds database. Has options to, for example, create 3K users for testing."
+msgstr "重建数据库。有一些选项，例如创建 3000 个用户用于测试。"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Useful for testing reading messages."
+msgstr "便于测试阅读消息。"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"Send <a href=\"https://zulip.com/help/configure-automated-notices#zulip-"
+"update-announcements\">Zulip update notices</a> drafted in <code>zerver/lib/"
+"zulip_update_announcements.py</code>."
+msgstr ""
+"发送 <code>zerver/lib/zulip_update_announcements.py</code> 中起草的 <a "
+"href=\"https://zulip.com/help/configure-automated-notices#zulip-update-"
+"announcements\">Zulip 更新通知</a>。"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"Add test messages, streams, images, emoji, etc. into the dev environment. "
+"First edit <code>zilencer/management/commands/add_mock_conversation.py</"
+"code> to add the data you're testing."
+msgstr ""
+"在开发环境中添加测试消息、频道、图片、表情等。请先编辑 <code>zilencer/"
+"management/commands/add_mock_conversation.py</code>，加入要测试的数据。"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"We also have <a href=\"https://zulip.readthedocs.io/en/latest/development/"
+"authentication.html\">documentation on testing LDAP, Google &amp; GitHub "
+"authentication</a> in the development environment."
+msgstr ""
+"另有<a href=\"https://zulip.readthedocs.io/en/latest/development/"
+"authentication.html\">在开发环境中测试 LDAP、Google 和 GitHub 认证的文档</"
+"a>。"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Modifying and running the help center"
+msgstr "修改和运行帮助中心"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Viewing error pages"
+msgstr "查看错误页面"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Error 5xx page served by nginx (used when Django is totally broken)"
+msgstr "由 nginx 提供的 5xx 错误页面（Django 完全不可用时使用）"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Error 404 page served by Django"
+msgstr "由 Django 提供的 404 错误页面"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Error 5xx page served by Django"
+msgstr "由 Django 提供的 5xx 错误页面"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Invalid confirmation link page"
+msgstr "无效确认链接页面"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Connecting to the local PostgreSQL database"
+msgstr "连接本地 PostgreSQL 数据库"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Connect to PostgreSQL database via your terminal."
+msgstr "在终端中连接 PostgreSQL 数据库。"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"<code>provision</code> creates a <code>~/.pgpass</code> file, so <code>psql -"
+"U zulip -h localhost</code> works too."
+msgstr ""
+"<code>provision</code> 会创建 <code>~/.pgpass</code> 文件，所以 <code>psql -"
+"U zulip -h localhost</code> 也能连接。"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"To connect using a graphical PostgreSQL client like <a href=\"https://www."
+"pgadmin.org/\">pgAdmin</a>, use the following credentials:"
+msgstr ""
+"要使用 <a href=\"https://www.pgadmin.org/\">pgAdmin</a> 等图形化 PostgreSQL "
+"客户端连接，请使用以下凭据："
+
+#: templates/zerver/development/dev_tools.html
+msgid "Host: 127.0.0.1 (don't use localhost)"
+msgstr "主机：127.0.0.1（不要用 localhost）"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Maintenance database: zulip"
+msgstr "维护数据库：zulip"
+
+#: templates/zerver/development/dev_tools.html
+msgid "Username: zulip"
+msgstr "用户名：zulip"
+
+#: templates/zerver/development/dev_tools.html
+msgid ""
+"password: stored as <code>local_database_password</code> in <code>zulip/"
+"zproject/dev-secrets.conf</code>"
+msgstr ""
+"密码：保存在 <code>zulip/zproject/dev-secrets.conf</code> 的 "
+"<code>local_database_password</code> 中"
+
+#: templates/zerver/development/email_log.html
+msgid "Email log"
+msgstr "邮件日志"
+
+#: templates/zerver/development/email_log.html
+msgid "All emails sent in the Zulip development environment are logged here."
+msgstr "开发环境中发送的所有邮件都记录在这里。"
+
+#: templates/zerver/development/email_log.html
+msgid "Clear this log"
+msgstr "清空日志"
+
+#: templates/zerver/development/email_log.html
+msgid "Manually generate most emails"
+msgstr "手动生成大部分邮件"
+
 #: templates/zerver/development/email_log.html
 msgid "Forward emails to an email account"
 msgstr "转发电子邮件至另一个电子邮箱账号"
+
+#: templates/zerver/development/email_log.html
+msgid "Show text only version"
+msgstr "仅显示纯文本版本"
+
+#: templates/zerver/development/email_log.html
+msgid "Updated successfully."
+msgstr "更新成功。"
+
+#: templates/zerver/development/email_log.html
+msgid ""
+"Forwards all emails sent in the development environment to an external mail "
+"account."
+msgstr "将开发环境中发送的所有邮件转发到外部邮箱账号。"
+
+#: templates/zerver/development/email_log.html
+msgid "Yes"
+msgstr "是"
+
+#: templates/zerver/development/email_log.html
+msgid "No"
+msgstr "否"
+
+#: templates/zerver/development/email_log.html
+msgid "Address to which emails should be forwarded"
+msgstr "邮件转发到的地址"
+
+#: templates/zerver/development/email_log.html
+msgid "eg: your-email@example.com"
+msgstr "例如：your-email@example.com"
+
+#: templates/zerver/development/email_log.html
+msgid ""
+"You must set up SMTP as described <a target=\"_blank\" rel=\"noopener "
+"noreferrer\" href=\"https://zulip.readthedocs.io/en/latest/subsystems/email."
+"html#development-and-testing\"> here</a> first before enabling this."
+msgstr ""
+"启用前，请先按照<a target=\"_blank\" rel=\"noopener noreferrer\" "
+"href=\"https://zulip.readthedocs.io/en/latest/subsystems/email."
+"html#development-and-testing\">这里</a>的说明配置 SMTP。"
+
+#: templates/zerver/development/email_log.html
+msgid "(Close this dialog window)"
+msgstr "（关闭此对话框）"
 
 #: templates/zerver/development/email_log.html
 msgid "Close"
@@ -1606,6 +1978,229 @@ msgstr "关闭"
 #: templates/zerver/slack_import.html
 msgid "Update"
 msgstr "更新"
+
+#: templates/zerver/development/help_center_instructions_macro.html
+msgid ""
+"If you're making changes to the help center files, be sure to <b>test</b> "
+"and provide screenshots in your pull request description. As with other "
+"code, untested documentation is often buggy."
+msgstr ""
+"修改帮助中心文件时，请务必<b>测试</b>，并在 pull request 的描述中附上截图。和"
+"其他代码一样，没有测试过的文档往往有错。"
+
+#: templates/zerver/development/help_center_instructions_macro.html
+msgid ""
+"To run just the help center dev server without running the rest of the Zulip "
+"app, use <code>./tools/run-dev --only-help-center</code>."
+msgstr ""
+"只运行帮助中心开发服务器、不运行 Zulip 应用的其他部分：<code>./tools/run-dev "
+"--only-help-center</code>。"
+
+#: templates/zerver/development/help_center_instructions_macro.html
+msgid ""
+"To run the help center dev server alongside the Zulip app, use <code>./tools/"
+"run-dev --help-center-dev-server</code> (requires more resources)."
+msgstr ""
+"同时运行帮助中心开发服务器和 Zulip 应用：<code>./tools/run-dev --help-center-"
+"dev-server</code>（需要更多资源）。"
+
+#: templates/zerver/development/help_center_instructions_macro.html
+msgid ""
+"To test help center search, run <code>./tools/build-help-center</code> "
+"followed by <code>./tools/run-dev --help-center-static-build</code>. Hot "
+"reloads won't work: rerun <code>./tools/build-help-center</code> and reload "
+"your browser to see updates. Search will not work with other methods of "
+"running the help center."
+msgstr ""
+"测试帮助中心搜索：先运行 <code>./tools/build-help-center</code>，再运行 "
+"<code>./tools/run-dev --help-center-static-build</code>。这种方式不支持热重"
+"载：修改后需重新运行 <code>./tools/build-help-center</code> 并刷新浏览器。其"
+"他运行方式下搜索不可用。"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Integrations developer panel"
+msgstr "应用整合开发者面板"
+
+#: templates/zerver/development/integrations_dev_panel.html
+#: templates/zerver/emails/onboarding_zulip_topics.html
+#: templates/zerver/emails/onboarding_zulip_topics.txt
+#: templates/zerver/portico-header-dropdown.html
+msgid "Go to Zulip"
+msgstr "前往 Zulip"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Bot"
+msgstr "机器人"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Integration"
+msgstr "应用整合"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Fixture"
+msgstr "测试数据"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Stream"
+msgstr "频道"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Topic"
+msgstr "话题"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "(automatically generated)"
+msgstr "（自动生成）"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Custom HTTP headers"
+msgstr "自定义 HTTP 请求头"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Fixture body"
+msgstr "测试数据内容"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Send all"
+msgstr "全部发送"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Send!"
+msgstr "发送！"
+
+#: templates/zerver/development/integrations_dev_panel.html
+msgid "Results"
+msgstr "结果"
+
+#: templates/zerver/development/showroom/banners.html
+#: templates/zerver/development/showroom/inputs.html
+msgid "Theme Settings"
+msgstr "主题设置"
+
+#: templates/zerver/development/showroom/banners.html
+#: templates/zerver/development/showroom/buttons.html
+#: templates/zerver/development/showroom/inputs.html
+msgid "Dark Theme"
+msgstr "深色主题"
+
+#: templates/zerver/development/showroom/banners.html
+#: templates/zerver/development/showroom/buttons.html
+#: templates/zerver/development/showroom/inputs.html
+msgid "Enable"
+msgstr "启用"
+
+#: templates/zerver/development/showroom/banners.html
+#: templates/zerver/development/showroom/buttons.html
+#: templates/zerver/development/showroom/inputs.html
+msgid "Disable"
+msgstr "禁用"
+
+#: templates/zerver/development/showroom/banners.html
+#: templates/zerver/development/showroom/buttons.html
+#: templates/zerver/development/showroom/inputs.html
+msgid "Select Background"
+msgstr "选择背景"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Banner Settings"
+msgstr "横幅设置"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Alert Banner Type"
+msgstr "提示横幅类型"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Banner Intent"
+msgstr "横幅意图"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Banner Label"
+msgstr "横幅标签"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Banner Close Button"
+msgstr "横幅关闭按钮"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Solid Button Settings"
+msgstr "实心按钮设置"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Button"
+msgstr "按钮"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Button Icon"
+msgstr "按钮图标"
+
+#: templates/zerver/development/showroom/banners.html
+#: templates/zerver/development/showroom/buttons.html
+msgid "Select Icon"
+msgstr "选择图标"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Button Text"
+msgstr "按钮文字"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Subtle Button Settings"
+msgstr "浅色按钮设置"
+
+#: templates/zerver/development/showroom/banners.html
+msgid "Text Button Settings"
+msgstr "文字按钮设置"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Action Buttons"
+msgstr "操作按钮"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Icon Buttons"
+msgstr "图标按钮"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Neutral Variant"
+msgstr "中性变体"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Button joy"
+msgstr "按钮示例"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Brand Variant"
+msgstr "品牌变体"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Info Variant"
+msgstr "信息变体"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Success Variant"
+msgstr "成功变体"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Warning Variant"
+msgstr "警告变体"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Danger Variant"
+msgstr "危险变体"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Controls"
+msgstr "控制项"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Action Button Icon"
+msgstr "操作按钮图标"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Action Button Text"
+msgstr "操作按钮文字"
+
+#: templates/zerver/development/showroom/buttons.html
+msgid "Reset"
+msgstr "重置"
 
 #: templates/zerver/digest_base.html
 msgid "Digest"
@@ -2420,7 +3015,7 @@ msgstr "时间：%(login_time)s"
 #: templates/zerver/emails/notify_new_login.txt
 #, python-format
 msgid "Device: %(device_browser)s on %(device_os)s."
-msgstr "设备：%(device_browser)s于%(device_os)s。"
+msgstr "设备：%(device_os)s 上的 %(device_browser)s。"
 
 #: templates/zerver/emails/notify_new_login.html
 #: templates/zerver/emails/notify_new_login.txt
@@ -2461,7 +3056,7 @@ msgstr "取消订阅登录通知"
 #: templates/zerver/emails/notify_new_login.subject.txt
 #, python-format
 msgid "New login from %(device_browser)s on %(device_os)s"
-msgstr "新的登录来自%(device_os)s上的%(device_browser)s"
+msgstr "来自 %(device_os)s 上 %(device_browser)s 的新登录"
 
 #: templates/zerver/emails/notify_new_login.txt
 #, python-format
@@ -2708,12 +3303,6 @@ msgstr ""
 "href=\"%(move_messages_link)s\">移动消息</a>、<a "
 "href=\"%(rename_topics_link)s\">重命名话题</a>，甚至<a "
 "href=\"%(move_channels_link)s\">把话题移到其他频道</a>。"
-
-#: templates/zerver/emails/onboarding_zulip_topics.html
-#: templates/zerver/emails/onboarding_zulip_topics.txt
-#: templates/zerver/portico-header-dropdown.html
-msgid "Go to Zulip"
-msgstr "前往 Zulip"
 
 #: templates/zerver/emails/onboarding_zulip_topics.subject.txt
 msgid "Keep your conversations organized with topics"
@@ -3138,7 +3727,7 @@ msgstr "产品"
 
 #: templates/zerver/footer.html
 msgid "Why Zulip"
-msgstr "为什么选择Zulip"
+msgstr "为什么选择 Zulip"
 
 #: templates/zerver/footer.html
 msgid "Switch from Slack"
@@ -3170,7 +3759,7 @@ msgstr "应用整合"
 
 #: templates/zerver/footer.html
 msgid "Desktop & mobile apps"
-msgstr "桌面&移动应用"
+msgstr "桌面和移动应用"
 
 #: templates/zerver/footer.html templates/zerver/portico-header.html
 msgid "New organization"
@@ -3282,7 +3871,7 @@ msgstr "团队"
 
 #: templates/zerver/footer.html
 msgid "History"
-msgstr "历史消息"
+msgstr "发展历程"
 
 #: templates/zerver/footer.html
 msgid "Values"
@@ -3290,7 +3879,7 @@ msgstr "价值观"
 
 #: templates/zerver/footer.html
 msgid "Jobs"
-msgstr "工作"
+msgstr "招聘"
 
 #: templates/zerver/footer.html
 msgid "Blog"
@@ -3428,7 +4017,7 @@ msgstr "无效或过期的登录会话。"
 
 #: templates/zerver/login.html
 msgid "Log in to Zulip"
-msgstr "登录Zulip"
+msgstr "登录 Zulip"
 
 #: templates/zerver/login.html
 msgid "You've already registered with this email address. Please log in below."
@@ -3449,7 +4038,7 @@ msgstr "忘记密码？"
 #: templates/zerver/login.html
 #, python-format
 msgid "Log in with %(identity_provider)s"
-msgstr "使用%(identity_provider)s登录"
+msgstr "使用 %(identity_provider)s 登录"
 
 #: templates/zerver/login.html
 msgid "View without an account"
@@ -8025,9 +8614,6 @@ msgstr "不能同时使用 mobile_flow_otp 和 desktop_flow_otp。"
 #~ msgid "Search integrations"
 #~ msgstr "搜索模块"
 
-#~ msgid "Custom integrations"
-#~ msgstr "自定义集成"
-
 #~ msgid "Incoming webhooks"
 #~ msgstr "传入的网络钩子"
 
@@ -8055,9 +8641,6 @@ msgstr "不能同时使用 mobile_flow_otp 和 desktop_flow_otp。"
 
 #~ msgid "Entertainment"
 #~ msgstr "娱乐"
-
-#~ msgid "Communication"
-#~ msgstr "通信"
 
 #~ msgid "Financial"
 #~ msgstr "财务"

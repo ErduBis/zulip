@@ -2,7 +2,7 @@
 {% set entrypoint = "dev-login" %}
 
 {% block title %}
-<title>Log in | Zulip Dev</title>
+<title>{{ _("Log in") }} | Zulip Dev</title>
 {% endblock %}
 
 {# Login page. #}
@@ -13,11 +13,11 @@ page can be easily identified in it's respective JavaScript file -->
 <div class="app login-page flex full-page">
     <div class="app-main login-page-container dev-login white-box">
         {% if current_realm %}
-        <h4 class="login-page-header">Click on a user to log in to {{ current_realm.name }}!</h4>
+        <h4 class="login-page-header">{% trans realm_name=current_realm.name %}Click on a user to log in to {{ realm_name }}!{% endtrans %}</h4>
         {% else %}
-        <h4 class="login-page-header">Click on a user to log in!</h4>
+        <h4 class="login-page-header">{{ _("Click on a user to log in!") }}</h4>
         {% endif %}
-        <p class="devlogin_subheader">(Browse the <a href="/devtools">developer tools</a> or visit the <a href="/login/{% if next %}?next={{ next|urlencode }}{% endif %}">normal login page</a>.)</p>
+        <p class="devlogin_subheader">{% trans login_url="/login/" + ("?next=" + next|urlencode if next else "") %}(Browse the <a href="/devtools">developer tools</a> or visit the <a href="{{ login_url }}">normal login page</a>.){% endtrans %}</p>
         <form name="direct_login_form" id="direct_login_form" method="post" class="login-form">
             <input type="hidden" name="next" value="{{ next }}" />
             <div class="controls">
@@ -44,7 +44,7 @@ page can be easily identified in it's respective JavaScript file -->
                         </p>
                         {% endfor %}
                     {% else %}
-                        <p>No owners found in this realm</p>
+                        <p>{{ _("No owners found in this realm") }}</p>
                     {% endif %}
                     <h2>{{ _('Administrators') }}</h2>
                     {% if direct_admins %}
@@ -55,7 +55,7 @@ page can be easily identified in it's respective JavaScript file -->
                         </p>
                         {% endfor %}
                     {% else %}
-                        <p>No administrators found in this realm</p>
+                        <p>{{ _("No administrators found in this realm") }}</p>
                     {% endif %}
                     <h2>{{ _('Moderators') }}</h2>
                     {% if direct_moderators %}
@@ -66,7 +66,7 @@ page can be easily identified in it's respective JavaScript file -->
                         </p>
                         {% endfor %}
                     {% else %}
-                        <p>No moderators found in this realm</p>
+                        <p>{{ _("No moderators found in this realm") }}</p>
                     {% endif %}
                     <h2>{{ _('Guest users') }}</h2>
                     {% if guest_users %}
@@ -77,7 +77,7 @@ page can be easily identified in it's respective JavaScript file -->
                         </p>
                         {% endfor %}
                     {% else %}
-                        <p>No guest users found in this realm</p>
+                        <p>{{ _("No guest users found in this realm") }}</p>
                     {% endif %}
                 </div>
 
@@ -91,16 +91,16 @@ page can be easily identified in it's respective JavaScript file -->
                         </p>
                         {% endfor %}
                     {% else %}
-                        <p>No normal users found in this realm</p>
+                        <p>{{ _("No normal users found in this realm") }}</p>
                     {% endif %}
                 </div>
             </div>
         </form>
         <form name="change_realm" action="{{ url('login_page') }}" method="post">
             {{ csrf_input }}
-            <h2>Realm</h2>
+            <h2>{{ _("Realm") }}</h2>
             <select class="bootstrap-focus-style" name="new_realm" onchange="this.form.submit()">
-                <option value="all_realms" {% if not current_realm %}selected="selected"{% endif %}>All realms</option>
+                <option value="all_realms" {% if not current_realm %}selected="selected"{% endif %}>{{ _("All realms") }}</option>
                 {% for realm in all_realms %}
                 <option value="{{realm.string_id}}" {% if current_realm == realm %}selected="selected"{% endif %}>{{realm.name}}</option>
                 {% endfor %}
@@ -109,13 +109,13 @@ page can be easily identified in it's respective JavaScript file -->
         <div id="devtools-wrapper">
             <div id="devtools-registration">
                 <form name="register_dev_user" action="{{ url('register_dev_user') }}" method="POST">
-                    <input type="submit" class="dev-button dev-create-button" value="Create new user" />
+                    <input type="submit" class="dev-button dev-create-button" value="{{ _('Create new user') }}" />
                 </form>
                 <form name="register_dev_realm" action="{{ url('register_dev_realm') }}" method="POST">
-                    <input type="submit" class="dev-button dev-create-button" value="Create new realm" />
+                    <input type="submit" class="dev-button dev-create-button" value="{{ _('Create new realm') }}" />
                 </form>
                 <form name="register_demo_dev_realm" action="{{ url('register_demo_dev_realm') }}" method="POST">
-                    <input type="submit" class="dev-button dev-create-button" value="Create demo organization" />
+                    <input type="submit" class="dev-button dev-create-button" value="{{ _('Create demo organization') }}" />
                 </form>
             </div>
         </div>
