@@ -40,7 +40,7 @@
             <select class="bootstrap-focus-style" id="bot_name">
                 <option value=""></option>
                 {% for bot in bots %}
-                <option value="{{ bot.api_key }}"> {{ bot.full_name }} </option>
+                <option value="{{ bot.api_key }}" data-default-channel="{% if bot.realm.new_stream_announcements_stream %}{{ bot.realm.new_stream_announcements_stream.name }}{% endif %}"> {{ bot.full_name }} </option>
                 {% endfor %}
             </select>
         </div>
@@ -67,7 +67,7 @@
 
         <div>
             <label class="optional"><b>{{ _("Topic") }}</b></label>
-            <input id="topic_name" type="text" />
+            <input id="topic_name" type="text" data-default-topic="{{ _('Integrations testing') }}" />
         </div>
     </div>
 
@@ -91,7 +91,15 @@
         <div class="col1">
             <div class="inline">
                 <label for="fixture_body"><b>{{ _("Fixture body") }}</b></label>
-                <span id="results_notice"></span>
+                <span id="results_notice"
+                  data-success-message="{{ _('Success!') }}"
+                  data-repeated-success-message="{{ _('Success!!!') }}"
+                  data-invalid-custom-headers-message="{{ _('Custom HTTP headers are not in a valid JSON format.') }}"
+                  data-missing-fixture-body-message="{{ _('Fixture does not have a body.') }}"
+                  data-error-response-message="{{ _('Result: ({status_code}) {message}') }}"
+                  data-empty-url-message="{{ _("URL can't be empty.") }}"
+                  data-invalid-fixture-body-message="{{ _('Invalid JSON in fixture body.') }}"
+                  data-no-integration-selected-message="{{ _('You have to select an integration first.') }}"></span>
             </div>
             <textarea id="fixture_body"></textarea>
             <div class="buttons">
@@ -101,7 +109,11 @@
         </div>
         <div class="col1">
             <label for="idp-results"><b>{{ _("Results") }}</b></label>
-            <textarea id="idp-results" readonly></textarea>
+            <textarea id="idp-results" readonly
+              data-results-heading="{{ _('Results:') }}"
+              data-fixture-label="{{ _('Fixture:') }}"
+              data-status-code-label="{{ _('Status code:') }}"
+              data-response-label="{{ _('Response:') }}"></textarea>
         </div>
     </div>
 

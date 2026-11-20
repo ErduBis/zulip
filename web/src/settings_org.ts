@@ -599,6 +599,19 @@ export function update_description_empty_state(): void {
     $textarea.toggleClass("empty-description", is_empty);
 }
 
+function get_auth_method_label(auth_method: string): string {
+    // Most authentication methods are named after a product or a
+    // protocol (Google, SAML, LDAP, ...), which stay untranslated.
+    switch (auth_method) {
+        case "Email":
+            return $t({defaultMessage: "Email"});
+        case "Dev":
+            return $t({defaultMessage: "Development login"});
+        default:
+            return auth_method;
+    }
+}
+
 export function populate_auth_methods(auth_method_to_bool_map: Record<string, boolean>): void {
     if (!meta.loaded) {
         return;
@@ -619,6 +632,7 @@ export function populate_auth_methods(auth_method_to_bool_map: Record<string, bo
 
         const render_args = {
             method: auth_method,
+            method_label: get_auth_method_label(auth_method),
             enabled: value,
             disable_configure_auth_method: !current_user.is_owner || cant_be_enabled,
             // The negated character class regexp serves as an allowlist - the replace() will

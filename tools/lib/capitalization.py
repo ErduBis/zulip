@@ -91,6 +91,36 @@ IGNORED_PHRASES = [
     r"PastedText",
     # Placeholders
     r"keyword",
+    # Product names on development pages
+    r"Django",
+    r"PostgreSQL",
+    r"zulip\.com",
+    # Placeholder examples
+    r"acme\.com",
+    r"^eg: your-email@example\.com$",
+    # Welcome Bot commands, which users type as written
+    r"^apps$",
+    r"^channels$",
+    r"^help$",
+    r"^keyboard shortcuts$",
+    r"^message formatting$",
+    r"^profile$",
+    r"^theme$",
+    r"^topics$",
+    # Widget names inserted into reminder sentences
+    r"^poll$",
+    r"^todo list$",
+    # Email types inserted into the unsubscribe page sentence
+    r"^digest$",
+    r"^login$",
+    r"^missed messages$",
+    r"^welcome$",
+    # Search operator placeholders in search_operators.hbs
+    r"^channel$",
+    r"^date$",
+    r"^id$",
+    r"^topic$",
+    r"^user A, user B$",
     r"streamname",
     r"user@example\.com",
     r"example\.com",

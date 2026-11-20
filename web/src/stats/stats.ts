@@ -2,16 +2,37 @@ import {$} from "jquery";
 import assert from "minimalistic-assert";
 import PlotlyBar from "plotly.js/lib/bar";
 import Plotly from "plotly.js/lib/core";
+import PlotlyLocaleZhCn from "plotly.js/lib/locales/zh-cn";
 import PlotlyPie from "plotly.js/lib/pie";
 import * as tippy from "tippy.js";
 import * as z from "zod/mini";
 
 import * as blueslip from "../blueslip.ts";
-import {$t, $t_html} from "../i18n.ts";
+import {$t, $t_html, intl} from "../i18n.ts";
 
 import {page_params} from "./page_params.ts";
 
-Plotly.register([PlotlyBar, PlotlyPie]);
+Plotly.register([
+    PlotlyBar,
+    PlotlyPie,
+    {
+        ...PlotlyLocaleZhCn,
+        // Plotly's zh-CN locale translates only the month names and
+        // falls back to English date patterns, giving axis labels
+        // like "十一 2"; these are the usual Chinese date patterns.
+        format: {
+            ...PlotlyLocaleZhCn.format,
+            month: "%Y年%-m月",
+            dayMonth: "%-m月%-d日",
+            dayMonthYear: "%Y年%-m月%-d日",
+        },
+    },
+]);
+// Plotly translates its own text (axis dates, toolbar tooltips) per
+// locale; it names Simplified Chinese differently from Django.
+if (page_params.request_language === "zh-hans") {
+    Plotly.setPlotConfig({locale: "zh-CN"});
+}
 
 // Define types
 type DateFormatter = (date: Date) => string;
@@ -211,17 +232,17 @@ function update_last_full_update(end_times: number[]): void {
 
     last_full_update = Math.min(last_full_update, end_times.at(-1)!);
     const update_time = new Date(last_full_update * 1000);
-    const locale_date = update_time.toLocaleDateString("en-US", {
+    const date = intl.formatDate(update_time, {
         year: "numeric",
         month: "long",
         day: "numeric",
     });
-    const locale_time = update_time.toLocaleTimeString(undefined, {
+    const time = intl.formatTime(update_time, {
         hour: "numeric",
         minute: "numeric",
     });
 
-    $("#id_last_full_update").text(locale_time + " on " + locale_date);
+    $("#id_last_full_update").text($t({defaultMessage: "{date} at {time}"}, {date, time}));
     $("#id_last_full_update").closest(".last-update").show();
 }
 

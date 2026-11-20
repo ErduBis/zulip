@@ -13,7 +13,9 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.template import Library, engines
 from django.template.backends.jinja2 import Jinja2
 from django.utils.safestring import mark_safe
-from markupsafe import Markup
+from django.utils.translation import gettext as _
+from django.utils.translation import ngettext, pgettext
+from markupsafe import Markup, escape
 
 import zerver.lib.markdown.api_arguments_table_generator
 import zerver.lib.markdown.api_return_values_table_generator
@@ -34,15 +36,6 @@ from zerver.openapi.merge_api_changelogs import (
 register = Library()
 
 
-def and_n_others(values: list[str | Markup], limit: int) -> str | Markup:
-    # A helper for the commonly appended "and N other(s)" string, with
-    # the appropriate pluralization.
-    return " and {} other{}".format(
-        len(values) - limit,
-        "" if len(values) == limit + 1 else "s",
-    )
-
-
 def get_updated_changelog() -> str | None:
     unmerged_changelogs = get_unmerged_changelogs(verbose=False)
     if not unmerged_changelogs:
@@ -61,24 +54,40 @@ def display_list(values: list[str | Markup], display_limit: int) -> str | Markup
 
     Jessica
     Jessica and Waseem
-    Jessica, Waseem, and Tim
-    Jessica, Waseem, Tim, and 1 other
-    Jessica, Waseem, Tim, and 2 others
+    Jessica, Waseem and Tim
+    Jessica, Waseem, Tim and 1 other
+    Jessica, Waseem, Tim and 2 others
+
+    The connecting words are translated into the active language.  If
+    any value is Markup, the result is Markup, with the translated
+    words escaped.
     """
-    sep = Markup(", ") if any(isinstance(value, Markup) for value in values) else ", "
+    is_markup = any(isinstance(value, Markup) for value in values)
+
+    def fill(template: str, **values_to_insert: str | Markup | int) -> str | Markup:
+        if is_markup:
+            return escape(template).format(**values_to_insert)
+        return template.format(**values_to_insert)
+
+    separator = pgettext("separator between list items", ", ")
+    sep = escape(separator) if is_markup else separator
     if len(values) == 1:
         # One value, show it.
-        display_string = values[0]
-    elif len(values) <= display_limit:
+        return values[0]
+    if len(values) <= display_limit:
         # Fewer than `display_limit` values, show all of them.
-        display_string = sep.join(value for value in values[:-1])
-        display_string += " and " + values[-1]
-    else:
-        # More than `display_limit` values, only mention a few.
-        display_string = sep.join(value for value in values[:display_limit])
-        display_string += and_n_others(values, display_limit)
-
-    return display_string
+        return fill(
+            _("{items} and {last_item}"),
+            items=sep.join(values[:-1]),
+            last_item=values[-1],
+        )
+    # More than `display_limit` values, only mention a few.
+    others_count = len(values) - display_limit
+    return fill(
+        ngettext("{items} and {count} other", "{items} and {count} others", others_count),
+        items=sep.join(values[:display_limit]),
+        count=others_count,
+    )
 
 
 md_extensions: list[markdown.Extension] | None = None

@@ -6,6 +6,35 @@
 {% endblock %}
 
 {% block content %}
+{# Sample texts for showroom.ts, since this page has no client-side translations. #}
+<div id="showroom_banner_sample_texts" hidden
+  data-normal-banner-label="{{ _("This is a normal banner. Use the controls below to modify this banner.") }}"
+  data-navbar-alerts-banner-label="{{ _("This is a navbar alerts banner. Use the controls below to modify this banner.") }}"
+  data-solid-button="{{ _("Solid button") }}"
+  data-subtle-button="{{ _("Subtle button") }}"
+  data-text-button="{{ _("Text button") }}"
+  data-bankruptcy-label="{{ _("Welcome back! You have 12 unread messages. Do you want to mark them all as read?") }}"
+  data-yes-please="{{ _("Yes, please!") }}"
+  data-no-catch-up="{{ _("No, I'll catch up.") }}"
+  data-email-server-label="{{ _("Zulip needs to send email to confirm users' addresses and send notifications.") }}"
+  data-configuration-instructions="{{ _("Configuration instructions") }}"
+  data-demo-organization-deadline-label="{{ _("This demo organization will be automatically deleted in 30 days, unless it's converted into a permanent organization.") }}"
+  data-convert="{{ _("Convert") }}"
+  data-desktop-notifications-label="{{ _("Zulip needs your permission to enable desktop notifications for important messages.") }}"
+  data-enable-notifications="{{ _("Enable notifications") }}"
+  data-ask-me-later="{{ _("Ask me later") }}"
+  data-never-ask-on-this-computer="{{ _("Never ask on this computer") }}"
+  data-profile-missing-required-label="{{ _("Your profile is missing required fields.") }}"
+  data-edit-your-profile="{{ _("Edit your profile") }}"
+  data-insecure-desktop-app-label="{{ _("Zulip Desktop is not updating automatically. Please upgrade for security updates and other improvements.") }}"
+  data-download-the-latest-version="{{ _("Download the latest version") }}"
+  data-unsupported-browser-label="{{ _("Because you're using an unsupported or very old browser, Zulip may not work as expected.") }}"
+  data-learn-more="{{ _("Learn more") }}"
+  data-profile-incomplete-label="{{ _("Complete your organization profile, which is displayed on your organization's registration and login pages.") }}"
+  data-edit-profile="{{ _("Edit profile") }}"
+  data-server-needs-upgrade-label="{{ _("This Zulip server is running an old version and should be upgraded.") }}"
+  data-dismiss-for-a-week="{{ _("Dismiss for a week") }}">
+</div>
 <div class="portico-container" data-platform="{{ platform }}">
     <div class="portico-wrap">
         {% include 'zerver/portico-header.html' %}
@@ -15,10 +44,10 @@
                 <div class="showroom-wrapper">
                     <div class="banner-wrapper" id="showroom_component_banner_default_wrapper"></div>
                     <section class="showroom-controls-section">
-                        <div class="showroom-controls-label">{{ _("Theme Settings") }}</div>
+                        <div class="showroom-controls-label">{{ _("Theme settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Dark Theme") }}</span>
+                                <span class="showroom-control-label">{{ _("Dark theme") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" data-theme="dark" id="showroom_enable_dark_theme_banners" class="tab-option" name="showroom-dark-theme-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="showroom_enable_dark_theme_banners" tabindex="0">
@@ -32,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Select Background") }}</span>
+                                <span class="showroom-control-label">{{ _("Select background") }}</span>
                                 <select class="showroom-control-element showroom-control-setting select_background">
                                     {% for background in background_colors %}
                                         <option value="{{ background.css_var }}" {% if background.css_var == "--color-background" %}selected{% endif %}>{{ background.name }}</option>
@@ -41,22 +70,22 @@
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">{{ _("Banner Settings") }}</div>
+                        <div class="showroom-controls-label">{{ _("Banner settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Alert Banner Type") }}</span>
+                                <span class="showroom-control-label">{{ _("Alert banner type") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="banner_select_type"></select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Banner Intent") }}</span>
+                                <span class="showroom-control-label">{{ _("Banner intent") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="showroom_component_banner_select_intent"></select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Banner Label") }}</span>
+                                <span class="showroom-control-label">{{ _("Banner label") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="banner_label" />
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Banner Close Button") }}</span>
+                                <span class="showroom-control-label">{{ _("Banner close button") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_banner_close_button" class="tab-option" name="banner-close-button-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_banner_close_button" tabindex="0">
@@ -71,7 +100,7 @@
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">{{ _("Solid Button Settings") }}</div>
+                        <div class="showroom-controls-label">{{ _("Solid button settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
                                 <span class="showroom-control-label">{{ _("Button") }}</span>
@@ -88,7 +117,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Button Icon") }}</span>
+                                <span class="showroom-control-label">{{ _("Button icon") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_solid_button_icon" class="tab-option" name="solid-button-icon-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_solid_button_icon" tabindex="0">
@@ -102,7 +131,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Select Icon") }}</span>
+                                <span class="showroom-control-label">{{ _("Select icon") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="solid_button_select_icon">
                                     {% for icon in icons %}
                                         <option value="{{ icon }}" {% if icon == "move-alt" %}selected{% endif %}>{{ icon }}</option>
@@ -110,12 +139,12 @@
                                 </select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Button Text") }}</span>
+                                <span class="showroom-control-label">{{ _("Button text") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="solid_button_text" />
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">{{ _("Subtle Button Settings") }}</div>
+                        <div class="showroom-controls-label">{{ _("Subtle button settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
                                 <span class="showroom-control-label">{{ _("Button") }}</span>
@@ -132,7 +161,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Button Icon") }}</span>
+                                <span class="showroom-control-label">{{ _("Button icon") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_subtle_button_icon" class="tab-option" name="subtle-button-icon-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_subtle_button_icon" tabindex="0">
@@ -146,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Select Icon") }}</span>
+                                <span class="showroom-control-label">{{ _("Select icon") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="subtle_button_select_icon">
                                     {% for icon in icons %}
                                         <option value="{{ icon }}" {% if icon == "move-alt" %}selected{% endif %}>{{ icon }}</option>
@@ -154,12 +183,12 @@
                                 </select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Button Text") }}</span>
+                                <span class="showroom-control-label">{{ _("Button text") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="subtle_button_text" />
                             </div>
                         </div>
 
-                        <div class="showroom-controls-label">{{ _("Text Button Settings") }}</div>
+                        <div class="showroom-controls-label">{{ _("Text button settings") }}</div>
                         <div class="showroom-controls">
                             <div class="showroom-control">
                                 <span class="showroom-control-label">{{ _("Button") }}</span>
@@ -176,7 +205,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Button Icon") }}</span>
+                                <span class="showroom-control-label">{{ _("Button icon") }}</span>
                                 <div role="group" class="tab-picker showroom-control-setting">
                                     <input type="radio" id="enable_text_button_icon" class="tab-option" name="text-button-icon-select"/>
                                     <label role="menuitemradio" class="tab-option-content showroom-control-element" for="enable_text_button_icon" tabindex="0">
@@ -190,7 +219,7 @@
                                 </div>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Select Icon") }}</span>
+                                <span class="showroom-control-label">{{ _("Select icon") }}</span>
                                 <select class="showroom-control-element showroom-control-setting" id="text_button_select_icon">
                                     {% for icon in icons %}
                                         <option value="{{ icon }}" {% if icon == "move-alt" %}selected{% endif %}>{{ icon }}</option>
@@ -198,7 +227,7 @@
                                 </select>
                             </div>
                             <div class="showroom-control">
-                                <span class="showroom-control-label">{{ _("Button Text") }}</span>
+                                <span class="showroom-control-label">{{ _("Button text") }}</span>
                                 <input class="showroom-control-element showroom-control-setting" type="text" id="text_button_text" />
                             </div>
                         </div>

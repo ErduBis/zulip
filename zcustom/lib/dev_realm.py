@@ -372,9 +372,12 @@ class DevRealmBuilder:
         dropdown_values: dict[str, dict[str, str]] = {}
         for profile_field in self.data.org.custom_profile_fields:
             if profile_field.type == "external_account":
-                field_ids[profile_field.name] = try_add_realm_default_custom_profile_field(
-                    self.realm, "github"
-                ).id
+                github_field = try_add_realm_default_custom_profile_field(self.realm, "github")
+                # The default field is named in English ("GitHub username"),
+                # not in the realm's language; use the name from the data.
+                github_field.name = profile_field.name
+                github_field.save(update_fields=["name"])
+                field_ids[profile_field.name] = github_field.id
                 continue
             field_data: ProfileFieldData | None = None
             if profile_field.type == "dropdown":

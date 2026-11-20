@@ -753,6 +753,11 @@ class DevRealmGenerationTest(ZulipTestCase):
         self.assertEqual(
             [subgroup.named_user_group.name for subgroup in team.direct_subgroups.all()], ["徒弟"]
         )
+        github = CustomProfileField.objects.get(realm=realm, name="GitHub")
+        self.assertEqual(github.field_type, CustomProfileField.EXTERNAL_ACCOUNT)
+        self.assertEqual(
+            CustomProfileFieldValue.objects.get(user_profile=tangseng, field=github).value, "zulip"
+        )
         weapon = CustomProfileField.objects.get(realm=realm, name="常用兵器")
         self.assertEqual(
             CustomProfileFieldValue.objects.get(user_profile=sunwukong, field=weapon).value, "1"

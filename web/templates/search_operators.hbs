@@ -10,29 +10,29 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="operator"><span class="operator_value">keyword</span></td>
+                        <td class="operator"><span class="operator_value">{{t "keyword" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Search for <z-value></z-value> in the topic or message content.
-                                {{#*inline "z-value"}}<span class="operator_value">keyword</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "keyword" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">channel:<span class="operator_value">channel</span></td>
+                        <td class="operator">channel:<span class="operator_value">{{t "channel" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to messages on channel <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">channel</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "channel" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">topic:<span class="operator_value">topic</span></td>
+                        <td class="operator">topic:<span class="operator_value">{{t "topic" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to messages with topic <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">topic</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "topic" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
@@ -43,16 +43,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">dm:<span class="operator_value">user</span></td>
+                        <td class="operator">dm:<span class="operator_value">{{t "user" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to 1-on-1 direct messages with <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">user</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "user" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">dm:<span class="operator_value">user A, user B</span></td>
+                        <td class="operator">dm:<span class="operator_value">{{t "user A, user B" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to direct messages with specified users.
@@ -60,20 +60,20 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">dm-including:<span class="operator_value">user</span></td>
+                        <td class="operator">dm-including:<span class="operator_value">{{t "user" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to all direct messages that include <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">user</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "user" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">date:<span class="operator_value">date</span></td>
+                        <td class="operator">date:<span class="operator_value">{{t "date" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to messages around <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">date</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "date" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
@@ -100,11 +100,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">sender:<span class="operator_value">user</span></td>
+                        <td class="operator">sender:<span class="operator_value">{{t "user" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to messages sent by <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">user</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "user" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
@@ -151,11 +151,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">mentions:<span class="operator_value">user</span></td>
+                        <td class="operator">mentions:<span class="operator_value">{{t "user" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to messages that mention <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">user</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "user" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
@@ -196,29 +196,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">near:<span class="operator_value">id</span></td>
+                        <td class="operator">near:<span class="operator_value">{{t "id" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Center the view around message ID <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">id</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "id" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">id:<span class="operator_value">id</span></td>
+                        <td class="operator">id:<span class="operator_value">{{t "id" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Narrow to just message ID <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">id</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "id" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="operator">-topic:<span class="operator_value">topic</span></td>
+                        <td class="operator">-topic:<span class="operator_value">{{t "topic" }}</span></td>
                         <td class="definition">
                             {{#tr}}
                                 Exclude messages with topic <z-value></z-value>.
-                                {{#*inline "z-value"}}<span class="operator_value">topic</span>{{/inline}}
+                                {{#*inline "z-value"}}<span class="operator_value">{{t "topic" }}</span>{{/inline}}
                             {{/tr}}
                         </td>
                     </tr>

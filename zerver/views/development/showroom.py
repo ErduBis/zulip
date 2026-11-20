@@ -2,12 +2,14 @@ import os
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 
 background_colors = [
-    {"name": "Default background", "css_var": "--color-background"},
-    {"name": "Popover background", "css_var": "--color-background-popover-menu"},
-    {"name": "Modal background", "css_var": "--color-background-modal"},
-    {"name": "Compose background", "css_var": "--color-compose-box-background"},
+    {"name": gettext_lazy("Default background"), "css_var": "--color-background"},
+    {"name": gettext_lazy("Popover background"), "css_var": "--color-background-popover-menu"},
+    {"name": gettext_lazy("Modal background"), "css_var": "--color-background-modal"},
+    {"name": gettext_lazy("Compose background"), "css_var": "--color-compose-box-background"},
 ]
 
 
@@ -30,7 +32,7 @@ def showroom_component_buttons(request: HttpRequest) -> HttpResponse:
         "icons": get_svg_filenames(),
         "page_is_showroom": True,
         "showroom_component": "buttons",
-        "doc_root_title": "Button styles browser",
+        "doc_root_title": _("Button styles browser"),
         # We set isolated_page to avoid clutter from footer/header.
         "isolated_page": True,
     }
@@ -43,7 +45,7 @@ def showroom_component_banners(request: HttpRequest) -> HttpResponse:
         "icons": get_svg_filenames(),
         "page_is_showroom": True,
         "showroom_component": "banners",
-        "doc_root_title": "Banner styles browser",
+        "doc_root_title": _("Banner styles browser"),
         # We set isolated_page to avoid clutter from footer/header.
         "isolated_page": True,
     }
@@ -56,7 +58,7 @@ def showroom_component_inputs(request: HttpRequest) -> HttpResponse:
         "icons": get_svg_filenames(),
         "page_is_showroom": True,
         "showroom_component": "inputs",
-        "doc_root_title": "Input styles browser",
+        "doc_root_title": _("Input styles browser"),
         # We set isolated_page to avoid clutter from footer/header.
         "isolated_page": True,
     }

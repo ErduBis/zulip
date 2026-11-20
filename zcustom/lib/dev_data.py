@@ -328,9 +328,12 @@ def builtin_channel_names() -> list[str]:
 
 
 def parse_duration(duration: str) -> timedelta:
-    units = {"d": "days", "h": "hours", "m": "minutes", "s": "seconds"}
+    amounts = {unit: int(amount) for amount, unit in re.findall(r"(\d+)([dhms])", duration)}
     return timedelta(
-        **{units[unit]: int(amount) for amount, unit in re.findall(r"(\d+)([dhms])", duration)}
+        days=amounts.get("d", 0),
+        hours=amounts.get("h", 0),
+        minutes=amounts.get("m", 0),
+        seconds=amounts.get("s", 0),
     )
 
 

@@ -1,10 +1,28 @@
 from django.template.loader import get_template
+from markupsafe import Markup
 
 from zerver.lib.exceptions import InvalidMarkdownIncludeStatementError
+from zerver.lib.templates import display_list
 from zerver.lib.test_classes import ZulipTestCase
 
 
 class TemplateTestCase(ZulipTestCase):
+    def test_display_list(self) -> None:
+        names = ["Jessica", "Waseem", "Tim", "Ana", "Bo"]
+        self.assertEqual(display_list(names[:1], 3), "Jessica")
+        self.assertEqual(display_list(names[:2], 3), "Jessica and Waseem")
+        self.assertEqual(display_list(names[:3], 3), "Jessica, Waseem and Tim")
+        self.assertEqual(display_list(names[:4], 3), "Jessica, Waseem, Tim and 1 other")
+        self.assertEqual(display_list(names, 3), "Jessica, Waseem, Tim and 2 others")
+
+        links = [Markup('<a href="#a">A</a>'), Markup('<a href="#b">B</a>'), "<C>"]
+        result = display_list(links, 3)
+        self.assertIsInstance(result, Markup)
+        self.assertEqual(result, '<a href="#a">A</a>, <a href="#b">B</a> and &lt;C&gt;')
+        result = display_list(links, 1)
+        self.assertIsInstance(result, Markup)
+        self.assertEqual(result, '<a href="#a">A</a> and 2 others')
+
     def test_markdown_in_template(self) -> None:
         template = get_template("tests/test_markdown.html")
         context = {

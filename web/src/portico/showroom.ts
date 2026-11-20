@@ -1,10 +1,8 @@
-import Handlebars from "handlebars/runtime.js";
 import {$} from "jquery";
 import assert from "minimalistic-assert";
 
 import render_banner from "../../templates/components/banner.hbs";
 import render_filter_input from "../../templates/components/showroom/filter_input.hbs";
-import {$t, $t_html} from "../i18n.ts";
 import type {HTMLSelectOneElement} from "../types.ts";
 
 type ComponentIntent = "neutral" | "brand" | "info" | "success" | "warning" | "danger";
@@ -18,7 +16,7 @@ type ActionButton = {
 
 type Banner = {
     intent: ComponentIntent;
-    label: string | Handlebars.SafeString;
+    label: string;
     buttons: ActionButton[];
     close_button: boolean;
     custom_classes?: string;
@@ -39,14 +37,21 @@ const component_intents: ComponentIntent[] = [
 
 const banner_html = (banner: Banner | AlertBanner): string => render_banner(banner);
 
+// This page has no client-side translations, so the banners page's
+// template provides translated sample texts. The other showroom pages
+// share this module but show no banners, so they don't need them.
+function get_sample_text(name: string): string {
+    return $("#showroom_banner_sample_texts").attr(`data-${name}`) ?? "";
+}
+
 const custom_normal_banner: Banner = {
     intent: "neutral",
-    label: "This is a normal banner. Use the controls below to modify this banner.",
+    label: get_sample_text("normal-banner-label"),
     buttons: [
         {
             variant: "subtle",
             intent: "neutral",
-            label: "Subtle Button",
+            label: get_sample_text("subtle-button"),
         },
     ],
     close_button: true,
@@ -56,12 +61,12 @@ const alert_banners: Record<string, AlertBanner> = {
     "custom-banner": {
         process: "custom-banner",
         intent: "neutral",
-        label: "This is a navbar alerts banner. Use the controls below to modify this banner.",
+        label: get_sample_text("navbar-alerts-banner-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "neutral",
-                label: "Subtle Button",
+                label: get_sample_text("subtle-button"),
             },
         ],
         close_button: true,
@@ -70,17 +75,17 @@ const alert_banners: Record<string, AlertBanner> = {
     bankruptcy: {
         process: "bankruptcy",
         intent: "info",
-        label: "Welcome back! You have 12 unread messages. Do you want to mark them all as read?",
+        label: get_sample_text("bankruptcy-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "info",
-                label: "Yes, please!",
+                label: get_sample_text("yes-please"),
             },
             {
                 variant: "text",
                 intent: "info",
-                label: "No, I'll catch up.",
+                label: get_sample_text("no-catch-up"),
             },
         ],
         close_button: true,
@@ -89,12 +94,12 @@ const alert_banners: Record<string, AlertBanner> = {
     "email-server": {
         process: "email-server",
         intent: "warning",
-        label: "Zulip needs to send email to confirm users' addresses and send notifications.",
+        label: get_sample_text("email-server-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "warning",
-                label: "Configuration instructions",
+                label: get_sample_text("configuration-instructions"),
             },
         ],
         close_button: true,
@@ -103,22 +108,17 @@ const alert_banners: Record<string, AlertBanner> = {
     "demo-organization-deadline": {
         process: "demo-organization-deadline",
         intent: "info",
-        label: new Handlebars.SafeString(
-            $t_html({
-                defaultMessage:
-                    "This demo organization will be automatically deleted in 30 days, unless it's converted into a permanent organization.",
-            }),
-        ),
+        label: get_sample_text("demo-organization-deadline-label"),
         buttons: [
             {
                 variant: "text",
                 intent: "info",
-                label: $t({defaultMessage: "Learn more"}),
+                label: get_sample_text("learn-more"),
             },
             {
                 variant: "subtle",
                 intent: "info",
-                label: $t({defaultMessage: "Convert"}),
+                label: get_sample_text("convert"),
             },
         ],
         close_button: true,
@@ -127,27 +127,22 @@ const alert_banners: Record<string, AlertBanner> = {
     notifications: {
         process: "desktop-notifications",
         intent: "brand",
-        label: new Handlebars.SafeString(
-            $t_html({
-                defaultMessage:
-                    "Zulip needs your permission to enable desktop notifications for important messages.",
-            }),
-        ),
+        label: get_sample_text("desktop-notifications-label"),
         buttons: [
             {
                 variant: "solid",
                 intent: "brand",
-                label: "Enable notifications",
+                label: get_sample_text("enable-notifications"),
             },
             {
                 variant: "subtle",
                 intent: "brand",
-                label: "Ask me later",
+                label: get_sample_text("ask-me-later"),
             },
             {
                 variant: "text",
                 intent: "brand",
-                label: "Never ask on this computer",
+                label: get_sample_text("never-ask-on-this-computer"),
             },
         ],
         close_button: true,
@@ -156,12 +151,12 @@ const alert_banners: Record<string, AlertBanner> = {
     "profile-missing-required": {
         process: "profile-missing-required",
         intent: "warning",
-        label: "Your profile is missing required fields.",
+        label: get_sample_text("profile-missing-required-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "warning",
-                label: "Edit your profile",
+                label: get_sample_text("edit-your-profile"),
             },
         ],
         close_button: true,
@@ -170,12 +165,12 @@ const alert_banners: Record<string, AlertBanner> = {
     "insecure-desktop-app": {
         process: "insecure-desktop-app",
         intent: "warning",
-        label: "Zulip Desktop is not updating automatically. Please upgrade for security updates and other improvements.",
+        label: get_sample_text("insecure-desktop-app-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "warning",
-                label: "Download the latest version",
+                label: get_sample_text("download-the-latest-version"),
             },
         ],
         close_button: true,
@@ -184,12 +179,12 @@ const alert_banners: Record<string, AlertBanner> = {
     "unsupported-browser": {
         process: "unsupported-browser",
         intent: "warning",
-        label: "Because you're using an unsupported or very old browser, Zulip may not work as expected.",
+        label: get_sample_text("unsupported-browser-label"),
         buttons: [
             {
                 variant: "text",
                 intent: "warning",
-                label: "Learn more",
+                label: get_sample_text("learn-more"),
             },
         ],
         close_button: true,
@@ -198,12 +193,12 @@ const alert_banners: Record<string, AlertBanner> = {
     "profile-incomplete": {
         process: "profile-incomplete",
         intent: "info",
-        label: "Complete your organization profile, which is displayed on your organization's registration and login pages.",
+        label: get_sample_text("profile-incomplete-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "info",
-                label: "Edit profile",
+                label: get_sample_text("edit-profile"),
             },
         ],
         close_button: true,
@@ -212,17 +207,17 @@ const alert_banners: Record<string, AlertBanner> = {
     "server-needs-upgrade": {
         process: "server-needs-upgrade",
         intent: "danger",
-        label: "This Zulip server is running an old version and should be upgraded.",
+        label: get_sample_text("server-needs-upgrade-label"),
         buttons: [
             {
                 variant: "subtle",
                 intent: "danger",
-                label: "Learn more",
+                label: get_sample_text("learn-more"),
             },
             {
                 variant: "text",
                 intent: "danger",
-                label: "Dismiss for a week",
+                label: get_sample_text("dismiss-for-a-week"),
             },
         ],
         close_button: true,
@@ -293,7 +288,7 @@ function update_banner(): void {
     $("#showroom_component_banner_default_wrapper").html(banner_html(custom_normal_banner));
 
     $("#showroom_component_banner_select_intent").val(current_banner.intent);
-    $("#banner_label").val(current_banner.label.toString());
+    $("#banner_label").val(current_banner.label);
     update_buttons(current_banner.buttons);
     if (current_banner.close_button) {
         $("#enable_banner_close_button").prop("checked", true);
@@ -329,7 +324,7 @@ $(window).on("load", () => {
 
     $("#clear_button_text").on("click", () => {
         $("#button_text").val("");
-        $(".action-button-label").text($t({defaultMessage: "Button joy"}));
+        $(".action-button-label").text($("#button_text").attr("data-default-label")!);
     });
 
     $<HTMLSelectOneElement>("select:not([multiple])#button_select_icon").on("change", function () {
@@ -347,7 +342,11 @@ $(window).on("load", () => {
     });
 
     // Code for /devtools/banners design testing page.
-    update_banner();
+    // The other showroom pages have no banners and no sample texts,
+    // with which the banners would fail to render.
+    if ($("#showroom_component_banner_navbar_alerts_wrapper").length > 0) {
+        update_banner();
+    }
 
     // Populate banner type select options
     const $banner_select = $<HTMLSelectOneElement>("select:not([multiple])#banner_select_type");
@@ -419,7 +418,7 @@ $(window).on("load", () => {
             let label = $<HTMLInputElement>("input#solid_button_text").val();
             assert(label !== undefined);
             if (label === "") {
-                label = "Solid Button";
+                label = get_sample_text("solid-button");
             }
             const is_icon_enabled = $("#enable_solid_button_icon").prop("checked") === true;
             current_banner.buttons.push({
@@ -506,7 +505,7 @@ $(window).on("load", () => {
             let label = $<HTMLInputElement>("input#subtle_button_text").val();
             assert(label !== undefined);
             if (label === "") {
-                label = "Subtle Button";
+                label = get_sample_text("subtle-button");
             }
             const is_icon_enabled = $("#enable_subtle_button_icon").prop("checked") === true;
             current_banner.buttons.push({
@@ -593,7 +592,7 @@ $(window).on("load", () => {
             let label = $<HTMLInputElement>("input#text_button_text").val();
             assert(label !== undefined);
             if (label === "") {
-                label = "Text Button";
+                label = get_sample_text("text-button");
             }
             const is_icon_enabled = $("#enable_text_button_icon").prop("checked") === true;
             current_banner.buttons.push({

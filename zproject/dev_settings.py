@@ -4,10 +4,12 @@ import pwd
 from scripts.lib.zulip_tools import deport
 from zproject.settings_types import SCIMConfigDict
 
-ZULIP_ADMINISTRATOR = "desdemona+admin@zulip.com"
-
 # Initiatize TEST_SUITE early, so other code can rely on the setting.
 TEST_SUITE = os.getenv("ZULIP_TEST_SUITE") == "true"
+
+# The development organization's owner (zcustom/dev_data); upstream
+# tests expect the original address.
+ZULIP_ADMINISTRATOR = "desdemona+admin@zulip.com" if TEST_SUITE else "tangseng+admin@zulip.com"
 
 # We want LOCAL_UPLOADS_DIR to be an absolute path so that code can
 # chdir without having problems accessing it.  Unfortunately, this
@@ -75,7 +77,7 @@ if os.getenv("BEHIND_HTTPS_PROXY"):
 EMAIL_GATEWAY_PATTERN = "%s@" + EXTERNAL_HOST_WITHOUT_PORT
 NOTIFICATION_BOT = "notification-bot@zulip.com"
 EMAIL_GATEWAY_BOT = "emailgateway@zulip.com"
-PHYSICAL_ADDRESS = "Zulip Headquarters, 123 Octo Stream, South Pacific Ocean"
+PHYSICAL_ADDRESS = "东胜神洲傲来国花果山水帘洞 1 号（虚构地址）"
 STAFF_SUBDOMAIN = "zulip"
 EXTRA_INSTALLED_APPS = ["zilencer", "analytics", "corporate"]
 # Disable Camo in development

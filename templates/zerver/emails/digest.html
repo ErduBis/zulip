@@ -18,7 +18,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                {% if convo.count > 0 %}<p class="digest_paragraph">+ {{ convo.count }} more message{{ convo.count|pluralize }} by {{ convo.participants|display_list(4) }}.</p>{% endif %}
+                {% if convo.count > 0 %}<p class="digest_paragraph">{% trans count=convo.count, participants=convo.participants|display_list(4) %}+ {{ count }} more message by {{ participants }}.{% pluralize %}+ {{ count }} more messages by {{ participants }}.{% endtrans %}</p>{% endif %}
             {% endwith %}
         </div>
         {% endfor %}

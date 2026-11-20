@@ -346,7 +346,10 @@ python_rules = RuleList(
         {
             "pattern": "django.utils.translation",
             "include_only": {"test/", "zerver/views/development/"},
-            "exclude": {"zerver/views/development/dev_login.py"},
+            "exclude": {
+                "zerver/views/development/dev_login.py",
+                "zerver/views/development/showroom.py",
+            },
             "description": "Test strings should not be tagged for translation",
             "good_lines": [""],
             "bad_lines": ["django.utils.translation"],

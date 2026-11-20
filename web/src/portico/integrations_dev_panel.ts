@@ -108,6 +108,18 @@ function set_results_notice(msg: string, level: "warning" | "success"): void {
     $("#results_notice").text(msg).css("color", results_notice_level_to_color_map[level]);
 }
 
+// This page has no client-side translations, so translated texts come
+// from data attributes in the server-rendered template.
+function get_translated_text($element: JQuery, attribute_name: string): string {
+    const text = $element.attr(`data-${attribute_name}`);
+    assert(text !== undefined, `Missing data-${attribute_name}`);
+    return text;
+}
+
+function get_results_notice_message(name: string): string {
+    return get_translated_text($("#results_notice"), `${name}-message`);
+}
+
 function get_api_key_from_selected_bot(): string {
     return $<HTMLSelectOneElement>("select:not([multiple])#bot_name").val()!;
 }
@@ -128,7 +140,7 @@ function get_custom_http_headers(): string | undefined {
             // Let JavaScript validate the JSON for us.
             custom_headers = JSON.stringify(JSON.parse(custom_headers));
         } catch {
-            set_results_notice("Custom HTTP headers are not in a valid JSON format.", "warning");
+            set_results_notice(get_results_notice_message("invalid-custom-headers"), "warning");
             return undefined;
         }
     }
@@ -144,17 +156,20 @@ function set_results(response: ServerResponse): void {
     The following is a bit messy, but it's a devtool, so ultimately OK */
     const responses = response.responses;
 
-    let data = "Results:\n\n";
+    const $results = $<HTMLTextAreaElement>("textarea#idp-results");
+    const fixture_label = get_translated_text($results, "fixture-label");
+    const status_code_label = get_translated_text($results, "status-code-label");
+    const response_label = get_translated_text($results, "response-label");
+
+    let data = get_translated_text($results, "results-heading") + "\n\n";
     for (const response of responses) {
         if (response.fixture_name !== undefined) {
-            data += "Fixture:            " + response.fixture_name;
-            data += "\nStatus code:    " + response.status_code;
-        } else {
-            data += "Status code:    " + response.status_code;
+            data += `${fixture_label} ${response.fixture_name}\n`;
         }
-        data += "\nResponse:       " + response.message + "\n\n";
+        data += `${status_code_label} ${response.status_code}\n`;
+        data += `${response_label} ${response.message}\n\n`;
     }
-    util.the($<HTMLTextAreaElement>("textarea#idp-results")).value = data;
+    util.the($results).value = data;
 }
 
 function load_fixture_body(fixture_name: string): void {
@@ -166,7 +181,7 @@ function load_fixture_body(fixture_name: string): void {
     let fixture_body = fixture.body;
     const headers = fixture.headers;
     if (fixture_body === undefined) {
-        set_results_notice("Fixture does not have a body.", "warning");
+        set_results_notice(get_results_notice_message("missing-fixture-body"), "warning");
         return;
     }
     if (get_fixture_format(fixture_name) === "json") {
@@ -243,7 +258,12 @@ function handle_unsuccessful_response(response: JQuery.jqXHR): void {
     const parsed = z.object({msg: z.string()}).safeParse(response.responseJSON);
     if (parsed.data) {
         const status_code = response.status;
-        set_results_notice(`Result: (${status_code}) ${parsed.data.msg}`, "warning");
+        set_results_notice(
+            get_results_notice_message("error-response")
+                .replace("{status_code}", () => status_code.toString())
+                .replace("{message}", () => parsed.data.msg),
+            "warning",
+        );
     } else {
         // If the response is not a JSON response, then it is probably
         // Django returning an HTML response containing a stack trace
@@ -311,7 +331,7 @@ function send_webhook_fixture_message(): void {
 
     const url = $("#URL").val();
     if (url === "") {
-        set_results_notice("URL can't be empty.", "warning");
+        set_results_notice(get_results_notice_message("empty-url"), "warning");
         return;
     }
 
@@ -324,7 +344,7 @@ function send_webhook_fixture_message(): void {
             body = JSON.stringify(JSON.parse(body));
             is_json = true;
         } catch {
-            set_results_notice("Invalid JSON in fixture body.", "warning");
+            set_results_notice(get_results_notice_message("invalid-fixture-body"), "warning");
             return;
         }
     }
@@ -344,10 +364,11 @@ function send_webhook_fixture_message(): void {
             // also sent successfully.
             const response = integrations_api_response_schema.parse(raw_response);
             set_results(response);
-            if ($("#results_notice").text() === "Success!") {
-                set_results_notice("Success!!!", "success");
+            const success_message = get_results_notice_message("success");
+            if ($("#results_notice").text() === success_message) {
+                set_results_notice(get_results_notice_message("repeated-success"), "success");
             } else {
-                set_results_notice("Success!", "success");
+                set_results_notice(success_message, "success");
             }
             return;
         },
@@ -362,7 +383,7 @@ function send_all_fixture_messages(): void {
     const url = $("#URL").val();
     const integration = get_selected_integration_name();
     if (integration === "") {
-        set_results_notice("You have to select an integration first.", "warning");
+        set_results_notice(get_results_notice_message("no-integration-selected"), "warning");
         return;
     }
 
@@ -398,8 +419,8 @@ $(() => {
         "results",
     ]);
 
-    util.the($<HTMLInputElement>("input#stream_name")).value = "Denmark";
-    util.the($<HTMLInputElement>("input#topic_name")).value = "Integrations testing";
+    const $topic_name = $<HTMLInputElement>("input#topic_name");
+    util.the($topic_name).value = get_translated_text($topic_name, "default-topic");
 
     const potential_default_bot = util.the(
         $<HTMLSelectOneElement>("select:not([multiple])#bot_name"),
@@ -407,6 +428,10 @@ $(() => {
     assert(potential_default_bot instanceof HTMLOptionElement);
     if (potential_default_bot !== undefined) {
         potential_default_bot.selected = true;
+        // Channel names vary between organizations, so default to the
+        // bot's organization's new channel announcements channel.
+        util.the($<HTMLInputElement>("input#stream_name")).value =
+            potential_default_bot.dataset["defaultChannel"] ?? "";
     }
 
     $<HTMLSelectOneElement>("select:not([multiple])#integration_name").on("change", function () {
