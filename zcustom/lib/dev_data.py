@@ -9,7 +9,7 @@ because the data is written by hand by a separate localization session.
 import re
 from collections.abc import Iterable
 from dataclasses import dataclass, field
-from datetime import UTC, date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Annotated, Literal, TypeAlias
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -354,7 +354,7 @@ def conversation_start_time(start: Start, now: datetime) -> datetime:
     local_date = now.astimezone(DEV_REALM_TIMEZONE).date() - timedelta(days=start.days_ago)
     hour, minute = (int(part) for part in start.time.split(":"))
     local_start = datetime.combine(local_date, time(hour, minute), tzinfo=DEV_REALM_TIMEZONE)
-    return local_start.astimezone(UTC)
+    return local_start.astimezone(timezone.utc)
 
 
 def format_validation_error(filename: str, error: ValidationError) -> list[str]:
