@@ -542,7 +542,7 @@ css_rules = RuleList(
 prose_style_rules: list["Rule"] = [
     {
         "pattern": r'^[\t ]*[^\n{].*?[^\n\/\#\-"]([jJ]avascript)',  # exclude usage in hrefs/divs/custom-markdown
-        "exclude": {"docs/documentation/api.md", "templates/corporate/policies/privacy.md"},
+        "exclude": {"templates/corporate/policies/privacy.md"},
         "description": "javascript should be spelled JavaScript",
     },
     {
@@ -864,38 +864,10 @@ markdown_rules = RuleList(
             "description": "Linkified Markdown URLs should use cleaner <http://example.com> syntax.",
         },
         {
-            "pattern": "https://zulip.readthedocs.io/en/latest/[a-zA-Z0-9]",
-            "exclude": {
-                "api_docs/",
-                "docs/contributing/contributing.md",
-                "docs/overview/readme.md",
-                "docs/README.md",
-                "docs/subsystems/email.md",
-            },
-            "exclude_line": {
-                (
-                    "docs/overview/changelog.md",
-                    "[latest-changelog]: https://zulip.readthedocs.io/en/latest/overview/changelog.html",
-                ),
-            },
-            "include_only": {"docs/"},
-            "description": "Use relative links (../foo/bar.html) to other documents in docs/",
-        },
-        {
-            "pattern": "su zulip -c [^']",
-            "include_only": {"docs/"},
-            "description": "Always quote arguments using `su zulip -c '` to avoid confusion about how su works.",
-        },
-        {
             "pattern": r"\][(][^#h]",
             "exclude_pattern": "mailto:",
             "include_only": {"README.md", "CONTRIBUTING.md"},
             "description": "Use absolute links from docs served by GitHub",
-        },
-        {
-            "pattern": r"\.(py|js)#L\d+",
-            "include_only": {"docs/"},
-            "description": "Don't link directly to line numbers",
         },
         {
             "pattern": r"[eE]\.g\.[^,]",
