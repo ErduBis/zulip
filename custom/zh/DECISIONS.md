@@ -4,7 +4,7 @@
 
 ## D1 基于稳定版 13.2 开发（2026-11-20）
 
-定制分支 `custom/13.x` 从标签 `13.2` 开出。
+定制分支从标签 `13.2` 开出（分支名见 D13）。
 
 **原因**：最终要上线使用，稳定版可以直接部署，后续 13.x 小版本合并顺畅。14.0 发布后整体升级。
 
@@ -75,7 +75,7 @@ migration 不会和上游的编号冲突，新表也不用登记到 Zulip 的导
 
 ## D9 服务器从 git 部署（2026-11-20）
 
-服务器从 `https://github.com/ErduBis/zulip.git` 部署：首次安装克隆 `custom/13.x`，在
+服务器从 `https://github.com/ErduBis/zulip.git` 部署：首次安装克隆 `main`，在
 `/etc/zulip/zulip.conf` 设 `git_repo_url`；之后每次升级运行
 `upgrade-zulip-from-git <提交 ID>`，部署已推送到 `origin` 并在预发机验证过的提交。服务器内存选 8 GB。
 步骤见 `guides/deployment.md`。
@@ -129,3 +129,12 @@ Verona 等名字，测试库不能动；`populate_db.py` 等文件在 `zerver/li
 **原因**：显示名取自数据库，`INTERNAL_BOTS` 里的名字只在创建时用一次；直接改设置会改变开发库的哈希，
 `provision` 会不经提示清空开发库，而且改不到已有的服务器。测试库保留英文名，因为上游测试依赖这些名字。
 代价是测试模板会多一条 `zcustom` 的 migration 记录（数据不变），改名的效果由单独的测试验证。
+
+## D13 开发分支叫 main（2026-11-23）
+
+我们的二次开发分支叫 `main`（原名 `custom/13.x`），是 `ErduBis/zulip` 的默认分支。它从 13.2 开出，
+以后合并 Zulip 的新版本也合并到这里。Zulip 官方的代码用 `upstream/main`、`upstream/13.x` 和版本标签引用。
+
+**原因**：`13.x` 是 Zulip 官方 13 系列维护分支的名字，用在我们的分支上容易混淆；我们的分支会一直延续，
+不和某个大版本绑定。叫 `main` 时，CI 原有的「推送到 `main`」触发条件直接生效。GitHub 上的 `main` 原来是
+Zulip 官方代码的旧副本，第一次推送时用我们的分支覆盖。

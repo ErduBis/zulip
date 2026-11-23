@@ -5,7 +5,7 @@ Each entry: date, what was decided, and why. Superseded decisions are not delete
 
 ## D1 Build on the 13.2 stable release (2026-11-20)
 
-The customization branch `custom/13.x` is cut from the `13.2` tag.
+The customization branch is cut from the `13.2` tag (branch name: see D13).
 
 **Why**: The result will run in production. A stable release can be deployed directly, and
 later 13.x patch releases merge cleanly. Upgrade as a whole once 14.0 is released.
@@ -95,7 +95,7 @@ new and run it again, so deployed migrations can only be reconciled with a merge
 ## D9 Servers deploy from git (2026-11-20)
 
 Servers deploy from `https://github.com/ErduBis/zulip.git`: the first install clones
-`custom/13.x` and sets `git_repo_url` in `/etc/zulip/zulip.conf`; each later upgrade runs
+`main` and sets `git_repo_url` in `/etc/zulip/zulip.conf`; each later upgrade runs
 `upgrade-zulip-from-git <commit ID>` on a commit already pushed to `origin` and verified on staging.
 Servers get 8 GB of RAM. Steps are in `guides/deployment.md`.
 
@@ -161,3 +161,14 @@ creation. Changing the setting would change the dev database hash, so `provision
 database without warning, and it wouldn't reach existing servers. The test database keeps the
 English names because upstream tests depend on them. The cost is one extra `zcustom` migration record
 in the test template (data unchanged); a separate test covers the renaming.
+
+## D13 The development branch is main (2026-11-23)
+
+Our development branch is `main` (formerly `custom/13.x`), the default branch of `ErduBis/zulip`. It
+is cut from 13.2, and new Zulip releases are merged into it too. Refer to Zulip's own code as
+`upstream/main`, `upstream/13.x` and release tags.
+
+**Why**: `13.x` is the name of Zulip's 13-series maintenance branch, so using it for ours was
+confusing; our branch continues indefinitely and isn't tied to one major version. Named `main`, it
+matches CI's existing "push to `main`" trigger. The `main` on GitHub was an old copy of Zulip's own
+code; the first push replaces it with our branch.

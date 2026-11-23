@@ -3,7 +3,8 @@
 本仓库是基于 Zulip 13.2 的**二次开发**（自部署 + 定制）。
 
 - 代码：`/home/codyli/zulip`（WSL2 Ubuntu 24.04）
-- 分支：`custom/13.x`（从标签 `13.2` 开出，所有定制都在这里）
+- 分支：`main`（从标签 `13.2` 开出，所有定制都在这里；Zulip 官方的代码用 `upstream/main`、
+  `upstream/13.x` 和版本标签引用，见 D13）
 - 远程：`origin` = `ErduBis/zulip`（我们的 fork），`upstream` = `zulip/zulip`（官方）
 
 ## 环境
@@ -204,7 +205,7 @@ Zulip 界面以英文为源文本，中文译文放在 `locale/zh_Hans/`：前�
 ## 总领的职责
 
 - 把需求拆成任务，指定角色和路径范围，写清验收标准。
-- 审查执行会话的改动，提交到 `custom/13.x` 并推送。
+- 审查执行会话的改动，提交到 `main` 并推送。
 - 把每处对 Zulip 原有文件的修改登记到 `CUSTOMIZATIONS.md`。
 - 把重要决策记录到 `DECISIONS.md`。
 - 定期同步上游：13.x 小版本随时合并；大版本升级单独规划。合并时按「中文翻译」第 3 步核对译文；

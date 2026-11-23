@@ -1,6 +1,6 @@
 # Deployment and upgrades
 
-How to deploy our Zulip fork (the `custom/13.x` branch of `ErduBis/zulip`) to our own servers, and
+How to deploy our Zulip fork (the `main` branch of `ErduBis/zulip`) to our own servers, and
 keep merging upstream releases and redeploying. Audience: the environment and ops session, and the
 lead.
 
@@ -30,7 +30,7 @@ as the `zulip` user). `$D` is the current deployment directory; run
 ## Deployment method
 
 Servers deploy straight from our GitHub repository (decision D9): the first install clones
-`custom/13.x`, and each later deploy runs `upgrade-zulip-from-git` on a commit already pushed to
+`main`, and each later deploy runs `upgrade-zulip-from-git` on a commit already pushed to
 `origin`. The frontend is built on the server. The version shown in the UI comes from
 `git describe` (e.g., `13.2-4-gceb0b030c9`).
 
@@ -38,7 +38,7 @@ Servers deploy straight from our GitHub repository (decision D9): the first inst
 
 ```bash
 apt install git
-git clone -b custom/13.x https://github.com/ErduBis/zulip.git zulip-server-git
+git clone -b main https://github.com/ErduBis/zulip.git zulip-server-git
 ./zulip-server-git/scripts/setup/install --certbot --email=ADMIN_EMAIL --hostname=HOSTNAME
 ```
 
@@ -120,7 +120,7 @@ Optional features are all configured in `/etc/zulip/settings.py` (template
 
 ### 1. Merge upstream in the dev environment (lead)
 
-1. `git fetch upstream --tags`, then on `custom/13.x` run `git merge <new tag>` (e.g., `13.3`).
+1. `git fetch upstream --tags`, then on `main` run `git merge <new tag>` (e.g., `13.3`).
 2. Resolve conflicts by checking `custom/en/CUSTOMIZATIONS.md` item by item; check translations per
    step 3 of "Chinese translation" in the development guide.
 3. Check migrations: when an upstream migration and one of ours both become leaf nodes, hand it to
@@ -143,7 +143,7 @@ update the server's `settings.py` against the new `zproject/prod_settings_templa
 ### 3. Run it
 
 ```bash
-$D/scripts/upgrade-zulip-from-git <commit ID>  # the branch name custom/13.x also works
+$D/scripts/upgrade-zulip-from-git <commit ID>  # the branch name main also works
 ```
 
 A commit ID guarantees that exactly the verified commit is deployed.

@@ -1,6 +1,6 @@
 # 部署与升级
 
-把我们 fork 的 Zulip（`ErduBis/zulip` 的 `custom/13.x` 分支）部署到自己的服务器，并在之后持续合并
+把我们 fork 的 Zulip（`ErduBis/zulip` 的 `main` 分支）部署到自己的服务器，并在之后持续合并
 上游版本、重新部署。读者：环境与运维会话、总领。
 
 下文的服务器命令都在生产服务器上以 root 运行（`su zulip -c` 开头的以 `zulip` 用户运行）。
@@ -25,7 +25,7 @@
 
 ## 部署方式
 
-服务器直接从我们的 GitHub 仓库部署（决策 D9）：首次安装时克隆 `custom/13.x`，之后每次用
+服务器直接从我们的 GitHub 仓库部署（决策 D9）：首次安装时克隆 `main`，之后每次用
 `upgrade-zulip-from-git` 部署已推送到 `origin` 的提交。前端在服务器上编译。
 界面里显示的版本号来自 `git describe`（如 `13.2-4-gceb0b030c9`）。
 
@@ -33,7 +33,7 @@
 
 ```bash
 apt install git
-git clone -b custom/13.x https://github.com/ErduBis/zulip.git zulip-server-git
+git clone -b main https://github.com/ErduBis/zulip.git zulip-server-git
 ./zulip-server-git/scripts/setup/install --certbot --email=ADMIN_EMAIL --hostname=HOSTNAME
 ```
 
@@ -107,7 +107,7 @@ $D/scripts/get-django-setting NAME # 查看某个设置的实际生效值
 
 ### 1. 在开发环境合并上游（总领）
 
-1. `git fetch upstream --tags`，在 `custom/13.x` 上 `git merge <新标签>`（如 `13.3`）。
+1. `git fetch upstream --tags`，在 `main` 上 `git merge <新标签>`（如 `13.3`）。
 2. 冲突按 `custom/zh/CUSTOMIZATIONS.md` 逐条核对；按开发规范「中文翻译」第 3 步核对译文。
 3. 检查 migration：上游新增的 migration 与我们的同时成为叶节点时，交后端会话处理；
    已在生产执行过的 migration 保持原名不变。
@@ -126,7 +126,7 @@ $D/scripts/get-django-setting NAME # 查看某个设置的实际生效值
 ### 3. 执行
 
 ```bash
-$D/scripts/upgrade-zulip-from-git <提交 ID>  # 也可以写分支名 custom/13.x
+$D/scripts/upgrade-zulip-from-git <提交 ID>  # 也可以写分支名 main
 ```
 
 写提交 ID 能确保部署的正是验证过的那个提交。

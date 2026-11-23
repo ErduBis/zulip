@@ -3,7 +3,8 @@
 This repository is a **customization** of Zulip 13.2 (self-hosted, with our own changes).
 
 - Code: `/home/codyli/zulip` (WSL2 Ubuntu 24.04)
-- Branch: `custom/13.x` (cut from the `13.2` tag; all customizations live here)
+- Branch: `main` (cut from the `13.2` tag; all customizations live here; refer to Zulip's own code
+  as `upstream/main`, `upstream/13.x` and release tags, see D13)
 - Remotes: `origin` = `ErduBis/zulip` (our fork), `upstream` = `zulip/zulip` (official)
 
 ## Environment
@@ -240,7 +241,7 @@ when accepting, list each deviation between the implementation and the spec.
 ## Lead responsibilities
 
 - Break requirements into tasks, assign the role and path scope, and state acceptance criteria.
-- Review worker sessions' changes, commit them to `custom/13.x`, and push.
+- Review worker sessions' changes, commit them to `main`, and push.
 - Record every change to Zulip's original files in `CUSTOMIZATIONS.md`.
 - Record important decisions in `DECISIONS.md`.
 - Sync with upstream regularly: merge 13.x patch releases as they come; plan major upgrades
